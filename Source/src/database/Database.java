@@ -1,10 +1,10 @@
-package HICS;
-
 /*
- * CDatabase.java
+ * Database.java
  *
- * @ Author: Andreas Schmidhuber
+ * @author: Andreas Schmidhuber
  */
+
+package database;
 
 import java.sql.*;
 
