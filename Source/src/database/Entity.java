@@ -52,6 +52,55 @@ public abstract class Entity
      */
     public Entity() {}
     
+    
+    /**
+     * Konvertiert einen normalen Java-String ins Datenbankformat.
+     * Nur bei echten String-Werten verwenden.
+     */
+    static protected String toSqlString( String normalString )
+    {
+        return "'" + normalString + "'";
+    }
+    
+    /**
+     * Konvertiert einen String im Datenbankformat in einen
+     * normalen Java-String. Nur bei echten String-Werten verwenden.
+     */
+    static protected String fromSqlString( String sqlString )
+    {
+        return sqlString.substring( 1, sqlString.length() - 2 );
+    }
+    
+    /**
+     * Belegt die Primärschlüssel der Entity mit neuen Werten.
+     * Das nächste Speichern wird mit diesen Schlüsseln erfolgen,
+     * wobei die alte Entity noch vorhanden ist (falls sie nicht mit
+     * deleteFromDatabase() gelöscht wurde).
+     *
+     * @param primaryKeys  Ein Array mit neuen Werten für die Primärschlüssel.
+     */
+    public void setPrimaryKeys( String[] primaryKeys )
+    {
+        this.primaryKeys = primaryKeys;
+    }
+    
+    /**
+     * Gibt die Liste der Primärschlüsseln zurück.
+     */
+    public String[] getPrimaryKeys()
+    {
+        return this.primaryKeys;
+    }
+    
+    /**
+     * Gibt die Liste der Spaltennamen der Eigenschaften zurück.
+     */
+    public String[] getPrimaryKeyNames()
+    {
+        return this.primaryKeyNames;
+    }
+    
+    
     /**
      * Weist der Entity eine Datenbank zu, die zum Auslesen und Schreiben
      * der Daten verwendet werden soll.
@@ -66,6 +115,7 @@ public abstract class Entity
         else
             return true;
     }
+    
     
     /**
      * Liest die Entity aus der Datenbank aus. Gelesen wird dabei jene Entity,
@@ -86,11 +136,16 @@ public abstract class Entity
             return false;
         }
         
-        // SQL-Abfrage zusammenstellen
-        String query = "SELECT " + primaryKeyNames[0];
+        // SQL-Abfrage zusammenstellen.
+        // Der erste Primärschluessel hat noch keinen Beistrich vorn.
+        String query = "SELECT ";
         
-        for( i = 1; i < primaryKeyNames.length; i++ ) {
-            query += ", " + primaryKeyNames[i];
+        for( i = 0; i < primaryKeyNames.length; i++ )
+        {
+            if( i != 0 ) {
+                query += ", ";
+            }
+            query += primaryKeyNames[i];
         }
         for( i = 0; i < propertyNames.length; i++ ) {
             query += ", " + propertyNames[i];
@@ -103,18 +158,32 @@ public abstract class Entity
         if( result == null )
             return false;
         
-        // String-Werte aus dem ResultSet ermitteln
-        for( i = 0; i < primaryKeyNames.length; i++ ) {
-            primaryKeys[i] = result.getString(i);
-        }
-        for( i = primaryKeyNames.length;
-             i < primaryKeyNames.length + propertyNames.length; i++ )
-        {
-            properties[i] = result.getString(i);
-        }
+        // Sicherheitskopie, falls was schief lauft
+        // Zu ueberlegen: aus Performance-Gründen weglassen?
+        String[] primaryBackup = primaryKeys;
+        String[] propertyBackup = properties;
         
+        try
+        {
+            // String-Werte aus dem ResultSet ermitteln
+            for( i = 0; i < primaryKeyNames.length; i++ ) {
+                primaryKeys[i] = result.getString(i);
+            }
+            for( i = primaryKeyNames.length;
+                 i < primaryKeyNames.length + propertyNames.length; i++ )
+            {
+                properties[i] = result.getString(i);
+            }
+        }
+        catch( java.sql.SQLException e )
+        {
+            primaryKeys = primaryBackup;
+            properties = propertyBackup;
+            return false;
+        }
         return true;
     }
+    
     
     /**
      * Schreibt die Entity in die Datenbank zurück. Geschrieben wird dabei jene
@@ -128,10 +197,111 @@ public abstract class Entity
      */
     public boolean toDatabase()
     {
-        //blabla;
+        // Pruefen, ob eh alles Notwendige vorhanden ist
+        if( db == null || entityName == null
+            || primaryKeyNames.length == 0 || primaryKeys.length == 0
+            || propertyNames.length == 0 || properties.length == 0 )
+        {
+            return false;
+        }
         
-        return true;
+        String changeStatement;
+        
+        if( this.isInDatabase() == true )
+            changeStatement = this.updateStatement();
+        else
+            changeStatement = this.insertStatement();
+        
+        // Daten aus der Datenbank auslesen
+        return db.change( changeStatement );
     }
+    
+    
+    /**
+     * Erstellt ein SQL-UPDATE-Statement zum Schreiben der aktuellen Daten in
+     * die Datenbank (wobei die Methode von toDatabase() aufgerufen wird).
+     * Es wird vorausgesetzt, dass alle Datenvariablen der Klasse initialisiert
+     * und auf Richtigkeit überprüft worden sind.
+     */
+    private String updateStatement()
+    {
+        int i;
+        String updateStatement;
+        
+        // Der erste Primärschluessel hat noch keinen Beistrich vorn.
+        updateStatement = "UPDATE " + entityName + " SET ";
+        
+        // Strings vom Typ ", ZimmerNr = 666"
+        for( i = 0; i < primaryKeyNames.length; i++ )
+        {
+            if( i != 0 ) {
+                updateStatement += ", ";
+            }
+            updateStatement += primaryKeyNames[i] + " = " + primaryKeys[i];
+        }
+        for( i = primaryKeyNames.length;
+             i < primaryKeyNames.length + propertyNames.length; i++ )
+        {
+            updateStatement += ", " + propertyNames[i] + " = " + properties[i];
+        }
+        updateStatement += ";";
+        
+        // und fertig. WHERE-Bedingung brauchen wir keine, die soll der
+        // Programmierer, bzw. die Programmiererin, high-level auf Objektbasis
+        // machen, wenn sie gebraucht wird.
+        return updateStatement;
+    }
+    
+    
+    /**
+     * Erstellt ein SQL-INSERT-Statement zum Schreiben der aktuellen Daten in
+     * die Datenbank (wobei die Methode von toDatabase() aufgerufen wird).
+     * Es wird vorausgesetzt, dass alle Datenvariablen der Klasse initialisiert
+     * und auf Richtigkeit überprüft worden sind.
+     */
+    private String insertStatement()
+    {
+        int i;
+        String insertStatement;
+        
+        insertStatement = "INSERT INTO " + entityName + " ( ";
+        
+        // Ein String vom Typ "schlüsselName1, schlüsselName2" usw.
+        for( i = 0; i < primaryKeyNames.length; i++ )
+        {            
+            if( i != 0 ) {
+                insertStatement += ", ";
+            }
+            insertStatement += primaryKeyNames[i];
+        }
+        // Fortsetzung der Spaltennamenaufzaehlung mit den Eigenschaften
+        for( i = primaryKeyNames.length;
+             i < primaryKeyNames.length + propertyNames.length; i++ )
+        {
+            insertStatement += ", " + propertyNames[i];
+        }
+        insertStatement += " ) VALUES ( " + primaryKeys[0];
+        
+        // So, jetzt kommen die Werte hinein ("schluessel1, schluessel2" usw.)
+        for( i = 0; i < primaryKeyNames.length; i++ )
+        {
+            if( i != 0 ) {
+                insertStatement += ", ";
+            }
+            insertStatement += primaryKeys[i];
+        }
+        // Fortsetzung der Werteaufzaehlung mit den Eigenschaften
+        for( i = primaryKeyNames.length;
+             i < primaryKeyNames.length + propertyNames.length; i++ )
+        {
+            insertStatement += ", " + properties[i];
+        }
+        insertStatement += " );";
+        
+        // und fertig
+        return insertStatement;
+    }
+    
     
     /**
      * Löscht die Entity, die mit den gesetzten Primärschlüsseln
@@ -140,12 +310,39 @@ public abstract class Entity
      * @return  Für den Fall, dass das Database-Objekt keine Verbindung zur
      *          Datenbank hat oder sonstige Fehlermeldungen zurückgibt, ist der
      *          Rückgabewert false, ansonsten gibt die Methode true zurück.
+     *          (Sie gibt auch true zurück, wenn die Entity schon vorher nicht
+     *           in der Datenbank vorhanden war).
      */
     public boolean deleteFromDatabase()
     {
-        //bla. blablabla.
+        int i;
+        String deleteStatement;
         
-        return true;
+        if( this.isInDatabase() == false )
+            return true; // true wie: das Objekt ist gelöscht.
+        
+        // Pruefen, ob eh alles Notwendige vorhanden ist
+        if( db == null || entityName == null || primaryKeyNames.length == 0 )
+        {
+            return false;
+        }
+        
+        // Der erste Primärschluessel hat noch keinen Beistrich vorn.
+        deleteStatement = "DELETE FROM " + entityName + " WHERE "
+                          + primaryKeyNames[0] + " = " + primaryKeys[0];
+        
+        // Strings vom Typ ", ZimmerNr = 666"
+        for( i = 0; i < primaryKeyNames.length; i++ )
+        {
+            if( i != 0 ) {
+                deleteStatement += " AND ";
+            }
+            deleteStatement += primaryKeyNames[i] + " = " + primaryKeys[i];
+        }
+        deleteStatement += ";";
+        
+        // Daten aus der Datenbank auslesen
+        return db.change( deleteStatement );
     }
     
     /**
@@ -169,8 +366,12 @@ public abstract class Entity
         // (ohne Eigenschaften, die sind in dem Zusammenhang unwichtig)
         String query = "SELECT " + primaryKeyNames[0];
         
-        for( i = 1; i < primaryKeyNames.length; i++ ) {
-            query += ", " + primaryKeyNames[i];
+        for( i = 1; i < primaryKeyNames.length; i++ )
+        {
+            if( i != 0 ) {
+                query += ", ";
+            }
+            query += primaryKeyNames[i];
         }
         query += " FROM " + entityName;
         
