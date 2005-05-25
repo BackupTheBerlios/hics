@@ -7,6 +7,9 @@
 
 package database;
 
+import java.sql.ResultSet;
+
+
 /**
  * Entity ist eine Klasse zum Verwalten von Primärschlüsseln und Eigenschaften
  * einer Datenbank-Entity. Als solches enthält sie im Normalfall die Werte
@@ -94,7 +97,21 @@ public abstract class Entity
         }
         query += " FROM " + entityName;
         
+        // Daten aus der Datenbank auslesen
         ResultSet result = db.query( query );
+        
+        if( result == null )
+            return false;
+        
+        // String-Werte aus dem ResultSet ermitteln
+        for( i = 0; i < primaryKeyNames.length; i++ ) {
+            primaryKeys[i] = result.getString(i);
+        }
+        for( i = primaryKeyNames.length;
+             i < primaryKeyNames.length + propertyNames.length; i++ )
+        {
+            properties[i] = result.getString(i);
+        }
         
         return true;
     }
@@ -140,8 +157,29 @@ public abstract class Entity
      */
     public boolean isInDatabase()
     {
-        //superbla.
+        int i;
         
-        return true;
+        // Pruefen, ob eh alles Notwendige vorhanden ist
+        if( db == null || entityName == null || primaryKeyNames.length == 0 )
+        {
+            return false;
+        }
+        
+        // SQL-Abfrage zusammenstellen
+        // (ohne Eigenschaften, die sind in dem Zusammenhang unwichtig)
+        String query = "SELECT " + primaryKeyNames[0];
+        
+        for( i = 1; i < primaryKeyNames.length; i++ ) {
+            query += ", " + primaryKeyNames[i];
+        }
+        query += " FROM " + entityName;
+        
+        // Daten aus der Datenbank auslesen
+        ResultSet result = db.query( query );
+        
+        if( result == null )
+            return false;
+        else
+            return true;
     }
 }

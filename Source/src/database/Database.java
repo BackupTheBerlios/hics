@@ -25,7 +25,8 @@ class Database {
      * @return  Wenn der Treiber geladen und die Verbindung hergestellt
      *          werden kann wird true zurückgegeben, ansonsten false.
      */
-    boolean connect(){
+    boolean connect()
+    {
         try{
             Class.forName( "org.postgresql.Driver" );
             this.con = DriverManager.getConnection(this.url,this.user,this.passwd);
@@ -42,12 +43,16 @@ class Database {
     }
     
     /**
-     * Verbindung zur db wird getrennt.
+     * Verbindung zur Datenbank wird getrennt.
      * 
      * @return  Wenn die Verbindung getrennt werden kann wird true
      *          zurückgegeben, ansonsten false.
      */
-    boolean disconnect(){
+    boolean disconnect()
+    {
+        if( con == null )
+            return false;
+        
         try{
             this.con.close();
             return true;
@@ -59,12 +64,17 @@ class Database {
     }
     
     /**
-     * Macht eine abfrage in der Datenbank und gibt das ResultSet zurück.
+     * Macht eine SQL-SELECT-Abfrage in der Datenbank
+     * und gibt das ResultSet zurück.
      * 
      * @return  Wenn die Abfrage korrekt ist und ein Ergebnis erhält, wird das
      *          ResultSet zurückgegeben, ansonsten null.
      */
-    ResultSet query(String SQLStatement){
+    ResultSet query(String SQLStatement)
+    {
+        if( con == null )
+            return null;
+        
         try{
             Statement st = this.con.createStatement();
             ResultSet rs = st.executeQuery( SQLStatement );
@@ -77,12 +87,18 @@ class Database {
     }
     
     /**
-     * Macht eine veränderung in der Datenbank (insert, delete, update).
+     * Macht eine Veränderung in der Datenbank mittels
+     * INSERT, DELETE oder UPDATE Statement.
      *
-     * @return  Wenn das update korrekt ist wird true zurückgegeben,
+     * @return  Wenn die Verbindung zur Datenbank hergestellt ist und
+     *          das Update korrekt verarbeitet wurde, wird true zurückgegeben,
      *          ansonsten false.
      */
-    boolean change(String SQLStatement){
+    boolean change(String SQLStatement)
+    {
+        if( con == null )
+            return false;
+        
         try{
             Statement stmt = this.con.createStatement();
             stmt.execute(SQLStatement);
