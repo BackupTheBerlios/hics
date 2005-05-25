@@ -19,49 +19,52 @@ class Database {
         this.con = null;
     }
     
-    /***************************************************************************
-     * driver wird geladen und die verbindung zur db erstellt.
-     * wenn der driver geladen und die verbindung hergestellt
-     * werden kann wird true zurückgegeben, ansonsten false.
-     ***************************************************************************/
-    boolean Connect(){
+    /**
+     * JDBC-Treiber wird geladen und die verbindung zur Datenbank erstellt.
+     * 
+     * @return  Wenn der Treiber geladen und die Verbindung hergestellt
+     *          werden kann wird true zurückgegeben, ansonsten false.
+     */
+    boolean connect(){
         try{
             Class.forName( "org.postgresql.Driver" );
             this.con = DriverManager.getConnection(this.url,this.user,this.passwd);
             return true;
         }
         catch (ClassNotFoundException cnfe){
-            System.err.println("ERROR load driver: " + cnfe.toString());
+            System.err.println("ERROR loading driver: " + cnfe.toString());
             return false;
         }
         catch (SQLException sqle){
-            System.err.println("ERROR Connect: " + sqle.toString());
+            System.err.println("ERROR when connecting: " + sqle.toString());
             return false;
         }
     }
     
-    /***************************************************************************
-     * verbindung zur db wird getrennt.
-     * wenn die verbindung getrennt werden kann wird true zurückgegeben,
-     * ansonsten false.
-     ***************************************************************************/
-    boolean Disconnect(){
+    /**
+     * Verbindung zur db wird getrennt.
+     * 
+     * @return  Wenn die Verbindung getrennt werden kann wird true
+     *          zurückgegeben, ansonsten false.
+     */
+    boolean disconnect(){
         try{
             this.con.close();
             return true;
         }
         catch (SQLException sqle){
-            System.err.println("ERROR Disconnect: " + sqle.toString());
+            System.err.println("ERROR when disconnecting: " + sqle.toString());
             return false;
         }
     }
     
-    /***************************************************************************
-     * macht eine abfrage in der datenbank und gibt das resultset zurück.
-     * wenn die abfrage korrekt ist und ein ergebnis erhält, wird das
-     * resultset zurückgegeben, ansonsten null.
-     ***************************************************************************/
-    ResultSet Query(String SQLStatement){
+    /**
+     * Macht eine abfrage in der Datenbank und gibt das ResultSet zurück.
+     * 
+     * @return  Wenn die Abfrage korrekt ist und ein Ergebnis erhält, wird das
+     *          ResultSet zurückgegeben, ansonsten null.
+     */
+    ResultSet query(String SQLStatement){
         try{
             Statement st = this.con.createStatement();
             ResultSet rs = st.executeQuery( SQLStatement );
@@ -73,11 +76,13 @@ class Database {
         }
     }
     
-    /***************************************************************************
-     * macht eine veränderung in der datenbank (insert,delete,update).
-     * wenn das update korrekt ist wird true zurückgegeben, ansonsten false.
-     ***************************************************************************/
-    boolean Change(String SQLStatement){
+    /**
+     * Macht eine veränderung in der Datenbank (insert, delete, update).
+     *
+     * @return  Wenn das update korrekt ist wird true zurückgegeben,
+     *          ansonsten false.
+     */
+    boolean change(String SQLStatement){
         try{
             Statement stmt = this.con.createStatement();
             stmt.execute(SQLStatement);
