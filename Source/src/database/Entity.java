@@ -22,6 +22,14 @@ import java.sql.ResultSet;
  * Auslesen und Speichern zu erhalten. Weiters sollen für Schlüssel und
  * Eigenschaften get- und set-Methoden in den abgeleiteten Klassen zur
  * Verfügung gestellt werden.
+ *
+ * Beim Füllen von Werten hat die abgeleitete Klasse alle Möglichkeiten:
+ * Numerische Werte haben die Form 12[.34], boole'sche Werte sind entweder
+ * TRUE oder FALSE, und Strings können mit Hilfe der Methode toSqlString()
+ * ins Datenbankformat umgewandelt werden. Falls die betreffende Entity
+ * eine fortlaufende Nummer für einen oder mehrere Primärschlüssel hat,
+ * können diese mit dem Wert DEFAULT statt mit einer fix zugeteilten Nummer
+ * belegt werden.
  */
 public abstract class Entity
 {
@@ -50,26 +58,10 @@ public abstract class Entity
      * richtig dimensioniert werden, z.B. mit "primaryKeys = new String[2];"
      * (für einen aus zwei Werten zusammengesetzten Primärschlüssel).
      */
-    public Entity() {}
-    
-    
-    /**
-     * Konvertiert einen normalen Java-String ins Datenbankformat.
-     * Nur bei echten String-Werten verwenden.
-     */
-    static protected String toSqlString( String normalString )
-    {
-        return "'" + normalString + "'";
+    public Entity() {
+        db = null; // sollte eh automatisch gemacht werden, schadet aber nicht
     }
     
-    /**
-     * Konvertiert einen String im Datenbankformat in einen
-     * normalen Java-String. Nur bei echten String-Werten verwenden.
-     */
-    static protected String fromSqlString( String sqlString )
-    {
-        return sqlString.substring( 1, sqlString.length() - 2 );
-    }
     
     /**
      * Belegt die Primärschlüssel der Entity mit neuen Werten.
@@ -120,6 +112,8 @@ public abstract class Entity
     /**
      * Liest die Entity aus der Datenbank aus. Gelesen wird dabei jene Entity,
      * die mit den gesetzten Primärschlüsseln identifiziert werden kann.
+     * Nach Aufruf dieser Methode haben alle Daten dieses Objekts gleiche Werte
+     * wie ihre Gegenstücke in der Datenbank.
      * 
      * @return  Falls es keine Entity mit den entsprechenden Primärschlüsseln
      *          gibt, oder das Database-Objekt keine Verbindung zur Datenbank
@@ -189,7 +183,8 @@ public abstract class Entity
      * Schreibt die Entity in die Datenbank zurück. Geschrieben wird dabei jene
      * Entity, die mit den gesetzten Primärschlüsseln identifiziert werden kann.
      * Falls es keine Entity mit den entsprechenden Primärschlüsseln gibt,
-     * wird diese erzeugt.
+     * wird diese erzeugt. Falls Werte aus Spalten mit DEFAULT-Werten
+     * geschrieben wurden, sind diese Werte ab sofort abrufbar.
      * 
      * @return  Für den Fall, dass das Database-Objekt keine Verbindung zur
      *          Datenbank hat oder sonstige Fehlermeldungen zurückgibt, ist der
@@ -208,12 +203,18 @@ public abstract class Entity
         String changeStatement;
         
         if( this.isInDatabase() == true )
-            changeStatement = this.updateStatement();
+            changeStatement = this.getUpdateStatement();
         else
-            changeStatement = this.insertStatement();
+            changeStatement = this.getInsertStatement();
         
         // Daten aus der Datenbank auslesen
-        return db.change( changeStatement );
+        boolean result = db.change( changeStatement );
+        
+        // erneutes Auslesen, z.B. damit wir die per DEFAULT zugeteilten Werte
+        // wissen.
+        this.fromDatabase();
+        
+        return result;
     }
     
     
@@ -223,7 +224,7 @@ public abstract class Entity
      * Es wird vorausgesetzt, dass alle Datenvariablen der Klasse initialisiert
      * und auf Richtigkeit überprüft worden sind.
      */
-    private String updateStatement()
+    private String getUpdateStatement()
     {
         int i;
         String updateStatement;
@@ -259,7 +260,7 @@ public abstract class Entity
      * Es wird vorausgesetzt, dass alle Datenvariablen der Klasse initialisiert
      * und auf Richtigkeit überprüft worden sind.
      */
-    private String insertStatement()
+    private String getInsertStatement()
     {
         int i;
         String insertStatement;
@@ -382,5 +383,24 @@ public abstract class Entity
             return false;
         else
             return true;
+    }
+    
+    
+    /**
+     * Konvertiert einen normalen Java-String ins Datenbankformat.
+     * Nur bei echten String-Werten verwenden.
+     */
+    static protected String toSqlString( String normalString )
+    {
+        return "'" + normalString + "'";
+    }
+    
+    /**
+     * Konvertiert einen String im Datenbankformat in einen
+     * normalen Java-String. Nur bei echten String-Werten verwenden.
+     */
+    static protected String fromSqlString( String sqlString )
+    {
+        return sqlString.substring( 1, sqlString.length() - 2 );
     }
 }
