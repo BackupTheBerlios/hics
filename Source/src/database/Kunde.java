@@ -14,7 +14,7 @@ package database;
  */
 public class Kunde extends Entity
 {
-    
+
     /**
      * Erstellt eine neue, nicht mit Daten gefüllte Instanz der Entity.
      */
@@ -25,14 +25,14 @@ public class Kunde extends Entity
         propertyNames = new String[] {"Nachname", "Vorname", "Land", "PLZ",
                                       "Wohnort", "Strasse", "TelNr"};
     }
-    
+
     /**
      * Setzt die Kundennummer für diese Entity fest.
      */
     public void setPrimaryKeys( String kundenNr ) {
         primaryKeys[0] = kundenNr;
     }
-    
+
     /**
      * Setzt die Kundennummer für diese Entity auf einen fortlaufenden Wert.
      * Das wirkt sich nur fürs Einfügen einer neuen Entity in die Datenbank
@@ -43,7 +43,7 @@ public class Kunde extends Entity
     {
         primaryKeys[0] = "DEFAULT";
     }
-    
+
     /**
      * Ermittelt die Kundennummer dieser Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
@@ -56,7 +56,7 @@ public class Kunde extends Entity
             return null;
         }
     }
-    
+
     /**
      * Setzt alle Eigenschaften dieser Entity auf einmal. Um einen Wert
      * auf NULL zu setzen, muss null als Argument übergeben werden.
@@ -74,13 +74,13 @@ public class Kunde extends Entity
         properties[4] = Entity.toSqlString(wohnort);
         properties[5] = Entity.toSqlString(strasse);
         properties[6] = Entity.toSqlString(telnr);
-        
+
         if( plz == null )
             properties[3] = null;
         else
             properties[3] = plz.toString();
     }
-    
+
     /**
      * Ermittelt die Eigenschaft Nachname der Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
@@ -89,7 +89,7 @@ public class Kunde extends Entity
     {
         return properties[0];
     }
-    
+
     /**
      * Ermittelt die Eigenschaft Vorname der Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
@@ -98,7 +98,7 @@ public class Kunde extends Entity
     {
         return properties[1];
     }
-    
+
     /**
      * Ermittelt die Eigenschaft Land der Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
@@ -107,7 +107,7 @@ public class Kunde extends Entity
     {
         return properties[2];
     }
-    
+
     /**
      * Ermittelt die Eigenschaft PLZ der Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
@@ -120,7 +120,7 @@ public class Kunde extends Entity
             return null;
         }
     }
-    
+
     /**
      * Ermittelt die Eigenschaft Wohnort der Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
@@ -129,7 +129,7 @@ public class Kunde extends Entity
     {
         return properties[4];
     }
-     
+
     /**
      * Ermittelt die Eigenschaft Strasse der Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
@@ -138,7 +138,7 @@ public class Kunde extends Entity
     {
         return properties[5];
     }
-    
+
     /**
      * Ermittelt die Eigenschaft TelNr der Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
