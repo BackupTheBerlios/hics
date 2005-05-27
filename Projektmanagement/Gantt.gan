@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HICS" company="SE2_08" webLink="" view-date="2005-04-25" version="1.11">
+<view zooming-state="default:4"/>
+<!-- -->
+<calendars>
+<day-types>
+<day-type id="0"/>
+<day-type id="1"/>
+<calendar id="1" name="default">
+<default-week sun="0" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+<overriden-day-types/>
+<days/>
+</calendar>
+</day-types>
+</calendars>    <description>
+        Hotel Information and Control Service
+    </description>
+
+    <tasks color="#8cb6ce">
+        <task id="0" name="Initiierungsphase" shape="0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0" meeting="false" start="2005-03-28" duration="10" complete="100" fixed-start="false" priority="1" expand="true">
+            <task id="1" name="Projektplanung" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-03-28" duration="10" complete="100" fixed-start="false" priority="1" expand="true">
+                <depend id="3" type="2"/>
+            </task>
+        </task>
+        <task id="2" name="Spezifikation" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-04-07" duration="17" complete="100" fixed-start="false" priority="1" expand="true">
+            <depend id="18" type="2"/>
+            <task id="3" name="HICS" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-04-07" duration="10" complete="100" fixed-start="false" priority="1" expand="true">
+                <depend id="4" type="2"/>
+                <depend id="7" type="2"/>
+            </task>
+            <task id="7" name="UI_HICS" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-04-17" duration="7" complete="100" fixed-start="false" priority="1" expand="true">
+                <depend id="11" type="2"/>
+            </task>
+            <task id="4" name="DB_HICS" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-04-17" duration="7" complete="100" fixed-start="false" priority="1" expand="true">
+                <depend id="10" type="2"/>
+            </task>
+            <task id="25" name="Meilenstein" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="true" start="2005-04-23" duration="1" complete="100" fixed-start="false" priority="2" expand="true"/>
+        </task>
+        <task id="8" name="Entwurf" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-04-24" duration="20" complete="100" fixed-start="false" priority="1" expand="true">
+            <task id="9" name="HICS" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-05-04" duration="10" complete="100" fixed-start="false" priority="1" expand="true">
+                <depend id="13" type="2"/>
+            </task>
+            <task id="11" name="UI_HICS" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-04-24" duration="10" complete="100" fixed-start="false" priority="1" expand="true">
+                <depend id="9" type="2"/>
+            </task>
+            <task id="10" name="DB_HICS" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-04-24" duration="10" complete="100" fixed-start="false" priority="1" expand="true">
+                <depend id="9" type="2"/>
+                <depend id="14" type="2"/>
+            </task>
+            <task id="26" name="Meilenstein" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="true" start="2005-05-13" duration="1" complete="100" fixed-start="false" priority="2" expand="true"/>
+        </task>
+        <task id="12" name="Implementierung" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-05-04" duration="39" complete="49" fixed-start="false" priority="1" expand="true">
+            <task id="13" name="HICS + UI_HICS" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-05-15" duration="21" complete="40" fixed-start="false" priority="2" expand="true">
+                <depend id="16" type="2"/>
+            </task>
+            <task id="14" name="DB_HICS" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-05-04" duration="11" complete="100" fixed-start="false" priority="1" expand="true">
+                <depend id="13" type="2"/>
+            </task>
+            <task id="16" name="Integration" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-06-05" duration="7" complete="0" fixed-start="false" priority="1" expand="true"/>
+        </task>
+        <task id="17" name="Test" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-04-24" duration="51" complete="19" fixed-start="false" priority="1" expand="true">
+            <depend id="24" type="2"/>
+            <task id="18" name="Testplan + Testfälle" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-04-24" duration="10" complete="50" fixed-start="false" priority="1" expand="true">
+                <depend id="19" type="2"/>
+            </task>
+            <task id="19" name="Systemtest Entwicklung" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-05-30" duration="9" complete="0" fixed-start="false" priority="1" expand="true">
+                <depend id="20" type="2"/>
+            </task>
+            <task id="20" name="Systemtest HICS" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-06-08" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
+            <task id="27" name="Meilenstein" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="true" start="2005-06-13" duration="1" complete="0" fixed-start="false" priority="1" expand="true"/>
+        </task>
+        <task id="23" name="Abschlussfase" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-06-14" duration="10" complete="0" fixed-start="false" priority="1" expand="true">
+            <task id="24" name="HICS_Installation" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2005-06-14" duration="2" complete="0" fixed-start="false" priority="1" expand="true"/>
+            <task id="28" name="Meilenstein" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="true" start="2005-06-23" duration="1" complete="0" fixed-start="false" priority="1" expand="true"/>
+        </task>
+    </tasks>
+
+    <resources>
+    </resources>
+
+    <allocations>
+    </allocations>
+
+
+<roles roleset-name="Default"/>
+<roles roleset-name="SoftwareDevelopment"/>
+</project>
