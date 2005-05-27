@@ -23,13 +23,10 @@ import java.sql.ResultSet;
  * Eigenschaften get- und set-Methoden in den abgeleiteten Klassen zur
  * Verfügung gestellt werden.
  *
- * Beim Füllen von Werten hat die abgeleitete Klasse alle Möglichkeiten:
- * Numerische Werte haben die Form 12[.34], boole'sche Werte sind entweder
- * TRUE oder FALSE, und Strings können mit Hilfe der Methode toSqlString()
- * ins Datenbankformat umgewandelt werden. Falls die betreffende Entity
- * eine fortlaufende Nummer für einen oder mehrere Primärschlüssel hat,
- * können diese mit dem Wert DEFAULT statt mit einer fix zugeteilten Nummer
- * belegt werden.
+ * Die Werte der Entity werden als Java-Objekte gespeichert, die z.B.
+ * vom Typ String oder Integer sein können (irgendwas, hauptsache Object).
+ * Beim Auslesen und Schreiben werden sie automatisch vom bzw. ins
+ * Datenbankformat umgewandelt.
  */
 public abstract class Entity
 {
@@ -37,13 +34,15 @@ public abstract class Entity
     protected String entityName;
     // Eine Liste von Strings, die die Spaltennamen der Primärschlüssel enthält.
     protected String[] primaryKeyNames;
-    // Eine Liste von Strings, die die Primärschlüssel der Entity enthält.
-    protected String[] primaryKeys;
+    // Eine Liste von Objekten (vom gleichen Typ haben wie ihre Entsprechungen
+    // in der Datenbank), die die Primärschlüssel der Entity enthält.
+    protected Object[] primaryKeys;
     // Eine Liste von Strings, die die Spaltennamen der Eigenschaften
     // (= Nicht-Primärschlüssel) enthält.
     protected String[] propertyNames;
-    // Eine Liste von Strings, die die Eigenschaften der Entity enthält.
-    protected String[] properties;
+    // Eine Liste von Objekten (vom gleichen Typ haben wie ihre Entsprechungen
+    // in der Datenbank), die die Eigenschaften der Entity enthält.
+    protected Object[] properties;
     
     // Das Datenbank-Objekt, das zum Auslesen und Schreiben
     // verwendet werden soll.
@@ -71,7 +70,7 @@ public abstract class Entity
      *
      * @param primaryKeys  Ein Array mit neuen Werten für die Primärschlüssel.
      */
-    public void setPrimaryKeys( String[] primaryKeys )
+    public void setPrimaryKeys( Object[] primaryKeys )
     {
         this.primaryKeys = primaryKeys;
     }
@@ -79,7 +78,7 @@ public abstract class Entity
     /**
      * Gibt die Liste der Primärschlüsseln zurück.
      */
-    public String[] getPrimaryKeys()
+    public Object[] getPrimaryKeys()
     {
         return this.primaryKeys;
     }
@@ -144,7 +143,16 @@ public abstract class Entity
         for( i = 0; i < propertyNames.length; i++ ) {
             query += ", " + propertyNames[i];
         }
-        query += " FROM " + entityName;
+        query += " FROM " + entityName + " WHERE ";
+        
+        for( i = 1; i < primaryKeyNames.length; i++ )
+        {
+            if( i != 0 ) {
+                query += ", ";
+            }
+            query += primaryKeyNames[i] + " = " + getSqlString(primaryKeys[i]);
+        }
+        query += ";";
         
         // Daten aus der Datenbank auslesen
         ResultSet result = db.query( query );
@@ -154,19 +162,19 @@ public abstract class Entity
         
         // Sicherheitskopie, falls was schief lauft
         // Zu ueberlegen: aus Performance-Gründen weglassen?
-        String[] primaryBackup = primaryKeys;
-        String[] propertyBackup = properties;
+        Object[] primaryBackup = primaryKeys;
+        Object[] propertyBackup = properties;
         
         try
         {
             // String-Werte aus dem ResultSet ermitteln
             for( i = 0; i < primaryKeyNames.length; i++ ) {
-                primaryKeys[i] = result.getString(i);
+                primaryKeys[i] = result.getObject(i);
             }
             for( i = primaryKeyNames.length;
                  i < primaryKeyNames.length + propertyNames.length; i++ )
             {
-                properties[i] = result.getString(i);
+                properties[i] = result.getObject(i);
             }
         }
         catch( java.sql.SQLException e )
@@ -238,12 +246,14 @@ public abstract class Entity
             if( i != 0 ) {
                 updateStatement += ", ";
             }
-            updateStatement += primaryKeyNames[i] + " = " + primaryKeys[i];
+            updateStatement += primaryKeyNames[i] + " = "
+                               + getSqlString(primaryKeys[i]);
         }
         for( i = primaryKeyNames.length;
              i < primaryKeyNames.length + propertyNames.length; i++ )
         {
-            updateStatement += ", " + propertyNames[i] + " = " + properties[i];
+            updateStatement += ", " + propertyNames[i] + " = "
+                               + getSqlString(properties[i]);
         }
         updateStatement += ";";
         
@@ -269,7 +279,7 @@ public abstract class Entity
         
         // Ein String vom Typ "schlüsselName1, schlüsselName2" usw.
         for( i = 0; i < primaryKeyNames.length; i++ )
-        {            
+        {
             if( i != 0 ) {
                 insertStatement += ", ";
             }
@@ -281,7 +291,7 @@ public abstract class Entity
         {
             insertStatement += ", " + propertyNames[i];
         }
-        insertStatement += " ) VALUES ( " + primaryKeys[0];
+        insertStatement += " ) VALUES ( ";
         
         // So, jetzt kommen die Werte hinein ("schluessel1, schluessel2" usw.)
         for( i = 0; i < primaryKeyNames.length; i++ )
@@ -289,13 +299,16 @@ public abstract class Entity
             if( i != 0 ) {
                 insertStatement += ", ";
             }
-            insertStatement += primaryKeys[i];
+            if( primaryKeys[i] == null ) // gibts nicht, deshalb: default
+                insertStatement += "DEFAULT";
+            else
+                insertStatement += getSqlString(primaryKeys[i]);
         }
         // Fortsetzung der Werteaufzaehlung mit den Eigenschaften
         for( i = primaryKeyNames.length;
              i < primaryKeyNames.length + propertyNames.length; i++ )
         {
-            insertStatement += ", " + properties[i];
+            insertStatement += ", " + getSqlString(properties[i]);
         }
         insertStatement += " );";
         
@@ -329,8 +342,7 @@ public abstract class Entity
         }
         
         // Der erste Primärschluessel hat noch keinen Beistrich vorn.
-        deleteStatement = "DELETE FROM " + entityName + " WHERE "
-                          + primaryKeyNames[0] + " = " + primaryKeys[0];
+        deleteStatement = "DELETE FROM " + entityName + " WHERE ";
         
         // Strings vom Typ ", ZimmerNr = 666"
         for( i = 0; i < primaryKeyNames.length; i++ )
@@ -338,7 +350,8 @@ public abstract class Entity
             if( i != 0 ) {
                 deleteStatement += " AND ";
             }
-            deleteStatement += primaryKeyNames[i] + " = " + primaryKeys[i];
+            deleteStatement += primaryKeyNames[i] + " = "
+                               + getSqlString(primaryKeys[i]);
         }
         deleteStatement += ";";
         
@@ -365,7 +378,7 @@ public abstract class Entity
         
         // SQL-Abfrage zusammenstellen
         // (ohne Eigenschaften, die sind in dem Zusammenhang unwichtig)
-        String query = "SELECT " + primaryKeyNames[0];
+        String query = "SELECT ";
         
         for( i = 1; i < primaryKeyNames.length; i++ )
         {
@@ -374,7 +387,16 @@ public abstract class Entity
             }
             query += primaryKeyNames[i];
         }
-        query += " FROM " + entityName;
+        query += " FROM " + entityName + " WHERE ";
+        
+        for( i = 1; i < primaryKeyNames.length; i++ )
+        {
+            if( i != 0 ) {
+                query += ", ";
+            }
+            query += primaryKeyNames[i] + " = " + getSqlString(primaryKeys[i]);
+        }
+        query += ";";
         
         // Daten aus der Datenbank auslesen
         ResultSet result = db.query( query );
@@ -385,22 +407,14 @@ public abstract class Entity
             return true;
     }
     
-    
-    /**
-     * Konvertiert einen normalen Java-String ins Datenbankformat.
-     * Nur bei echten String-Werten verwenden.
-     */
-    static protected String toSqlString( String normalString )
+    private String getSqlString( Object object )
     {
-        return "'" + normalString + "'";
-    }
-    
-    /**
-     * Konvertiert einen String im Datenbankformat in einen
-     * normalen Java-String. Nur bei echten String-Werten verwenden.
-     */
-    static protected String fromSqlString( String sqlString )
-    {
-        return sqlString.substring( 1, sqlString.length() - 2 );
+        if( object instanceof String ) {
+            return "'" + ((String) object) + "'";
+        }
+        //TODO: weitere Konvertierungen einbauen (für Date, usw.)
+        else {
+            return object.toString();
+        }
     }
 }

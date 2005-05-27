@@ -8,11 +8,12 @@ package database;
 
 import java.sql.*;
 
-class Database {
+public class Database
+{
     protected String url,user,passwd;
     protected Connection con;
     
-    Database(String url, String user, String passwd) {
+    public Database(String url, String user, String passwd) {
         this.url = url;
         this.user = user;
         this.passwd = passwd;
@@ -25,7 +26,7 @@ class Database {
      * @return  Wenn der Treiber geladen und die Verbindung hergestellt
      *          werden kann wird true zurückgegeben, ansonsten false.
      */
-    boolean connect()
+    public boolean connect()
     {
         try{
             Class.forName( "org.postgresql.Driver" );
@@ -48,7 +49,7 @@ class Database {
      * @return  Wenn die Verbindung getrennt werden kann wird true
      *          zurückgegeben, ansonsten false.
      */
-    boolean disconnect()
+    public boolean disconnect()
     {
         if( con == null )
             return false;
@@ -70,7 +71,7 @@ class Database {
      * @return  Wenn die Abfrage korrekt ist und ein Ergebnis erhält, wird das
      *          ResultSet zurückgegeben, ansonsten null.
      */
-    ResultSet query(String SQLStatement)
+    public ResultSet query(String SQLStatement)
     {
         if( con == null )
             return null;
@@ -94,7 +95,7 @@ class Database {
      *          das Update korrekt verarbeitet wurde, wird true zurückgegeben,
      *          ansonsten false.
      */
-    boolean change(String SQLStatement)
+    public boolean change(String SQLStatement)
     {
         if( con == null )
             return false;
