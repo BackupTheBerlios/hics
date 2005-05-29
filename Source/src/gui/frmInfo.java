@@ -56,10 +56,10 @@ public class frmInfo extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 10, 3, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 80, 6, 0);
         pnlInformation.add(cmdSpeichern, gridBagConstraints);
 
         cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/abbrechen.gif")));
@@ -75,17 +75,17 @@ public class frmInfo extends javax.swing.JFrame {
         });
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 5, 3, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 0);
         pnlInformation.add(cmdAbbrechen, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         pnlInformation.add(jList1, gridBagConstraints);
@@ -107,12 +107,13 @@ public class frmInfo extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tblInfo.setGridColor(new java.awt.Color(0, 0, 0));
+        tblInfo.setSelectionBackground(new java.awt.Color(153, 153, 255));
         tblInfo.setSurrendersFocusOnKeystroke(true);
-        tblInfo.setTableHeader(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.gridwidth = 15;
         gridBagConstraints.gridheight = 3;
         gridBagConstraints.ipadx = 320;
         gridBagConstraints.ipady = 148;
@@ -144,12 +145,12 @@ public class frmInfo extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         pnlInformation.add(lblAufgabe3, gridBagConstraints);
 
         lblAufgabe4.setFont(new java.awt.Font("Dialog", 1, 12));
+        lblAufgabe4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblAufgabe4.setText("Details");
         lblAufgabe4.setBorder(new javax.swing.border.BevelBorder(javax.swing.border.BevelBorder.RAISED));
         lblAufgabe4.setMaximumSize(new java.awt.Dimension(95, 25));
@@ -157,14 +158,15 @@ public class frmInfo extends javax.swing.JFrame {
         lblAufgabe4.setPreferredSize(new java.awt.Dimension(95, 25));
         lblAufgabe4.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         pnlInformation.add(lblAufgabe4, gridBagConstraints);
 
         lblAufgabe5.setFont(new java.awt.Font("Dialog", 1, 12));
+        lblAufgabe5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAufgabe5.setText("Erledigt");
         lblAufgabe5.setBorder(new javax.swing.border.BevelBorder(javax.swing.border.BevelBorder.RAISED));
         lblAufgabe5.setMaximumSize(new java.awt.Dimension(95, 25));
@@ -172,8 +174,9 @@ public class frmInfo extends javax.swing.JFrame {
         lblAufgabe5.setPreferredSize(new java.awt.Dimension(95, 25));
         lblAufgabe5.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
         pnlInformation.add(lblAufgabe5, gridBagConstraints);

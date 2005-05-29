@@ -6,19 +6,18 @@
 
 package gui;
 
-import gui.frmNotiz;
 
 /**
  *
  * @author  Standard
  */
-public class frmDaten extends javax.swing.JFrame {
+public class frmDaten1 extends javax.swing.JFrame {
     public static int WIDTH=500;
     public static int HEIGHT=400;
-    public static String TITLE="HICS - Daten";
+    public static String TITLE="HICS - Daten!";
     
     /** Creates new form Anzeige */
-    public frmDaten() {
+    public frmDaten1() {
         super(TITLE);
         initComponents();
         setSize(WIDTH, HEIGHT);
@@ -87,11 +86,14 @@ public class frmDaten extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 0, 0, 0);
         pnlTop.add(cmdSpeichern, gridBagConstraints);
 
+        cmbDaten.addItem("Admin");
+        cmbDaten.addItem("Mitarbeiter");
         cmbDaten.addItem("Kunde");
         cmbDaten.addItem("Zimmer");
         cmbDaten.addItem("Reservierung");
         cmbDaten.addItem("Notiz");
         cmbDaten.setEditable(false);
+
         cmbDaten.setMaximumSize(new java.awt.Dimension(110, 25));
         cmbDaten.setMinimumSize(new java.awt.Dimension(110, 25));
         cmbDaten.setOpaque(false);
@@ -299,21 +301,28 @@ public class frmDaten extends javax.swing.JFrame {
     private void cmbDatenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDatenActionPerformed
         // TODO add your handling code here:
         int index = 0;
-      
-        
-        index = cmbDaten.getSelectedIndex();
+       index = cmbDaten.getSelectedIndex();
         if(index == 0) {
-            new frmKundendaten().setVisible(true);
-            this.hide();
+           new frmAdmindaten().setVisible(true);
+           this.hide();
         }
         if(index == 1) {
-            new frmZimmerplan().setVisible(true);
+            new frmMitarbeiter().setVisible(true);
             this.hide();
         }
         if(index == 2) {
+            new frmKundendaten().setVisible(true);
+            this.hide();
+        }
+         if(index == 3) {
+             new frmZimmerplan().setVisible(true);
+            this.hide();
+        }
+        if(index == 4) {
             new frmReservierung().setVisible(true);
             this.hide();
-        }if(index == 3) {
+        }
+        if(index == 5) {
             new frmNotiz().setVisible(true);
             this.hide();
         }
@@ -331,7 +340,7 @@ public class frmDaten extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmDaten().setVisible(true);
+                new frmDaten1().setVisible(true);
             }
         });
     }

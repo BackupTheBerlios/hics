@@ -12,8 +12,8 @@ package gui;
  */
 public class frmStart extends javax.swing.JFrame {
     public static int WIDTH=450;
-    public static int HEIGHT=350;
-    public static String TITLE="HICS - Start";
+    public static int HEIGHT=400;
+    public static String TITLE="HICS - Login";
     
     /** Creates new form frmStart */
     public frmStart() {
@@ -42,52 +42,61 @@ public class frmStart extends javax.swing.JFrame {
         cmdLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         pnlStart.setLayout(new java.awt.GridBagLayout());
 
-        pnlStart.setMinimumSize(new java.awt.Dimension(181, 44));
-        pnlStart.setPreferredSize(new java.awt.Dimension(181, 44));
-        lblStart.setFont(new java.awt.Font("Banjoman Open Bold", 0, 24));
+        pnlStart.setMinimumSize(new java.awt.Dimension(200, 50));
+        pnlStart.setOpaque(false);
+        pnlStart.setPreferredSize(new java.awt.Dimension(450, 300));
+        lblStart.setFont(new java.awt.Font("Arial", 0, 24));
         lblStart.setText("Herzlich willkommen bei HICS!");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 70, 0, 38);
-        pnlStart.add(lblStart, gridBagConstraints);
-
-        lblStart1.setFont(new java.awt.Font("Banjoman Open Bold", 0, 18));
-        lblStart1.setIcon(new javax.swing.ImageIcon("D:\\Universität\\Informatik2\\Sem6\\Software Engineering 2\\Projekt\\Code\\HICS_v1_0\\Logo_klein.jpg"));
+        lblStart.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 140, 17, 0);
+        gridBagConstraints.insets = new java.awt.Insets(17, 40, 21, 30);
+        pnlStart.add(lblStart, gridBagConstraints);
+
+        lblStart1.setFont(new java.awt.Font("Arial", 0, 18));
+        lblStart1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/Logo_klein.jpg")));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 130, 0, 0);
         pnlStart.add(lblStart1, gridBagConstraints);
 
         getContentPane().add(pnlStart, java.awt.BorderLayout.CENTER);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(0, 0));
-        jPanel1.setPreferredSize(new java.awt.Dimension(383, 70));
+        jPanel1.setMinimumSize(new java.awt.Dimension(200, 50));
+        jPanel1.setPreferredSize(new java.awt.Dimension(450, 100));
         lblBenutzername.setText("Benutzername");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 13, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(lblBenutzername, gridBagConstraints);
 
-        jTextField1.setText("Benutzername");
         jTextField1.setToolTipText("Tragen Sie hier Ihren Benutzenamen ein! Achten Sie auf Gro\u00df- und Kleinschreibung!");
+        jTextField1.setMinimumSize(new java.awt.Dimension(11, 22));
+        jTextField1.setOpaque(false);
+        jTextField1.setPreferredSize(new java.awt.Dimension(50, 22));
+        jTextField1.setSelectedTextColor(new java.awt.Color(0, 0, 0));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 17, 0, 0);
+        gridBagConstraints.ipadx = 69;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(jTextField1, gridBagConstraints);
 
         lblKennwort.setText("Kennwort");
@@ -97,28 +106,25 @@ public class frmStart extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 13, 0, 0);
+        gridBagConstraints.ipadx = -10;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(lblKennwort, gridBagConstraints);
 
         pwdKennwort.setToolTipText("Geben Sie hier Ihr Kennwort ein!  Anstelle des Kennwortes erscheinen \"*\"-Zeichen.  Achten Sie auf Gro\u00df- und Kleinschreibung!");
-        pwdKennwort.setPreferredSize(new java.awt.Dimension(86, 23));
+        pwdKennwort.setPreferredSize(new java.awt.Dimension(50, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = 5;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 17, 12, 0);
+        gridBagConstraints.ipadx = 69;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(pwdKennwort, gridBagConstraints);
 
-        cmdLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/login.gif")));
         cmdLogin.setText("Login");
-        cmdLogin.setToolTipText("Geben Sie Ihren Benutzernamen und Ihr Kennwort in die entsprechenden Felder ein und\n klicken Sie anschlie\u00dfend auf  \"Login\" um einzuloggen!  Achten Sie auf Gro\u00df- und Kleinschreibung!");
-        cmdLogin.setMaximumSize(new java.awt.Dimension(86, 25));
-        cmdLogin.setMinimumSize(new java.awt.Dimension(86, 25));
-        cmdLogin.setPreferredSize(new java.awt.Dimension(125, 30));
+        cmdLogin.setToolTipText("Geben Sie Ihren Benutzernamen und Ihr Kennwort in die entsprechenden Felder ein und\n klicken Sie anschlie\u00dfend auf  \"Login\" um einzuloggen! \nAchten Sie auf Gro\u00df- und Kleinschreibung!");
+        cmdLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cmdLogin.setMaximumSize(new java.awt.Dimension(80, 22));
+        cmdLogin.setMinimumSize(new java.awt.Dimension(80, 22));
+        cmdLogin.setPreferredSize(new java.awt.Dimension(80, 22));
         cmdLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLoginActionPerformed(evt);
@@ -129,10 +135,7 @@ public class frmStart extends javax.swing.JFrame {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 39;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(17, 74, 0, 5);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(cmdLogin, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
@@ -140,10 +143,33 @@ public class frmStart extends javax.swing.JFrame {
         pack();
     }//GEN-END:initComponents
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
         // TODO add your handling code here:
-        this.hide();
-        new frmAnzeige().setVisible(true);
+         String username = jTextField1.getText();
+        
+        if (username.equals("Raumpflege")) {
+          this.hide();
+          new frmInfo().setVisible(true);
+        }
+        else if (username.equals("Admin")) {
+          this.hide();
+          new frmDaten().setVisible(true);
+        }
+         else if (username.equals("Hauptadmin")) {
+          this.hide();
+          new frmDaten1().setVisible(true);
+        }
+        else if (username.equals("Rezeption")) {
+           this.hide();
+           new frmZimmerplan().setVisible(true);
+        }
+        else {
+          helpMeldungen.showErrorMessage("Es wurde kein gültiger Benutzername eingegebe!"+username);
+        }
     }//GEN-LAST:event_cmdLoginActionPerformed
     
     /**
@@ -168,7 +194,7 @@ public class frmStart extends javax.swing.JFrame {
     private javax.swing.JPanel pnlStart;
     private javax.swing.JPasswordField pwdKennwort;
     // End of variables declaration//GEN-END:variables
-    
+  
     
     
 }

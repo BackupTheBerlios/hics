@@ -96,7 +96,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbDatenActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cmbDaten.addItem(&quot;Kunde&quot;);&#xa;cmbDaten.addItem(&quot;Zimmer&quot;);&#xa;cmbDaten.addItem(&quot;Reservierung&quot;);&#xa;cmbDaten.addItem(&quot;Notiz&quot;);&#xa;cmbDaten.setEditable(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cmbDaten.addItem(&quot;Admin&quot;);&#xa;cmbDaten.addItem(&quot;Mitarbeiter&quot;);&#xa;cmbDaten.addItem(&quot;Kunde&quot;);&#xa;cmbDaten.addItem(&quot;Zimmer&quot;);&#xa;cmbDaten.addItem(&quot;Reservierung&quot;);&#xa;cmbDaten.addItem(&quot;Notiz&quot;);&#xa;cmbDaten.setEditable(false);&#xa;&#xa;"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">

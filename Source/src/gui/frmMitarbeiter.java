@@ -56,36 +56,27 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         txtStrasse = new javax.swing.JTextField();
         lblHausStiegeTuer = new javax.swing.JLabel();
         txtHaus = new javax.swing.JTextField();
-        txtStiege = new javax.swing.JTextField();
-        txtTuer = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         cmdLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setBorder(new javax.swing.border.EtchedBorder());
         cmdSuchen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/suchen.gif")));
-        cmdSuchen.setText("Suchen");
         cmdSuchen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdSuchen.setMinimumSize(new java.awt.Dimension(95, 25));
-        cmdSuchen.setPreferredSize(new java.awt.Dimension(125, 30));
+        cmdSuchen.setPreferredSize(new java.awt.Dimension(35, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
         jPanel1.add(cmdSuchen, gridBagConstraints);
 
         cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/speichern.gif")));
-        cmdSpeichern.setText("Speichern");
         cmdSpeichern.setToolTipText("Klicken Sie hier um die ge\u00e4nderten Daten zu speichern!");
         cmdSpeichern.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdSpeichern.setMinimumSize(new java.awt.Dimension(95, 25));
-        cmdSpeichern.setPreferredSize(new java.awt.Dimension(125, 30));
+        cmdSpeichern.setPreferredSize(new java.awt.Dimension(35, 30));
         cmdSpeichern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdSpeichernActionPerformed(evt);
@@ -93,21 +84,16 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         });
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 5;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         jPanel1.add(cmdSpeichern, gridBagConstraints);
 
         cmdZurueck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/zurueck.gif")));
-        cmdZurueck.setText("Zurueck");
         cmdZurueck.setToolTipText("Klicken Sie  auf  \"Zurueck\" um wieder auf den vorigen Bildschirm zu gelangen!");
         cmdZurueck.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdZurueck.setMinimumSize(new java.awt.Dimension(95, 25));
-        cmdZurueck.setPreferredSize(new java.awt.Dimension(125, 30));
+        cmdZurueck.setPreferredSize(new java.awt.Dimension(35, 30));
         cmdZurueck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdZurueckActionPerformed(evt);
@@ -115,13 +101,9 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         });
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 16;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 5;
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         jPanel1.add(cmdZurueck, gridBagConstraints);
 
         cmbTaetigkeit.addItem("Rezeption");
@@ -145,46 +127,35 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 15;
-        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 15);
         jPanel1.add(cmbTaetigkeit, gridBagConstraints);
 
         cmdBearbeiten.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/bearbeiten.gif")));
-        cmdBearbeiten.setText("Bearbeiten");
         cmdBearbeiten.setToolTipText("Klicken Sie hier um Mitarbeiterdaten zu bearbeiten!\nKlicken Sie anschlie\u00dfend auf  \"Speichern\" um die \u00c4nderungen zu speichern!\nKlicken Sie anschlie\u00dfend auf  \"Abbrechen\" um die \u00c4nderungen nicht zu speichern!");
-        cmdBearbeiten.setPreferredSize(new java.awt.Dimension(125, 30));
+        cmdBearbeiten.setPreferredSize(new java.awt.Dimension(35, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         jPanel1.add(cmdBearbeiten, gridBagConstraints);
 
         cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/loeschen.gif")));
-        cmdLoeschen.setText("Loeschen");
         cmdLoeschen.setToolTipText("Klicken Sie  auf  \"L\u00f6schen\" um Mitarbeiterdaten zu l\u00f6schen!");
         cmdLoeschen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLoeschen.setMinimumSize(new java.awt.Dimension(95, 25));
-        cmdLoeschen.setPreferredSize(new java.awt.Dimension(125, 30));
+        cmdLoeschen.setPreferredSize(new java.awt.Dimension(35, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 5;
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         jPanel1.add(cmdLoeschen, gridBagConstraints);
 
         cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/abbrechen.gif")));
-        cmdAbbrechen.setText("Abbrechen");
         cmdAbbrechen.setToolTipText("Klicken Sie  auf  \"Abbrechen\" um die \u00c4nderungen nicht zu speichern!");
         cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdAbbrechen.setMinimumSize(new java.awt.Dimension(95, 25));
-        cmdAbbrechen.setPreferredSize(new java.awt.Dimension(125, 30));
+        cmdAbbrechen.setPreferredSize(new java.awt.Dimension(35, 30));
         cmdAbbrechen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdAbbrechenActionPerformed(evt);
@@ -192,26 +163,18 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         });
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 5;
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         jPanel1.add(cmdAbbrechen, gridBagConstraints);
 
-        cmdNeu.setText("Neu");
-        cmdNeu.setToolTipText("Klicken Sie  auf  \"Neu\" um Mitarbeiterdaten anzulegen!");
-        cmdNeu.setPreferredSize(new java.awt.Dimension(125, 30));
+        cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/neu.gif")));
+        cmdNeu.setToolTipText("Legt neue Mitarbeiterdaten an!");
+        cmdNeu.setPreferredSize(new java.awt.Dimension(35, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 68;
-        gridBagConstraints.ipady = 5;
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 0, 0);
         jPanel1.add(cmdNeu, gridBagConstraints);
 
         lblSVNr.setText("SVNr");
@@ -223,7 +186,6 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 20, 0, 0);
         jPanel1.add(lblSVNr, gridBagConstraints);
 
         txtSVNr.setText("SVNr");
@@ -232,12 +194,10 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         txtSVNr.setPreferredSize(new java.awt.Dimension(95, 25));
         txtSVNr.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.ipadx = 35;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         jPanel1.add(txtSVNr, gridBagConstraints);
 
         lblKundenNN.setText("Nachname");
@@ -247,9 +207,8 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         lblKundenNN.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
         jPanel1.add(lblKundenNN, gridBagConstraints);
 
         txtZimmer1.setText("Nachname");
@@ -258,10 +217,9 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         txtZimmer1.setPreferredSize(new java.awt.Dimension(95, 25));
         txtZimmer1.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.ipadx = 35;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(txtZimmer1, gridBagConstraints);
 
@@ -272,10 +230,8 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         lblKundenVN.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 20, 0, 0);
         jPanel1.add(lblKundenVN, gridBagConstraints);
 
         txtKundenVN.setText("Vorname");
@@ -284,13 +240,10 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         txtKundenVN.setPreferredSize(new java.awt.Dimension(95, 25));
         txtKundenVN.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 35;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel1.add(txtKundenVN, gridBagConstraints);
 
         txtLand.setText("A");
@@ -305,12 +258,10 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         });
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = -55;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel1.add(txtLand, gridBagConstraints);
 
         lblBundesland.setText("Bundesland");
@@ -320,10 +271,8 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         lblBundesland.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridheight = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 20, 0, 0);
         jPanel1.add(lblBundesland, gridBagConstraints);
 
         txtBundesland.setText("Bundesland");
@@ -332,13 +281,10 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         txtBundesland.setPreferredSize(new java.awt.Dimension(95, 25));
         txtBundesland.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.gridheight = 5;
-        gridBagConstraints.ipadx = 35;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel1.add(txtBundesland, gridBagConstraints);
 
         lblPLZ.setText("Land - PLZ");
@@ -348,9 +294,8 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         lblPLZ.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 20, 0, 0);
         jPanel1.add(lblPLZ, gridBagConstraints);
 
         txtPLZ.setText("PLZ");
@@ -360,11 +305,9 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         txtPLZ.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = -5;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel1.add(txtPLZ, gridBagConstraints);
 
         lblStrasse.setText("Strasse");
@@ -374,9 +317,8 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         lblStrasse.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
         jPanel1.add(lblStrasse, gridBagConstraints);
 
         txtStrasse.setText("Strasse");
@@ -385,29 +327,26 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         txtStrasse.setPreferredSize(new java.awt.Dimension(95, 25));
         txtStrasse.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.ipadx = 35;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(txtStrasse, gridBagConstraints);
 
-        lblHausStiegeTuer.setText("Haus-Stiege-Tuer");
+        lblHausStiegeTuer.setText("Nr/Stiege/Tuer");
         lblHausStiegeTuer.setMaximumSize(new java.awt.Dimension(95, 25));
         lblHausStiegeTuer.setMinimumSize(new java.awt.Dimension(95, 25));
         lblHausStiegeTuer.setPreferredSize(new java.awt.Dimension(95, 25));
         lblHausStiegeTuer.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 15;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 20, 1, 0);
         jPanel1.add(lblHausStiegeTuer, gridBagConstraints);
 
-        txtHaus.setText("Haus");
+        txtHaus.setText("Nr/Stiege/Tuer");
         txtHaus.setMaximumSize(new java.awt.Dimension(95, 25));
         txtHaus.setMinimumSize(new java.awt.Dimension(95, 25));
         txtHaus.setPreferredSize(new java.awt.Dimension(95, 25));
@@ -419,52 +358,20 @@ public class frmMitarbeiter extends javax.swing.JFrame {
         });
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 17;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = -55;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 1, 0);
         jPanel1.add(txtHaus, gridBagConstraints);
-
-        txtStiege.setText("Stiege");
-        txtStiege.setMaximumSize(new java.awt.Dimension(95, 25));
-        txtStiege.setMinimumSize(new java.awt.Dimension(95, 25));
-        txtStiege.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtStiege.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 17;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = -45;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 1, 0);
-        jPanel1.add(txtStiege, gridBagConstraints);
-
-        txtTuer.setText("Tuer");
-        txtTuer.setMaximumSize(new java.awt.Dimension(95, 25));
-        txtTuer.setMinimumSize(new java.awt.Dimension(95, 25));
-        txtTuer.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtTuer.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 17;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = -55;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 1, 0);
-        jPanel1.add(txtTuer, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setBorder(new javax.swing.border.EtchedBorder());
         cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
-        cmdLogout.setText("Ausloggen");
         cmdLogout.setToolTipText("Klicken Sie  auf  \"Ausloggen\" um wieder auf den Startbildschim zu gelangen!");
         cmdLogout.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLogout.setMinimumSize(new java.awt.Dimension(95, 25));
-        cmdLogout.setPreferredSize(new java.awt.Dimension(125, 30));
+        cmdLogout.setPreferredSize(new java.awt.Dimension(35, 30));
         cmdLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLogoutActionPerformed(evt);
@@ -489,7 +396,7 @@ public class frmMitarbeiter extends javax.swing.JFrame {
     private void cmdZurueckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdZurueckActionPerformed
         // TODO add your handling code here:
         this.hide();
-        new frmDaten().setVisible(true);        
+        new frmDaten1().setVisible(true);        
     }//GEN-LAST:event_cmdZurueckActionPerformed
 
     private void cmdLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLogoutActionPerformed
@@ -522,7 +429,7 @@ public class frmMitarbeiter extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmAnzeige().setVisible(true);
+                new frmMitarbeiter().setVisible(true);
             }
         });
     }
@@ -553,9 +460,7 @@ public class frmMitarbeiter extends javax.swing.JFrame {
     private javax.swing.JTextField txtLand;
     private javax.swing.JTextField txtPLZ;
     private javax.swing.JTextField txtSVNr;
-    private javax.swing.JTextField txtStiege;
     private javax.swing.JTextField txtStrasse;
-    private javax.swing.JTextField txtTuer;
     private javax.swing.JTextField txtZimmer1;
     // End of variables declaration//GEN-END:variables
     
