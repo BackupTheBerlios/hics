@@ -153,7 +153,7 @@ public class frmStart extends javax.swing.JFrame {
         
         if (username.equals("Raumpflege")) {
           this.hide();
-          new frmInfo().setVisible(true);
+          new frmZimNotizAnzeigen().setVisible(true);
         }
         else if (username.equals("Admin")) {
           this.hide();

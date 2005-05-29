@@ -109,7 +109,7 @@ public class frmAufenthalt extends javax.swing.JFrame {
     private void cmdNotizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNotizActionPerformed
         // TODO add your handling code here:
         this.hide();
-        new frmInfo().setVisible(true);
+        new frmZimNotizAnzeigen().setVisible(true);
     }//GEN-LAST:event_cmdNotizActionPerformed
     
     /**
