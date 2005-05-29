@@ -30,6 +30,7 @@ public class Kunde extends Entity
      * Setzt die Kundennummer für diese Entity fest.
      */
     public void setPrimaryKeys( String kundenNr ) {
+        primaryKeys = new String[primaryKeyNames.length];
         primaryKeys[0] = kundenNr;
     }
 
@@ -41,6 +42,7 @@ public class Kunde extends Entity
      */
     public void setSerialKey()
     {
+        primaryKeys = new String[primaryKeyNames.length];
         primaryKeys[0] = "DEFAULT";
     }
 
