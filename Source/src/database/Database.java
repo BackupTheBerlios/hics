@@ -8,8 +8,7 @@ package database;
 
 import java.sql.*;
 
-public class Database
-{
+public class Database {
     protected String url,user,passwd;
     protected Connection con;
     
@@ -73,7 +72,7 @@ public class Database
      */
     public ResultSet query(String SQLStatement)
     {
-        if( con == null )
+        if( con == null || SQLStatement =="")
             return null;
         
         try{
@@ -97,7 +96,7 @@ public class Database
      */
     public boolean change(String SQLStatement)
     {
-        if( con == null )
+        if( con == null || SQLStatement =="")
             return false;
         
         try{
