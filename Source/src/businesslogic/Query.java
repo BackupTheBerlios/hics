@@ -81,7 +81,7 @@ public abstract class Query
      */
     public ResultSet getResultSet()
     {
-        //bla
+        return result;
     }
     
     /**

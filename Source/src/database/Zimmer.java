@@ -2,7 +2,6 @@
  * Kunde.java
  *
  * Created on 25. Mai 2005, 23:04
- * @author Jakob Petsovits
  */
 
 package database;
@@ -23,13 +22,14 @@ public class Zimmer extends Entity
         entityName = "Zimmer";
         primaryKeyNames = new String[] {"ZimmerNr"};
         propertyNames = new String[] {"AnzahlBetten", "PreisProNacht"};
+        primaryKeys = new Object[primaryKeyNames.length];
+        properties = new Object[propertyNames.length];
     }
 
     /**
      * Setzt die Zimmernummer für diese Entity fest.
      */
     public void setPrimaryKeys( String zimmerNr ) {
-        primaryKeys = new String[primaryKeyNames.length];
         primaryKeys[0] = zimmerNr;
     }
 
@@ -41,7 +41,6 @@ public class Zimmer extends Entity
      */
     public void setSerialKey()
     {
-        primaryKeys = new String[primaryKeyNames.length];
         primaryKeys[0] = "DEFAULT";
     }
 
@@ -51,31 +50,20 @@ public class Zimmer extends Entity
      */
     public Integer getZimmerNR()
     {
-        try {
-            return Integer.valueOf(primaryKeys[0]);
-        }
-        catch( NumberFormatException e ) {
-            return null;
-        }
+        return (Integer) primaryKeys[0];
     }
 
     /**
      * Setzt alle Eigenschaften dieser Entity auf einmal. Um einen Wert
      * auf NULL zu setzen, muss null als Argument übergeben werden.
      */
-    public void setProperties( Integer anzahlbetten, Double preispronacht )
+    public void setProperties( Integer anzahlBetten, Double preisProNacht )
     {
         // Die Werte sind so nummeriert wie oben in der Initialisierung
         // angegeben. Die Nummerierung ist unabhängig von der Reihenfolge
         // in der Datenbank.
-        
-        properties = new String[propertyNames.length];
-        if( anzahlbetten == null ){properties[0] = null;}
-        else{properties[0] = anzahlbetten.toString();}
-        
-        if( preispronacht == null ){properties[1] = null;}
-        else{properties[1] = preispronacht.toString();}
-        
+        properties[0] = anzahlBetten;
+        properties[1] = preisProNacht;
     }
 
 
@@ -85,14 +73,7 @@ public class Zimmer extends Entity
      */
     public Integer getAnzahlBetten()
     {
-        if(properties == null){return null;}
-        else{
-            try {
-                return Integer.valueOf(properties[0]);
-            } catch( NumberFormatException e ) {
-                return null;
-            }
-        }
+        return (Integer) properties[0];
     }
 
     /**
@@ -101,13 +82,6 @@ public class Zimmer extends Entity
      */
     public Double getPreisProNacht()
     {
-        if(properties == null){return null;}
-        else{
-            try {
-                return Double.valueOf(properties[1]);
-            } catch( NumberFormatException e ) {
-                return null;
-            }
-        }
+        return (Double) properties[1];
     }
 }
