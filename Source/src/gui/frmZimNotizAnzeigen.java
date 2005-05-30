@@ -46,7 +46,7 @@ public class frmZimNotizAnzeigen extends javax.swing.JFrame {
         pnlInformation.setLayout(new java.awt.GridBagLayout());
 
         pnlInformation.setBorder(new javax.swing.border.EtchedBorder());
-        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/speichern.gif")));
+        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/speichern.gif")));
         cmdSpeichern.setText("Speichern");
         cmdSpeichern.setToolTipText("Klicken Sie hier um die ge\u00e4nderten Daten zu speichern!");
         cmdSpeichern.setMaximumSize(new java.awt.Dimension(95, 30));
@@ -62,7 +62,7 @@ public class frmZimNotizAnzeigen extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 80, 6, 0);
         pnlInformation.add(cmdSpeichern, gridBagConstraints);
 
-        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/abbrechen.gif")));
+        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
         cmdAbbrechen.setText("Abbrechen");
         cmdAbbrechen.setToolTipText("Klicken Sie  auf  \"Abbrechen\" um die \u00c4nderungen nicht zu speichern!");
         cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
@@ -184,7 +184,7 @@ public class frmZimNotizAnzeigen extends javax.swing.JFrame {
         getContentPane().add(pnlInformation, java.awt.BorderLayout.CENTER);
 
         pnlZurueck.setBorder(new javax.swing.border.EtchedBorder());
-        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
+        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
         cmdLogout.setText("Ausloggen");
         cmdLogout.setToolTipText("Klicken Sie  auf  \"Ausloggen\" um wieder auf den Startbildschim zu gelangen!");
         cmdLogout.setMaximumSize(new java.awt.Dimension(95, 25));

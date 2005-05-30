@@ -54,7 +54,7 @@ public class frmReservierung extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setPreferredSize(new java.awt.Dimension(450, 300));
-        cmdNotiz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/info.gif")));
+        cmdNotiz.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/info.gif")));
         cmdNotiz.setToolTipText("Klicken Sie hier um eine Notiz zu erstellen!");
         cmdNotiz.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdNotiz.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -75,7 +75,7 @@ public class frmReservierung extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         jPanel1.add(cmdNotiz, gridBagConstraints);
 
-        cmdReservierung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/reservierung.gif")));
+        cmdReservierung.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/reservierung.gif")));
         cmdReservierung.setToolTipText("Klicken Sie hier um eine Reservierung zu duchzuf\u00fchren!");
         cmdReservierung.setMaximumSize(new java.awt.Dimension(110, 25));
         cmdReservierung.setMinimumSize(new java.awt.Dimension(110, 25));
@@ -105,7 +105,7 @@ public class frmReservierung extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(cmdKunde, gridBagConstraints);
 
-        cmdZurueck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/zurueck.gif")));
+        cmdZurueck.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/zurueck.gif")));
         cmdZurueck.setToolTipText("Klicken Sie  auf  \"Zurueck\" um wieder auf den vorigen Bildschirm zu gelangen!");
         cmdZurueck.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdZurueck.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -225,7 +225,7 @@ public class frmReservierung extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(txtKundennr, gridBagConstraints);
 
-        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/speichern.gif")));
+        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/speichern.gif")));
         cmdSpeichern.setToolTipText("Klicken Sie hier um die ge\u00e4nderten Daten zu speichern!");
         cmdSpeichern.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdSpeichern.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -243,7 +243,7 @@ public class frmReservierung extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(cmdSpeichern, gridBagConstraints);
 
-        cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/loeschen.gif")));
+        cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/loeschen.gif")));
         cmdLoeschen.setToolTipText("Klicken Sie  auf  \"L\u00f6schen\" um die Reservierung zu l\u00f6schen!");
         cmdLoeschen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLoeschen.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -255,7 +255,7 @@ public class frmReservierung extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(cmdLoeschen, gridBagConstraints);
 
-        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/abbrechen.gif")));
+        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
         cmdAbbrechen.setToolTipText("Macht \u00c4nderungen r\u00fcckg\u00e4ngig!");
         cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdAbbrechen.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -275,7 +275,7 @@ public class frmReservierung extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
+        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
         cmdLogout.setToolTipText("Klicken Sie  auf  \"Ausloggen\" um wieder auf den Startbildschim zu gelangen!");
         cmdLogout.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLogout.setMinimumSize(new java.awt.Dimension(95, 25));

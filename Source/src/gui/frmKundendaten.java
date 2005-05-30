@@ -59,7 +59,7 @@ public class frmKundendaten extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        btnSuchen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/suchen.gif")));
+        btnSuchen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/suchen.gif")));
         btnSuchen.setMaximumSize(new java.awt.Dimension(95, 25));
         btnSuchen.setMinimumSize(new java.awt.Dimension(95, 25));
         btnSuchen.setPreferredSize(new java.awt.Dimension(35, 30));
@@ -70,7 +70,7 @@ public class frmKundendaten extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(btnSuchen, gridBagConstraints);
 
-        btnSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/speichern.gif")));
+        btnSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/speichern.gif")));
         btnSpeichern.setToolTipText("Klicken Sie hier um die ge\u00e4nderten Daten zu speichern!");
         btnSpeichern.setMaximumSize(new java.awt.Dimension(95, 25));
         btnSpeichern.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -82,7 +82,7 @@ public class frmKundendaten extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(btnSpeichern, gridBagConstraints);
 
-        btnZurueck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/zurueck.gif")));
+        btnZurueck.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/zurueck.gif")));
         btnZurueck.setToolTipText("Klicken Sie  auf  \"Zurueck\" um wieder auf den vorigen Bildschirm zu gelangen!");
         btnZurueck.setMaximumSize(new java.awt.Dimension(95, 25));
         btnZurueck.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -100,7 +100,7 @@ public class frmKundendaten extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(btnZurueck, gridBagConstraints);
 
-        btnLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/loeschen.gif")));
+        btnLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/loeschen.gif")));
         btnLoeschen.setToolTipText("Klicken Sie  auf  \"L\u00f6schen\" um Kundendaten zu l\u00f6schen!");
         btnLoeschen.setMaximumSize(new java.awt.Dimension(95, 25));
         btnLoeschen.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -112,7 +112,7 @@ public class frmKundendaten extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(btnLoeschen, gridBagConstraints);
 
-        btnAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/abbrechen.gif")));
+        btnAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
         btnAbbrechen.setToolTipText("Klicken Sie  auf  \"Abbrechen\" um die \u00c4nderungen nicht zu speichern!");
         btnAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
         btnAbbrechen.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -130,7 +130,7 @@ public class frmKundendaten extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(btnAbbrechen, gridBagConstraints);
 
-        cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/neu.gif")));
+        cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/neu.gif")));
         cmdNeu.setToolTipText("Klicken Sie  auf  \"Neu\" um Kundendaten anzulegen!");
         cmdNeu.setPreferredSize(new java.awt.Dimension(35, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -303,7 +303,7 @@ public class frmKundendaten extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(txtHaus, gridBagConstraints);
 
-        btnNotiz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/info.gif")));
+        btnNotiz.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/info.gif")));
         btnNotiz.setPreferredSize(new java.awt.Dimension(35, 30));
         btnNotiz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,7 +320,7 @@ public class frmKundendaten extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
+        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
         cmdLogout.setToolTipText("Klicken Sie  auf  \"Ausloggen\" um wieder auf den Startbildschim zu gelangen!");
         cmdLogout.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLogout.setMinimumSize(new java.awt.Dimension(95, 25));

@@ -53,7 +53,7 @@ public class frmNotiz extends javax.swing.JFrame {
 
         jPanel1.setMinimumSize(new java.awt.Dimension(500, 350));
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 350));
-        cmdSuchen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/suchen.gif")));
+        cmdSuchen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/suchen.gif")));
         cmdSuchen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdSuchen.setMinimumSize(new java.awt.Dimension(10, 30));
         cmdSuchen.setPreferredSize(new java.awt.Dimension(10, 30));
@@ -65,7 +65,7 @@ public class frmNotiz extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel1.add(cmdSuchen, gridBagConstraints);
 
-        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/speichern.gif")));
+        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/speichern.gif")));
         cmdSpeichern.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdSpeichern.setMinimumSize(new java.awt.Dimension(10, 30));
         cmdSpeichern.setPreferredSize(new java.awt.Dimension(10, 30));
@@ -97,7 +97,7 @@ public class frmNotiz extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(cmbErledigen, gridBagConstraints);
 
-        cmdBearbeiten.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/bearbeiten.gif")));
+        cmdBearbeiten.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/bearbeiten.gif")));
         cmdBearbeiten.setMinimumSize(new java.awt.Dimension(10, 30));
         cmdBearbeiten.setPreferredSize(new java.awt.Dimension(10, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -108,7 +108,7 @@ public class frmNotiz extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel1.add(cmdBearbeiten, gridBagConstraints);
 
-        cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/loeschen.gif")));
+        cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/loeschen.gif")));
         cmdLoeschen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLoeschen.setMinimumSize(new java.awt.Dimension(30, 30));
         cmdLoeschen.setPreferredSize(new java.awt.Dimension(10, 30));
@@ -120,7 +120,7 @@ public class frmNotiz extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel1.add(cmdLoeschen, gridBagConstraints);
 
-        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/abbrechen.gif")));
+        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
         cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdAbbrechen.setMinimumSize(new java.awt.Dimension(10, 30));
         cmdAbbrechen.setPreferredSize(new java.awt.Dimension(10, 30));
@@ -138,7 +138,7 @@ public class frmNotiz extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel1.add(cmdAbbrechen, gridBagConstraints);
 
-        cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/neu.gif")));
+        cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/neu.gif")));
         cmdNeu.setMaximumSize(new java.awt.Dimension(10, 30));
         cmdNeu.setMinimumSize(new java.awt.Dimension(10, 30));
         cmdNeu.setOpaque(false);
@@ -199,7 +199,7 @@ public class frmNotiz extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(cmbDringlichkeit, gridBagConstraints);
 
-        cmdZurueck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/zurueck.gif")));
+        cmdZurueck.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/zurueck.gif")));
         cmdZurueck.setToolTipText("Klicken Sie  auf  \"Zurueck\" um wieder auf den vorigen Bildschirm zu gelangen!");
         cmdZurueck.setMaximumSize(new java.awt.Dimension(53, 23));
         cmdZurueck.setMinimumSize(new java.awt.Dimension(25, 25));
@@ -222,7 +222,7 @@ public class frmNotiz extends javax.swing.JFrame {
 
         pnlLogout.setMinimumSize(new java.awt.Dimension(500, 44));
         pnlLogout.setPreferredSize(new java.awt.Dimension(500, 44));
-        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
+        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
         cmdLogout.setText("Ausloggen");
         cmdLogout.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLogout.setMinimumSize(new java.awt.Dimension(95, 25));

@@ -88,7 +88,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(tblZimmer, gridBagConstraints);
 
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
         btnLogout.setMaximumSize(new java.awt.Dimension(22, 24));
         btnLogout.setMinimumSize(new java.awt.Dimension(22, 24));
         btnLogout.setPreferredSize(new java.awt.Dimension(35, 30));
@@ -130,7 +130,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 15, 80);
         jPanelTop.add(cmbMenue, gridBagConstraints);
 
-        btnBearbeiten.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/bearbeiten.gif")));
+        btnBearbeiten.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/bearbeiten.gif")));
         btnBearbeiten.setMaximumSize(new java.awt.Dimension(35, 30));
         btnBearbeiten.setMinimumSize(new java.awt.Dimension(35, 30));
         btnBearbeiten.setPreferredSize(new java.awt.Dimension(35, 30));
@@ -141,7 +141,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 15);
         jPanelTop.add(btnBearbeiten, gridBagConstraints);
 
-        btnNotiz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/info.gif")));
+        btnNotiz.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/info.gif")));
         btnNotiz.setMaximumSize(new java.awt.Dimension(35, 30));
         btnNotiz.setMinimumSize(new java.awt.Dimension(35, 30));
         btnNotiz.setPreferredSize(new java.awt.Dimension(35, 30));
@@ -158,7 +158,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 200);
         jPanelTop.add(btnNotiz, gridBagConstraints);
 
-        btnZimDetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/zimmer.gif")));
+        btnZimDetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/zimmer.gif")));
         btnZimDetail.setToolTipText("\u00f6ffnet die Zimmer Details");
         btnZimDetail.setMaximumSize(new java.awt.Dimension(35, 30));
         btnZimDetail.setMinimumSize(new java.awt.Dimension(35, 30));

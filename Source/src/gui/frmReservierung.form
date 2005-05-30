@@ -27,7 +27,7 @@
         <Component class="javax.swing.JButton" name="cmdNotiz">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/info.gif"/>
+              <Image iconType="3" name="gifs/info.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie hier um eine Notiz zu erstellen!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -52,7 +52,7 @@
         <Component class="javax.swing.JButton" name="cmdReservierung">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/reservierung.gif"/>
+              <Image iconType="3" name="gifs/reservierung.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie hier um eine Reservierung zu duchzuführen!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -97,7 +97,7 @@
         <Component class="javax.swing.JButton" name="cmdZurueck">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/zurueck.gif"/>
+              <Image iconType="3" name="gifs/zurueck.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie  auf  &quot;Zurueck&quot; um wieder auf den vorigen Bildschirm zu gelangen!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -285,7 +285,7 @@
         <Component class="javax.swing.JButton" name="cmdSpeichern">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/speichern.gif"/>
+              <Image iconType="3" name="gifs/speichern.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie hier um die geänderten Daten zu speichern!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -310,7 +310,7 @@
         <Component class="javax.swing.JButton" name="cmdLoeschen">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/loeschen.gif"/>
+              <Image iconType="3" name="gifs/loeschen.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie  auf  &quot;Löschen&quot; um die Reservierung zu löschen!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -332,7 +332,7 @@
         <Component class="javax.swing.JButton" name="cmdAbbrechen">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/abbrechen.gif"/>
+              <Image iconType="3" name="gifs/abbrechen.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Macht Änderungen rückgängig!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -373,7 +373,7 @@
         <Component class="javax.swing.JButton" name="cmdLogout">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/logout.gif"/>
+              <Image iconType="3" name="gifs/logout.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie  auf  &quot;Ausloggen&quot; um wieder auf den Startbildschim zu gelangen!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

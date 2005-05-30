@@ -33,7 +33,7 @@
         <Component class="javax.swing.JButton" name="cmdSuchen">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/suchen.gif"/>
+              <Image iconType="3" name="gifs/suchen.gif"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[95, 25]"/>
@@ -54,7 +54,7 @@
         <Component class="javax.swing.JButton" name="cmdSpeichern">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/speichern.gif"/>
+              <Image iconType="3" name="gifs/speichern.gif"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[95, 25]"/>
@@ -99,7 +99,7 @@
         <Component class="javax.swing.JButton" name="cmdBearbeiten">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/bearbeiten.gif"/>
+              <Image iconType="3" name="gifs/bearbeiten.gif"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[10, 30]"/>
@@ -117,7 +117,7 @@
         <Component class="javax.swing.JButton" name="cmdLoeschen">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/loeschen.gif"/>
+              <Image iconType="3" name="gifs/loeschen.gif"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[95, 25]"/>
@@ -138,7 +138,7 @@
         <Component class="javax.swing.JButton" name="cmdAbbrechen">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/abbrechen.gif"/>
+              <Image iconType="3" name="gifs/abbrechen.gif"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[95, 25]"/>
@@ -162,7 +162,7 @@
         <Component class="javax.swing.JButton" name="cmdNeu">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/neu.gif"/>
+              <Image iconType="3" name="gifs/neu.gif"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[10, 30]"/>
@@ -249,7 +249,7 @@
         <Component class="javax.swing.JButton" name="cmdZurueck">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/zurueck.gif"/>
+              <Image iconType="3" name="gifs/zurueck.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie  auf  &quot;Zurueck&quot; um wieder auf den vorigen Bildschirm zu gelangen!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -293,7 +293,7 @@
         <Component class="javax.swing.JButton" name="cmdLogout">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/logout.gif"/>
+              <Image iconType="3" name="gifs/logout.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ausloggen"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

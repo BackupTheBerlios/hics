@@ -76,7 +76,7 @@ public class frmAufenthalt extends javax.swing.JFrame {
         cmdSonstiges.setPreferredSize(new java.awt.Dimension(125, 30));
         jPanel1.add(cmdSonstiges);
 
-        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
+        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
         cmdLogout.setText("Ausloggen");
         cmdLogout.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLogout.setMinimumSize(new java.awt.Dimension(95, 25));
