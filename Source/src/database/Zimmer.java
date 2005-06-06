@@ -29,7 +29,7 @@ public class Zimmer extends Entity
     /**
      * Setzt die Zimmernummer für diese Entity fest.
      */
-    public void setPrimaryKeys( String zimmerNr ) {
+    public void setPrimaryKeys( Integer zimmerNr ) {
         primaryKeys[0] = zimmerNr;
     }
 
