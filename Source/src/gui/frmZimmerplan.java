@@ -114,7 +114,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
 
         pnlTop.setMinimumSize(new java.awt.Dimension(500, 41));
         pnlTop.setPreferredSize(new java.awt.Dimension(500, 70));
-        btnNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/neu.gif")));
+        btnNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/neu.gif")));
         btnNeu.setToolTipText("\u00f6ffnet die Zimmer Details");
         btnNeu.setMaximumSize(new java.awt.Dimension(35, 30));
         btnNeu.setMinimumSize(new java.awt.Dimension(35, 30));
@@ -127,7 +127,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
 
         pnlTop.add(btnNeu);
 
-        btnBearbeiten.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/bearbeiten.gif")));
+        btnBearbeiten.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/bearbeiten.gif")));
         btnBearbeiten.setMaximumSize(new java.awt.Dimension(35, 30));
         btnBearbeiten.setMinimumSize(new java.awt.Dimension(35, 30));
         btnBearbeiten.setPreferredSize(new java.awt.Dimension(35, 30));
@@ -162,7 +162,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         getContentPane().add(pnlTop, gridBagConstraints);
 
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
         btnLogout.setMaximumSize(new java.awt.Dimension(22, 24));
         btnLogout.setMinimumSize(new java.awt.Dimension(22, 24));
         btnLogout.setPreferredSize(new java.awt.Dimension(35, 30));
@@ -340,7 +340,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         pnlAnzeige.add(pnlAnzeigeZimmer, gridBagConstraints);
 
-        pnlNotiz.setLayout(new java.awt.GridLayout());
+        pnlNotiz.setLayout(new java.awt.GridLayout(1, 0));
 
         lblNotiz.setText("Notiz");
         lblNotiz.setMaximumSize(new java.awt.Dimension(95, 25));
@@ -361,7 +361,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         pnlAnzeige.add(pnlNotiz, gridBagConstraints);
 
-        pnlAufgaben.setLayout(new java.awt.GridLayout());
+        pnlAufgaben.setLayout(new java.awt.GridLayout(1, 0));
 
         lblAufgaben.setText("Aufgaben");
         lblAufgaben.setMaximumSize(new java.awt.Dimension(95, 25));

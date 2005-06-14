@@ -192,7 +192,7 @@
         <Component class="javax.swing.JButton" name="cmdLogout">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/logout.gif"/>
+              <Image iconType="3" name="gifs/logout.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ausloggen"/>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie  auf  &quot;Ausloggen&quot; um wieder auf den Startbildschim zu gelangen!"/>
@@ -224,7 +224,7 @@
         <Component class="javax.swing.JButton" name="cmdAbbrechen">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/abbrechen.gif"/>
+              <Image iconType="3" name="gifs/abbrechen.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Abbrechen"/>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie  auf  &quot;Abbrechen&quot; um die Änderungen nicht zu speichern!"/>
@@ -245,7 +245,7 @@
         <Component class="javax.swing.JButton" name="cmdSpeichern">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/speichern.gif"/>
+              <Image iconType="3" name="gifs/speichern.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Speichern"/>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie hier um die geänderten Daten zu speichern!"/>

@@ -172,7 +172,7 @@ public class frmAdmin extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 10);
         getContentPane().add(pnlMitarbeiter, gridBagConstraints);
 
-        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
+        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
         cmdLogout.setToolTipText("Ausloggen!");
         cmdLogout.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLogout.setMinimumSize(new java.awt.Dimension(10, 30));
@@ -193,7 +193,7 @@ public class frmAdmin extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(20, 10, 10, 10);
         getContentPane().add(pnlLogout, gridBagConstraints);
 
-        cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/neu.gif")));
+        cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/neu.gif")));
         cmdNeu.setToolTipText("Klicken Sie  auf  \"Neu\" um neue Daten anzulegen!");
         cmdNeu.setPreferredSize(new java.awt.Dimension(35, 30));
         cmdNeu.addActionListener(new java.awt.event.ActionListener() {
@@ -204,14 +204,14 @@ public class frmAdmin extends javax.swing.JFrame {
 
         pnlTop.add(cmdNeu);
 
-        cmdSuchen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/suchen.gif")));
+        cmdSuchen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/suchen.gif")));
         cmdSuchen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdSuchen.setMinimumSize(new java.awt.Dimension(95, 25));
         cmdSuchen.setOpaque(false);
         cmdSuchen.setPreferredSize(new java.awt.Dimension(35, 30));
         pnlTop.add(cmdSuchen);
 
-        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/speichern.gif")));
+        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/speichern.gif")));
         cmdSpeichern.setToolTipText("Klicken Sie hier um die ge\u00e4nderten Daten zu speichern!");
         cmdSpeichern.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdSpeichern.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -219,7 +219,7 @@ public class frmAdmin extends javax.swing.JFrame {
         cmdSpeichern.setPreferredSize(new java.awt.Dimension(35, 30));
         pnlTop.add(cmdSpeichern);
 
-        cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/loeschen.gif")));
+        cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/loeschen.gif")));
         cmdLoeschen.setToolTipText("Klicken Sie  auf  \"L\u00f6schen\" um Daten zu l\u00f6schen!");
         cmdLoeschen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLoeschen.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -233,7 +233,7 @@ public class frmAdmin extends javax.swing.JFrame {
 
         pnlTop.add(cmdLoeschen);
 
-        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/abbrechen.gif")));
+        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
         cmdAbbrechen.setToolTipText("Klicken Sie  auf  \"Abbrechen\" um die \u00c4nderungen nicht zu speichern!");
         cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdAbbrechen.setMinimumSize(new java.awt.Dimension(95, 25));

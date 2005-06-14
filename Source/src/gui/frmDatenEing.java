@@ -73,19 +73,19 @@ public class frmDatenEing extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/neu.gif")));
+        cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/neu.gif")));
         cmdNeu.setToolTipText("Klicken Sie  auf  \"Neu\" um neue Daten anzulegen!");
         cmdNeu.setPreferredSize(new java.awt.Dimension(35, 30));
         pnlTop.add(cmdNeu);
 
-        cmdSuchen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/suchen.gif")));
+        cmdSuchen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/suchen.gif")));
         cmdSuchen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdSuchen.setMinimumSize(new java.awt.Dimension(95, 25));
         cmdSuchen.setOpaque(false);
         cmdSuchen.setPreferredSize(new java.awt.Dimension(35, 30));
         pnlTop.add(cmdSuchen);
 
-        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/speichern.gif")));
+        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/speichern.gif")));
         cmdSpeichern.setToolTipText("Speichert Daten!");
         cmdSpeichern.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdSpeichern.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -93,7 +93,7 @@ public class frmDatenEing extends javax.swing.JFrame {
         cmdSpeichern.setPreferredSize(new java.awt.Dimension(35, 30));
         pnlTop.add(cmdSpeichern);
 
-        cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/loeschen.gif")));
+        cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/loeschen.gif")));
         cmdLoeschen.setToolTipText("Klicken Sie  auf  \"L\u00f6schen\" um Daten zu l\u00f6schen!");
         cmdLoeschen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLoeschen.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -101,7 +101,7 @@ public class frmDatenEing extends javax.swing.JFrame {
         cmdLoeschen.setPreferredSize(new java.awt.Dimension(35, 30));
         pnlTop.add(cmdLoeschen);
 
-        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/abbrechen.gif")));
+        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
         cmdAbbrechen.setToolTipText("Aenderungen werden verworfen!");
         cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdAbbrechen.setMinimumSize(new java.awt.Dimension(95, 25));

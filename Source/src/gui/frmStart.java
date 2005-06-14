@@ -61,7 +61,7 @@ public class frmStart extends javax.swing.JFrame {
         pnlStart.add(lblStart, gridBagConstraints);
 
         lblStart1.setFont(new java.awt.Font("Arial", 0, 18));
-        lblStart1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/Logo_klein.jpg")));
+        lblStart1.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/Logo_klein.jpg")));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -84,7 +84,6 @@ public class frmStart extends javax.swing.JFrame {
 
         txtUsername.setToolTipText("Tragen Sie hier Ihren Benutzenamen ein! Achten Sie auf Gro\u00df- und Kleinschreibung!");
         txtUsername.setMinimumSize(new java.awt.Dimension(11, 22));
-        txtUsername.setOpaque(false);
         txtUsername.setPreferredSize(new java.awt.Dimension(50, 22));
         txtUsername.setSelectedTextColor(new java.awt.Color(0, 0, 0));
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
@@ -148,23 +147,17 @@ public class frmStart extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
         // TODO add your handling code here:
-         String username = txtUsername.getText();
+         String username = jTextField1.getText();
         
         if (username.equals("Raumpflege")) {
           this.dispose();
           new frmAufgabenAnzeigen().setVisible(true);
-          
-           this.hide();
-
-//    if (username==IConstants.TF_ERROR)
-//      DialogHelper.showErrorMessage("Login-Nummer nicht gültig");
-//    else
-//      m_SysInOControl.login(this, username, new String(jPasswordField1.getPassword()));
-//    this.show();
-
-          
         }
         else if (username.equals("Admin")) {
           this.dispose();

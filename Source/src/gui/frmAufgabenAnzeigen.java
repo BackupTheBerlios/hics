@@ -138,7 +138,7 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         getContentPane().add(pnlInformation, gridBagConstraints);
 
-        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
+        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
         cmdLogout.setText("Ausloggen");
         cmdLogout.setToolTipText("Klicken Sie  auf  \"Ausloggen\" um wieder auf den Startbildschim zu gelangen!");
         cmdLogout.setMaximumSize(new java.awt.Dimension(95, 25));
@@ -158,7 +158,7 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         getContentPane().add(pnlLogout, gridBagConstraints);
 
-        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/abbrechen.gif")));
+        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
         cmdAbbrechen.setText("Abbrechen");
         cmdAbbrechen.setToolTipText("Klicken Sie  auf  \"Abbrechen\" um die \u00c4nderungen nicht zu speichern!");
         cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
@@ -172,7 +172,7 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
 
         pnlButtons.add(cmdAbbrechen);
 
-        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/speichern.gif")));
+        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/speichern.gif")));
         cmdSpeichern.setText("Speichern");
         cmdSpeichern.setToolTipText("Klicken Sie hier um die ge\u00e4nderten Daten zu speichern!");
         cmdSpeichern.setMaximumSize(new java.awt.Dimension(95, 30));

@@ -210,7 +210,7 @@
         <Component class="javax.swing.JButton" name="cmdLogout">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/logout.gif"/>
+              <Image iconType="3" name="gifs/logout.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Ausloggen!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -242,7 +242,7 @@
         <Component class="javax.swing.JButton" name="cmdNeu">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/neu.gif"/>
+              <Image iconType="3" name="gifs/neu.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie  auf  &quot;Neu&quot; um neue Daten anzulegen!"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -256,7 +256,7 @@
         <Component class="javax.swing.JButton" name="cmdSuchen">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/suchen.gif"/>
+              <Image iconType="3" name="gifs/suchen.gif"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[95, 25]"/>
@@ -273,7 +273,7 @@
         <Component class="javax.swing.JButton" name="cmdSpeichern">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/speichern.gif"/>
+              <Image iconType="3" name="gifs/speichern.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie hier um die geänderten Daten zu speichern!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -291,7 +291,7 @@
         <Component class="javax.swing.JButton" name="cmdLoeschen">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/loeschen.gif"/>
+              <Image iconType="3" name="gifs/loeschen.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie  auf  &quot;Löschen&quot; um Daten zu löschen!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -312,7 +312,7 @@
         <Component class="javax.swing.JButton" name="cmdAbbrechen">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/abbrechen.gif"/>
+              <Image iconType="3" name="gifs/abbrechen.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Klicken Sie  auf  &quot;Abbrechen&quot; um die Änderungen nicht zu speichern!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

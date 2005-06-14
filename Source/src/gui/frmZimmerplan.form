@@ -91,7 +91,7 @@
         <Component class="javax.swing.JButton" name="btnNeu">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/neu.gif"/>
+              <Image iconType="3" name="gifs/neu.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="öffnet die Zimmer Details"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -111,7 +111,7 @@
         <Component class="javax.swing.JButton" name="btnBearbeiten">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/bearbeiten.gif"/>
+              <Image iconType="3" name="gifs/bearbeiten.gif"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[35, 30]"/>
@@ -183,7 +183,7 @@
         <Component class="javax.swing.JButton" name="btnLogout">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gifs/logout.gif"/>
+              <Image iconType="3" name="gifs/logout.gif"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[22, 24]"/>
