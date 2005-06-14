@@ -37,7 +37,7 @@ public class frmStart extends javax.swing.JFrame {
         lblStart1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblBenutzername = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
         lblKennwort = new javax.swing.JLabel();
         pwdKennwort = new javax.swing.JPasswordField();
         cmdLogin = new javax.swing.JButton();
@@ -82,14 +82,14 @@ public class frmStart extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(lblBenutzername, gridBagConstraints);
 
-        jTextField1.setToolTipText("Tragen Sie hier Ihren Benutzenamen ein! Achten Sie auf Gro\u00df- und Kleinschreibung!");
-        jTextField1.setMinimumSize(new java.awt.Dimension(11, 22));
-        jTextField1.setOpaque(false);
-        jTextField1.setPreferredSize(new java.awt.Dimension(50, 22));
-        jTextField1.setSelectedTextColor(new java.awt.Color(0, 0, 0));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtUsername.setToolTipText("Tragen Sie hier Ihren Benutzenamen ein! Achten Sie auf Gro\u00df- und Kleinschreibung!");
+        txtUsername.setMinimumSize(new java.awt.Dimension(11, 22));
+        txtUsername.setOpaque(false);
+        txtUsername.setPreferredSize(new java.awt.Dimension(50, 22));
+        txtUsername.setSelectedTextColor(new java.awt.Color(0, 0, 0));
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtUsernameActionPerformed(evt);
             }
         });
 
@@ -98,7 +98,7 @@ public class frmStart extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 69;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel1.add(jTextField1, gridBagConstraints);
+        jPanel1.add(txtUsername, gridBagConstraints);
 
         lblKennwort.setText("Kennwort");
         lblKennwort.setMaximumSize(new java.awt.Dimension(80, 16));
@@ -144,17 +144,27 @@ public class frmStart extends javax.swing.JFrame {
         pack();
     }//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
         // TODO add your handling code here:
-         String username = jTextField1.getText();
+         String username = txtUsername.getText();
         
         if (username.equals("Raumpflege")) {
           this.dispose();
           new frmAufgabenAnzeigen().setVisible(true);
+          
+           this.hide();
+
+//    if (username==IConstants.TF_ERROR)
+//      DialogHelper.showErrorMessage("Login-Nummer nicht gültig");
+//    else
+//      m_SysInOControl.login(this, username, new String(jPasswordField1.getPassword()));
+//    this.show();
+
+          
         }
         else if (username.equals("Admin")) {
           this.dispose();
@@ -183,13 +193,13 @@ public class frmStart extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdLogin;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBenutzername;
     private javax.swing.JLabel lblKennwort;
     private javax.swing.JLabel lblStart;
     private javax.swing.JLabel lblStart1;
     private javax.swing.JPanel pnlStart;
     private javax.swing.JPasswordField pwdKennwort;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
   
     

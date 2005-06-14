@@ -30,25 +30,15 @@ public class frmAdmin extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         pnlMitarbeiter = new javax.swing.JPanel();
-        lblSVNr = new javax.swing.JLabel();
-        txtSVNr = new javax.swing.JTextField();
-        lblKundenNN = new javax.swing.JLabel();
-        txtKundeNN = new javax.swing.JTextField();
-        lblKundenVN = new javax.swing.JLabel();
-        txtKundenVN = new javax.swing.JTextField();
-        lblStrasse = new javax.swing.JLabel();
-        txtStrasse = new javax.swing.JTextField();
-        lblHausStiegeTuer = new javax.swing.JLabel();
-        txtHaus = new javax.swing.JTextField();
-        lblLand = new javax.swing.JLabel();
-        txtLand = new javax.swing.JTextField();
-        lblPlz = new javax.swing.JLabel();
-        txtPlz = new javax.swing.JTextField();
-        lblGeb = new javax.swing.JLabel();
-        txtGeb = new javax.swing.JTextField();
+        cmbBerechtigung = new javax.swing.JComboBox();
+        lblMitarbeiterNN = new javax.swing.JLabel();
+        txtMitarbeiterNN = new javax.swing.JTextField();
+        lblMitarbeiterVN = new javax.swing.JLabel();
+        txtMitarbeiterVN = new javax.swing.JTextField();
+        lblLogin = new javax.swing.JLabel();
+        txtLogin = new javax.swing.JTextField();
         lblPwd = new javax.swing.JLabel();
         txtPwd = new javax.swing.JTextField();
-        cmbBerechtigung = new javax.swing.JComboBox();
         pnlLogout = new javax.swing.JPanel();
         cmdLogout = new javax.swing.JButton();
         pnlTop = new javax.swing.JPanel();
@@ -65,229 +55,12 @@ public class frmAdmin extends javax.swing.JFrame {
         lblPreis = new javax.swing.JLabel();
         txtPreis = new javax.swing.JTextField();
         lblAusstattung = new javax.swing.JLabel();
-        txaAusstattung = new javax.swing.JTextArea();
+        lstAusstattung = new javax.swing.JList();
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         pnlMitarbeiter.setLayout(new java.awt.GridBagLayout());
-
-        lblSVNr.setText("SVNr");
-        lblSVNr.setMaximumSize(new java.awt.Dimension(95, 25));
-        lblSVNr.setMinimumSize(new java.awt.Dimension(95, 25));
-        lblSVNr.setPreferredSize(new java.awt.Dimension(95, 25));
-        lblSVNr.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        pnlMitarbeiter.add(lblSVNr, gridBagConstraints);
-
-        txtSVNr.setMaximumSize(new java.awt.Dimension(95, 25));
-        txtSVNr.setMinimumSize(new java.awt.Dimension(95, 25));
-        txtSVNr.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtSVNr.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        pnlMitarbeiter.add(txtSVNr, gridBagConstraints);
-
-        lblKundenNN.setText("Nachname");
-        lblKundenNN.setMaximumSize(new java.awt.Dimension(95, 25));
-        lblKundenNN.setMinimumSize(new java.awt.Dimension(95, 25));
-        lblKundenNN.setPreferredSize(new java.awt.Dimension(95, 25));
-        lblKundenNN.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        pnlMitarbeiter.add(lblKundenNN, gridBagConstraints);
-
-        txtKundeNN.setMaximumSize(new java.awt.Dimension(95, 25));
-        txtKundeNN.setMinimumSize(new java.awt.Dimension(95, 25));
-        txtKundeNN.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtKundeNN.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        pnlMitarbeiter.add(txtKundeNN, gridBagConstraints);
-
-        lblKundenVN.setText("Vorname");
-        lblKundenVN.setMaximumSize(new java.awt.Dimension(95, 25));
-        lblKundenVN.setMinimumSize(new java.awt.Dimension(95, 25));
-        lblKundenVN.setPreferredSize(new java.awt.Dimension(95, 25));
-        lblKundenVN.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        pnlMitarbeiter.add(lblKundenVN, gridBagConstraints);
-
-        txtKundenVN.setMaximumSize(new java.awt.Dimension(95, 25));
-        txtKundenVN.setMinimumSize(new java.awt.Dimension(95, 25));
-        txtKundenVN.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtKundenVN.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        pnlMitarbeiter.add(txtKundenVN, gridBagConstraints);
-
-        lblStrasse.setText("Strasse");
-        lblStrasse.setMaximumSize(new java.awt.Dimension(95, 25));
-        lblStrasse.setMinimumSize(new java.awt.Dimension(95, 25));
-        lblStrasse.setPreferredSize(new java.awt.Dimension(95, 25));
-        lblStrasse.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        pnlMitarbeiter.add(lblStrasse, gridBagConstraints);
-
-        txtStrasse.setMaximumSize(new java.awt.Dimension(95, 25));
-        txtStrasse.setMinimumSize(new java.awt.Dimension(95, 25));
-        txtStrasse.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtStrasse.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        pnlMitarbeiter.add(txtStrasse, gridBagConstraints);
-
-        lblHausStiegeTuer.setText("Nr/Stiege/Tuer");
-        lblHausStiegeTuer.setMaximumSize(new java.awt.Dimension(95, 25));
-        lblHausStiegeTuer.setMinimumSize(new java.awt.Dimension(95, 25));
-        lblHausStiegeTuer.setPreferredSize(new java.awt.Dimension(95, 25));
-        lblHausStiegeTuer.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        pnlMitarbeiter.add(lblHausStiegeTuer, gridBagConstraints);
-
-        txtHaus.setMaximumSize(new java.awt.Dimension(95, 25));
-        txtHaus.setMinimumSize(new java.awt.Dimension(95, 25));
-        txtHaus.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtHaus.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        pnlMitarbeiter.add(txtHaus, gridBagConstraints);
-
-        lblLand.setText("Land");
-        lblLand.setMaximumSize(new java.awt.Dimension(95, 25));
-        lblLand.setMinimumSize(new java.awt.Dimension(95, 25));
-        lblLand.setPreferredSize(new java.awt.Dimension(95, 25));
-        lblLand.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        pnlMitarbeiter.add(lblLand, gridBagConstraints);
-
-        txtLand.setMaximumSize(new java.awt.Dimension(95, 25));
-        txtLand.setMinimumSize(new java.awt.Dimension(95, 25));
-        txtLand.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtLand.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        pnlMitarbeiter.add(txtLand, gridBagConstraints);
-
-        lblPlz.setText("Plz");
-        lblPlz.setMaximumSize(new java.awt.Dimension(95, 25));
-        lblPlz.setMinimumSize(new java.awt.Dimension(95, 25));
-        lblPlz.setPreferredSize(new java.awt.Dimension(95, 25));
-        lblPlz.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        pnlMitarbeiter.add(lblPlz, gridBagConstraints);
-
-        txtPlz.setMaximumSize(new java.awt.Dimension(95, 25));
-        txtPlz.setMinimumSize(new java.awt.Dimension(95, 25));
-        txtPlz.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtPlz.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        pnlMitarbeiter.add(txtPlz, gridBagConstraints);
-
-        lblGeb.setText("Geb.");
-        lblGeb.setMaximumSize(new java.awt.Dimension(95, 25));
-        lblGeb.setMinimumSize(new java.awt.Dimension(95, 25));
-        lblGeb.setPreferredSize(new java.awt.Dimension(95, 25));
-        lblGeb.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        pnlMitarbeiter.add(lblGeb, gridBagConstraints);
-
-        txtGeb.setMaximumSize(new java.awt.Dimension(95, 25));
-        txtGeb.setMinimumSize(new java.awt.Dimension(95, 25));
-        txtGeb.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtGeb.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        pnlMitarbeiter.add(txtGeb, gridBagConstraints);
-
-        lblPwd.setText("Passwort");
-        lblPwd.setMaximumSize(new java.awt.Dimension(95, 25));
-        lblPwd.setMinimumSize(new java.awt.Dimension(95, 25));
-        lblPwd.setPreferredSize(new java.awt.Dimension(95, 25));
-        lblPwd.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        pnlMitarbeiter.add(lblPwd, gridBagConstraints);
-
-        txtPwd.setMaximumSize(new java.awt.Dimension(95, 25));
-        txtPwd.setMinimumSize(new java.awt.Dimension(95, 25));
-        txtPwd.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtPwd.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        pnlMitarbeiter.add(txtPwd, gridBagConstraints);
 
         cmbBerechtigung.addItem("Rezeption");
         cmbBerechtigung.addItem("Raumpflege");
@@ -300,15 +73,103 @@ public class frmAdmin extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(15, 0, 21, 16);
         pnlMitarbeiter.add(cmbBerechtigung, gridBagConstraints);
 
+        lblMitarbeiterNN.setText("Nachname");
+        lblMitarbeiterNN.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblMitarbeiterNN.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblMitarbeiterNN.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblMitarbeiterNN.setRequestFocusEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnlMitarbeiter.add(lblMitarbeiterNN, gridBagConstraints);
+
+        txtMitarbeiterNN.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtMitarbeiterNN.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtMitarbeiterNN.setPreferredSize(new java.awt.Dimension(95, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnlMitarbeiter.add(txtMitarbeiterNN, gridBagConstraints);
+
+        lblMitarbeiterVN.setText("Vorname");
+        lblMitarbeiterVN.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblMitarbeiterVN.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblMitarbeiterVN.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblMitarbeiterVN.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnlMitarbeiter.add(lblMitarbeiterVN, gridBagConstraints);
+
+        txtMitarbeiterVN.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtMitarbeiterVN.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtMitarbeiterVN.setPreferredSize(new java.awt.Dimension(95, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnlMitarbeiter.add(txtMitarbeiterVN, gridBagConstraints);
+
+        lblLogin.setText("Passwort");
+        lblLogin.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblLogin.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblLogin.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblLogin.setRequestFocusEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnlMitarbeiter.add(lblLogin, gridBagConstraints);
+
+        txtLogin.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtLogin.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtLogin.setPreferredSize(new java.awt.Dimension(95, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnlMitarbeiter.add(txtLogin, gridBagConstraints);
+
+        lblPwd.setText("Passwort");
+        lblPwd.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblPwd.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblPwd.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblPwd.setRequestFocusEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnlMitarbeiter.add(lblPwd, gridBagConstraints);
+
+        txtPwd.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtPwd.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtPwd.setPreferredSize(new java.awt.Dimension(95, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnlMitarbeiter.add(txtPwd, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 10);
         getContentPane().add(pnlMitarbeiter, gridBagConstraints);
 
         cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
@@ -329,12 +190,18 @@ public class frmAdmin extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 10, 10);
         getContentPane().add(pnlLogout, gridBagConstraints);
 
         cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/neu.gif")));
         cmdNeu.setToolTipText("Klicken Sie  auf  \"Neu\" um neue Daten anzulegen!");
         cmdNeu.setPreferredSize(new java.awt.Dimension(35, 30));
+        cmdNeu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdNeuActionPerformed(evt);
+            }
+        });
+
         pnlTop.add(cmdNeu);
 
         cmdSuchen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/suchen.gif")));
@@ -376,7 +243,7 @@ public class frmAdmin extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 20, 10);
         getContentPane().add(pnlTop, gridBagConstraints);
 
         pnlZimmer.setLayout(new java.awt.GridBagLayout());
@@ -392,11 +259,9 @@ public class frmAdmin extends javax.swing.JFrame {
         txtZimNr.setMaximumSize(new java.awt.Dimension(95, 25));
         txtZimNr.setMinimumSize(new java.awt.Dimension(95, 25));
         txtZimNr.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtZimNr.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         pnlZimmer.add(txtZimNr, gridBagConstraints);
@@ -412,11 +277,9 @@ public class frmAdmin extends javax.swing.JFrame {
         txtBettenANz.setMaximumSize(new java.awt.Dimension(95, 25));
         txtBettenANz.setMinimumSize(new java.awt.Dimension(95, 25));
         txtBettenANz.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtBettenANz.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         pnlZimmer.add(txtBettenANz, gridBagConstraints);
@@ -432,11 +295,9 @@ public class frmAdmin extends javax.swing.JFrame {
         txtPreis.setMaximumSize(new java.awt.Dimension(95, 25));
         txtPreis.setMinimumSize(new java.awt.Dimension(95, 25));
         txtPreis.setPreferredSize(new java.awt.Dimension(95, 25));
-        txtPreis.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         pnlZimmer.add(txtPreis, gridBagConstraints);
@@ -450,25 +311,37 @@ public class frmAdmin extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlZimmer.add(lblAusstattung, gridBagConstraints);
 
-        txaAusstattung.setColumns(1);
-        txaAusstattung.setRows(4);
-        txaAusstattung.setBorder(new javax.swing.border.EtchedBorder());
-        txaAusstattung.setMaximumSize(new java.awt.Dimension(95, 25));
-        txaAusstattung.setMinimumSize(new java.awt.Dimension(95, 25));
-        txaAusstattung.setPreferredSize(new java.awt.Dimension(95, 72));
+        lstAusstattung.setMinimumSize(new java.awt.Dimension(95, 25));
+        lstAusstattung.setPreferredSize(new java.awt.Dimension(95, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        pnlZimmer.add(txaAusstattung, gridBagConstraints);
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        pnlZimmer.add(lstAusstattung, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 5);
         getContentPane().add(pnlZimmer, gridBagConstraints);
 
         pack();
     }//GEN-END:initComponents
+
+    private void cmdNeuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNeuActionPerformed
+        
+        txtMitarbeiterVN.setText("");
+        txtMitarbeiterNN.setText("");
+        txtLogin.setText("");
+        txtPwd.setText("");
+        txtZimNr.setText("");
+        txtBettenANz.setText("");
+        txtPreis.setText("");
+        
+    }//GEN-LAST:event_cmdNeuActionPerformed
 
     private void cmdLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoeschenActionPerformed
         // TODO add your handling code here:
@@ -502,33 +375,23 @@ public class frmAdmin extends javax.swing.JFrame {
     private javax.swing.JButton cmdSuchen;
     private javax.swing.JLabel lblAusstattung;
     private javax.swing.JLabel lblBettenAnz;
-    private javax.swing.JLabel lblGeb;
-    private javax.swing.JLabel lblHausStiegeTuer;
-    private javax.swing.JLabel lblKundenNN;
-    private javax.swing.JLabel lblKundenVN;
-    private javax.swing.JLabel lblLand;
-    private javax.swing.JLabel lblPlz;
+    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblMitarbeiterNN;
+    private javax.swing.JLabel lblMitarbeiterVN;
     private javax.swing.JLabel lblPreis;
     private javax.swing.JLabel lblPwd;
-    private javax.swing.JLabel lblSVNr;
-    private javax.swing.JLabel lblStrasse;
     private javax.swing.JLabel lblZimNr;
+    private javax.swing.JList lstAusstattung;
     private javax.swing.JPanel pnlLogout;
     private javax.swing.JPanel pnlMitarbeiter;
     private javax.swing.JPanel pnlTop;
     private javax.swing.JPanel pnlZimmer;
-    private javax.swing.JTextArea txaAusstattung;
     private javax.swing.JTextField txtBettenANz;
-    private javax.swing.JTextField txtGeb;
-    private javax.swing.JTextField txtHaus;
-    private javax.swing.JTextField txtKundeNN;
-    private javax.swing.JTextField txtKundenVN;
-    private javax.swing.JTextField txtLand;
-    private javax.swing.JTextField txtPlz;
+    private javax.swing.JTextField txtLogin;
+    private javax.swing.JTextField txtMitarbeiterNN;
+    private javax.swing.JTextField txtMitarbeiterVN;
     private javax.swing.JTextField txtPreis;
     private javax.swing.JTextField txtPwd;
-    private javax.swing.JTextField txtSVNr;
-    private javax.swing.JTextField txtStrasse;
     private javax.swing.JTextField txtZimNr;
     // End of variables declaration//GEN-END:variables
     
