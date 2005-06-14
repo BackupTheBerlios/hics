@@ -32,6 +32,9 @@ public class QueryZimmer extends Query
         filterPreisProNacht = new String[0];
     }
     
+    /**
+     * Ermittelt alle Zimmer-Entities, die mit der SQL-Abfrage gefunden wurden.
+     */
     public Zimmer[] getZimmerEntites()
     {
         return (Zimmer[]) this.getEntities( new Zimmer() );
@@ -104,6 +107,7 @@ public class QueryZimmer extends Query
         }
         newFilter[ newFilter.length - 1 ] = "ZimmerNr = "
                                             + Database.getSqlString(zimmerNr);
+        filterZimmerNr = newFilter;
     }
     
     /**
@@ -127,8 +131,9 @@ public class QueryZimmer extends Query
         for( int i = 0; i < filterAnzahlBetten.length; i++ ) {
             newFilter[i] = filterAnzahlBetten[i];
         }
-        newFilter[ newFilter.length - 1 ] = "AnzahlBetten = "
-                                            + Database.getSqlString(anzahlBetten);
+        newFilter[ newFilter.length - 1 ]
+                = "AnzahlBetten = " + Database.getSqlString(anzahlBetten);
+        filterAnzahlBetten = newFilter;
     }
     
     /**
@@ -152,8 +157,9 @@ public class QueryZimmer extends Query
         for( int i = 0; i < filterPreisProNacht.length; i++ ) {
             newFilter[i] = filterPreisProNacht[i];
         }
-        newFilter[ newFilter.length - 1 ] = "PreisProNacht = "
-                                            + Database.getSqlString(preisProNacht);
+        newFilter[ newFilter.length - 1 ]
+                = "PreisProNacht = " + Database.getSqlString(preisProNacht);
+        filterPreisProNacht = newFilter;
     }
     
     /**
