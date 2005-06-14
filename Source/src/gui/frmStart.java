@@ -153,7 +153,7 @@ public class frmStart extends javax.swing.JFrame {
 
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
         // TODO add your handling code here:
-         String username = jTextField1.getText();
+         String username = txtUsername.getText();
         
         if (username.equals("Raumpflege")) {
           this.dispose();
