@@ -99,7 +99,7 @@ public abstract class Entity
      * @returns  Falls der Parameter null ist, wird false zurückgegeben,
      *           ansonsten true.
      */
-    boolean assignDatabase( Database database )
+    public boolean assignDatabase( Database database )
     {
         if( database == null )
             return false;
