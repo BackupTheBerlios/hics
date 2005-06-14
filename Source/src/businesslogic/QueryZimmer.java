@@ -32,6 +32,11 @@ public class QueryZimmer extends Query
         filterPreisProNacht = new String[0];
     }
     
+    public Zimmer[] getZimmerEntites()
+    {
+        return (Zimmer[]) this.getEntities( new Zimmer() );
+    }
+    
     public boolean search()
     {
         String query = "SELECT ZimmerNr FROM Zimmer";
@@ -141,7 +146,7 @@ public class QueryZimmer extends Query
      *
      * @param preisProNacht  Der gewünschte Preis pro Nacht.
      */
-    public void addFilterPreisProNacht( Integer preisProNacht )
+    public void addFilterPreisProNacht( Float preisProNacht )
     {
         String[] newFilter = new String[ filterPreisProNacht.length + 1 ];
         for( int i = 0; i < filterPreisProNacht.length; i++ ) {

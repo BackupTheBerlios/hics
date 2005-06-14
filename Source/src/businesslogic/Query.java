@@ -96,23 +96,6 @@ public abstract class Query
     }
     
     /**
-     * Ermittelt die Anzahl der Zeilen des Abfrage-Ergebnisses.
-     */
-    public int getRowCount()
-    {
-        if( result == null )
-            return 0;
-        
-        try {
-            result.last();
-            return result.getRow();
-        }
-        catch( SQLException e ) {
-            return 0;
-        }
-    }
-    
-    /**
      * Ermittelt alle Entity-Objekte vom Typ der als Parameter
      * übergebenen Vorlage, die im Abfrage-Ergebnis gefunden wurden.
      *
@@ -226,6 +209,23 @@ public abstract class Query
             return null;
         else
             return newEntity;
+    }
+    
+    /**
+     * Ermittelt die Anzahl der Zeilen des Abfrage-Ergebnisses.
+     */
+    protected int getRowCount()
+    {
+        if( result == null )
+            return 0;
+        
+        try {
+            result.last();
+            return result.getRow();
+        }
+        catch( SQLException e ) {
+            return 0;
+        }
     }
     
     /**
