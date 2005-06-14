@@ -10,16 +10,17 @@ package gui;
  *
  * @author  Standard
  */
-public class frmInfo extends javax.swing.JFrame {
-    public static int WIDTH=450;
-    public static int HEIGHT=350;
+public class frmAufgabenAnzeigen extends javax.swing.JFrame {
+    public static int WIDTH=700;
+    public static int HEIGHT=600;
     public static String TITLE="HICS - Informationen";
     
     /** Creates new form frmInfo */
-    public frmInfo() {
+    public frmAufgabenAnzeigen() {
         super(TITLE);
         initComponents();
         setSize(WIDTH, HEIGHT);
+        setLocation(((getToolkit().getScreenSize().width)/2)-(WIDTH/2),((getToolkit().getScreenSize().height)/2)-(HEIGHT/2));
     }
     
     /** This method is called from within the constructor to
@@ -31,64 +32,21 @@ public class frmInfo extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         pnlInformation = new javax.swing.JPanel();
-        cmdSpeichern = new javax.swing.JButton();
-        cmdAbbrechen = new javax.swing.JButton();
-        jList1 = new javax.swing.JList();
         tblInfo = new javax.swing.JTable();
         lblAufgabe2 = new javax.swing.JLabel();
         lblAufgabe3 = new javax.swing.JLabel();
         lblAufgabe4 = new javax.swing.JLabel();
         lblAufgabe5 = new javax.swing.JLabel();
-        pnlZurueck = new javax.swing.JPanel();
+        pnlLogout = new javax.swing.JPanel();
         cmdLogout = new javax.swing.JButton();
+        pnlButtons = new javax.swing.JPanel();
+        cmdAbbrechen = new javax.swing.JButton();
+        cmdSpeichern = new javax.swing.JButton();
+
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         pnlInformation.setLayout(new java.awt.GridBagLayout());
-
-        pnlInformation.setBorder(new javax.swing.border.EtchedBorder());
-        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/speichern.gif")));
-        cmdSpeichern.setText("Speichern");
-        cmdSpeichern.setToolTipText("Klicken Sie hier um die ge\u00e4nderten Daten zu speichern!");
-        cmdSpeichern.setMaximumSize(new java.awt.Dimension(95, 30));
-        cmdSpeichern.setMinimumSize(new java.awt.Dimension(95, 30));
-        cmdSpeichern.setOpaque(false);
-        cmdSpeichern.setPreferredSize(new java.awt.Dimension(125, 30));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 80, 6, 0);
-        pnlInformation.add(cmdSpeichern, gridBagConstraints);
-
-        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
-        cmdAbbrechen.setText("Abbrechen");
-        cmdAbbrechen.setToolTipText("Klicken Sie  auf  \"Abbrechen\" um die \u00c4nderungen nicht zu speichern!");
-        cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
-        cmdAbbrechen.setMinimumSize(new java.awt.Dimension(95, 25));
-        cmdAbbrechen.setPreferredSize(new java.awt.Dimension(125, 30));
-        cmdAbbrechen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdAbbrechenActionPerformed(evt);
-            }
-        });
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 0);
-        pnlInformation.add(cmdAbbrechen, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        pnlInformation.add(jList1, gridBagConstraints);
 
         tblInfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,17 +66,16 @@ public class frmInfo extends javax.swing.JFrame {
             }
         });
         tblInfo.setGridColor(new java.awt.Color(0, 0, 0));
+        tblInfo.setMinimumSize(new java.awt.Dimension(550, 350));
+        tblInfo.setPreferredSize(new java.awt.Dimension(550, 350));
         tblInfo.setSelectionBackground(new java.awt.Color(153, 153, 255));
         tblInfo.setSurrendersFocusOnKeystroke(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 320;
-        gridBagConstraints.ipady = 148;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(34, 10, 0, 10);
         pnlInformation.add(tblInfo, gridBagConstraints);
 
         lblAufgabe2.setFont(new java.awt.Font("Dialog", 1, 12));
@@ -132,7 +89,6 @@ public class frmInfo extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         pnlInformation.add(lblAufgabe2, gridBagConstraints);
 
         lblAufgabe3.setFont(new java.awt.Font("Dialog", 1, 12));
@@ -145,8 +101,7 @@ public class frmInfo extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlInformation.add(lblAufgabe3, gridBagConstraints);
 
         lblAufgabe4.setFont(new java.awt.Font("Dialog", 1, 12));
@@ -160,9 +115,7 @@ public class frmInfo extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlInformation.add(lblAufgabe4, gridBagConstraints);
 
         lblAufgabe5.setFont(new java.awt.Font("Dialog", 1, 12));
@@ -174,17 +127,18 @@ public class frmInfo extends javax.swing.JFrame {
         lblAufgabe5.setPreferredSize(new java.awt.Dimension(95, 25));
         lblAufgabe5.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlInformation.add(lblAufgabe5, gridBagConstraints);
 
-        getContentPane().add(pnlInformation, java.awt.BorderLayout.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        getContentPane().add(pnlInformation, gridBagConstraints);
 
-        pnlZurueck.setBorder(new javax.swing.border.EtchedBorder());
-        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
+        cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
         cmdLogout.setText("Ausloggen");
         cmdLogout.setToolTipText("Klicken Sie  auf  \"Ausloggen\" um wieder auf den Startbildschim zu gelangen!");
         cmdLogout.setMaximumSize(new java.awt.Dimension(95, 25));
@@ -196,12 +150,55 @@ public class frmInfo extends javax.swing.JFrame {
             }
         });
 
-        pnlZurueck.add(cmdLogout);
+        pnlLogout.add(cmdLogout);
 
-        getContentPane().add(pnlZurueck, java.awt.BorderLayout.SOUTH);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        getContentPane().add(pnlLogout, gridBagConstraints);
+
+        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/abbrechen.gif")));
+        cmdAbbrechen.setText("Abbrechen");
+        cmdAbbrechen.setToolTipText("Klicken Sie  auf  \"Abbrechen\" um die \u00c4nderungen nicht zu speichern!");
+        cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
+        cmdAbbrechen.setMinimumSize(new java.awt.Dimension(95, 25));
+        cmdAbbrechen.setPreferredSize(new java.awt.Dimension(125, 30));
+        cmdAbbrechen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAbbrechenActionPerformed(evt);
+            }
+        });
+
+        pnlButtons.add(cmdAbbrechen);
+
+        cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/speichern.gif")));
+        cmdSpeichern.setText("Speichern");
+        cmdSpeichern.setToolTipText("Klicken Sie hier um die ge\u00e4nderten Daten zu speichern!");
+        cmdSpeichern.setMaximumSize(new java.awt.Dimension(95, 30));
+        cmdSpeichern.setMinimumSize(new java.awt.Dimension(95, 30));
+        cmdSpeichern.setOpaque(false);
+        cmdSpeichern.setPreferredSize(new java.awt.Dimension(125, 30));
+        cmdSpeichern.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdSpeichernActionPerformed(evt);
+            }
+        });
+
+        pnlButtons.add(cmdSpeichern);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        getContentPane().add(pnlButtons, gridBagConstraints);
 
         pack();
     }//GEN-END:initComponents
+
+    private void cmdSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSpeichernActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdSpeichernActionPerformed
 
     private void cmdLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLogoutActionPerformed
         // TODO add your handling code here:
@@ -220,7 +217,7 @@ public class frmInfo extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmInfo().setVisible(true);
+                new frmAufgabenAnzeigen().setVisible(true);
             }
         });
     }
@@ -229,13 +226,13 @@ public class frmInfo extends javax.swing.JFrame {
     private javax.swing.JButton cmdAbbrechen;
     private javax.swing.JButton cmdLogout;
     private javax.swing.JButton cmdSpeichern;
-    private javax.swing.JList jList1;
     private javax.swing.JLabel lblAufgabe2;
     private javax.swing.JLabel lblAufgabe3;
     private javax.swing.JLabel lblAufgabe4;
     private javax.swing.JLabel lblAufgabe5;
+    private javax.swing.JPanel pnlButtons;
     private javax.swing.JPanel pnlInformation;
-    private javax.swing.JPanel pnlZurueck;
+    private javax.swing.JPanel pnlLogout;
     private javax.swing.JTable tblInfo;
     // End of variables declaration//GEN-END:variables
   
