@@ -178,7 +178,7 @@ public class frmStart extends javax.swing.JFrame
 
     private void quit(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quit
         dbDisconnect();
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_quit
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
