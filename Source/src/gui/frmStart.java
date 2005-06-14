@@ -6,22 +6,49 @@
 
 package gui;
 
+import database.*;
+
 /**
  *
  * @author  Standard
  */
-public class frmStart extends javax.swing.JFrame {
-    public static int WIDTH=450;
-    public static int HEIGHT=400;
-    public static String TITLE="HICS - Login";
+public class frmStart extends javax.swing.JFrame
+{
+    public static final int WIDTH  = 450;
+    public static final int HEIGHT = 400;
+    public static final String TITLE = "HICS - Login";
     
-    /** Creates new form frmStart */
+    public Database db;
+    
+    /**
+     * Erstellt ein neues Formular vom Typ frmStart.
+     */
     public frmStart() {
         super(TITLE);
         initComponents();       
         setSize(WIDTH, HEIGHT);
         setLocation(((getToolkit().getScreenSize().width)/2)-(WIDTH/2),100);
         show();
+        
+        if( dbConnect() == false ) {
+            helpMeldungen.showErrorMessage(
+              "Die Verbindung zur Datenbank konnte nicht hergestellt werden.");
+        }
+    }
+    
+    private boolean dbConnect()
+    {
+        db = new Database( DatabaseAccess.url,
+                           DatabaseAccess.user, DatabaseAccess.passwort );
+        return db.connect();
+    }
+    
+    private boolean dbDisconnect()
+    {
+        if( db != null )
+            return db.disconnect();
+        else
+            return false;
     }
     
     /** This method is called from within the constructor to
@@ -41,8 +68,9 @@ public class frmStart extends javax.swing.JFrame {
         lblKennwort = new javax.swing.JLabel();
         pwdKennwort = new javax.swing.JPasswordField();
         cmdLogin = new javax.swing.JButton();
+        cmdBeenden = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         pnlStart.setLayout(new java.awt.GridBagLayout());
 
@@ -131,17 +159,27 @@ public class frmStart extends javax.swing.JFrame {
             }
         });
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel1.add(cmdLogin, gridBagConstraints);
+        jPanel1.add(cmdLogin, new java.awt.GridBagConstraints());
+
+        cmdBeenden.setText("Beenden");
+        cmdBeenden.setToolTipText("Schlie\u00dft das Programm.");
+        cmdBeenden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quit(evt);
+            }
+        });
+
+        jPanel1.add(cmdBeenden, new java.awt.GridBagConstraints());
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
 
         pack();
     }//GEN-END:initComponents
+
+    private void quit(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quit
+        dbDisconnect();
+        this.dispose();
+    }//GEN-LAST:event_quit
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
@@ -184,6 +222,7 @@ public class frmStart extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdBeenden;
     private javax.swing.JButton cmdLogin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBenutzername;

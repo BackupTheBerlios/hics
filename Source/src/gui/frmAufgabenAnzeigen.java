@@ -45,7 +45,7 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         pnlInformation.setLayout(new java.awt.GridBagLayout());
 
         tblInfo.setModel(new javax.swing.table.DefaultTableModel(

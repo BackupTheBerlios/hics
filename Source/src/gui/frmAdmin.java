@@ -59,7 +59,7 @@ public class frmAdmin extends javax.swing.JFrame {
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         pnlMitarbeiter.setLayout(new java.awt.GridBagLayout());
 
         cmbBerechtigung.addItem("Rezeption");

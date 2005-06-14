@@ -72,7 +72,7 @@ public class frmDatenEing extends javax.swing.JFrame {
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/neu.gif")));
         cmdNeu.setToolTipText("Klicken Sie  auf  \"Neu\" um neue Daten anzulegen!");
         cmdNeu.setPreferredSize(new java.awt.Dimension(35, 30));

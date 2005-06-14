@@ -20,7 +20,7 @@ public class Database {
     }
     
     /**
-     * JDBC-Treiber wird geladen und die verbindung zur Datenbank erstellt.
+     * JDBC-Treiber wird geladen und die Verbindung zur Datenbank hergestellt.
      * 
      * @return  Wenn der Treiber geladen und die Verbindung hergestellt
      *          werden kann wird true zurückgegeben, ansonsten false.
@@ -29,7 +29,7 @@ public class Database {
     {
         try{
             Class.forName( "org.postgresql.Driver" );
-            this.con = DriverManager.getConnection(this.url,this.user,this.passwd);
+            this.con = DriverManager.getConnection( url, user, passwd );
             return true;
         }
         catch (ClassNotFoundException cnfe){
