@@ -102,7 +102,7 @@ public abstract class Query
      * @param template  Ein Objekt vom gleichen Typ wie die gewünschten
      *                  Entities, die gefunden werden sollen.
      *
-     * @result  Eine Liste von allen Entities des angegebenen Entity-Typs,
+     * @return  Eine Liste von allen Entities des angegebenen Entity-Typs,
      *          die mit der Abfrage gefunden wurden. Bei Fehlern wird null
      *          zurückgegeben, bei einem leeren Ergebnis ist der Rückgabewert
      *          ein leeres Array. Es werden genau so viele Entities
@@ -142,7 +142,7 @@ public abstract class Query
      * @param template  Ein Objekt vom gleichen Typ wie die gewünschten
      *                  Entities, die gefunden werden sollen.
      *
-     * @result  Das Entity-Objekt der gewünschten ResultSet-Zeile, falls es
+     * @return  Das Entity-Objekt der gewünschten ResultSet-Zeile, falls es
      *          ermittelt werden konnte. Falls nicht, wird stattdessen null
      *          zurückgegeben (z.B. auch, wenn es gar nicht so viele Zeilen
      *          im Ergebnis gibt wie in row angegeben).

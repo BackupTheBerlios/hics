@@ -96,8 +96,8 @@ public abstract class Entity
      * Weist der Entity eine Datenbank zu, die zum Auslesen und Schreiben
      * der Daten verwendet werden soll.
      * 
-     * @returns  Falls der Parameter null ist, wird false zurückgegeben,
-     *           ansonsten true.
+     * @return  Falls der Parameter null ist, wird false zurückgegeben,
+     *          ansonsten true.
      */
     public boolean assignDatabase( Database database )
     {
