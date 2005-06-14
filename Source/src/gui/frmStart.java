@@ -20,6 +20,7 @@ public class frmStart extends javax.swing.JFrame {
         super(TITLE);
         initComponents();       
         setSize(WIDTH, HEIGHT);
+        setLocation(((getToolkit().getScreenSize().width)/2)-(WIDTH/2),100);
         show();
     }
     
@@ -36,8 +37,8 @@ public class frmStart extends javax.swing.JFrame {
         lblStart1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblBenutzername = new javax.swing.JLabel();
-        lblKennwort = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        lblKennwort = new javax.swing.JLabel();
         pwdKennwort = new javax.swing.JPasswordField();
         cmdLogin = new javax.swing.JButton();
 
@@ -60,7 +61,7 @@ public class frmStart extends javax.swing.JFrame {
         pnlStart.add(lblStart, gridBagConstraints);
 
         lblStart1.setFont(new java.awt.Font("Arial", 0, 18));
-        lblStart1.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/Logo_klein.jpg")));
+        lblStart1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/Logo_klein.jpg")));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -81,20 +82,9 @@ public class frmStart extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(lblBenutzername, gridBagConstraints);
 
-        lblKennwort.setText("Kennwort");
-        lblKennwort.setMaximumSize(new java.awt.Dimension(80, 16));
-        lblKennwort.setMinimumSize(new java.awt.Dimension(80, 16));
-        lblKennwort.setPreferredSize(new java.awt.Dimension(80, 16));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = -10;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel1.add(lblKennwort, gridBagConstraints);
-
         jTextField1.setToolTipText("Tragen Sie hier Ihren Benutzenamen ein! Achten Sie auf Gro\u00df- und Kleinschreibung!");
         jTextField1.setMinimumSize(new java.awt.Dimension(11, 22));
-        jTextField1.setNextFocusableComponent(pwdKennwort);
+        jTextField1.setOpaque(false);
         jTextField1.setPreferredSize(new java.awt.Dimension(50, 22));
         jTextField1.setSelectedTextColor(new java.awt.Color(0, 0, 0));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -110,8 +100,18 @@ public class frmStart extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(jTextField1, gridBagConstraints);
 
+        lblKennwort.setText("Kennwort");
+        lblKennwort.setMaximumSize(new java.awt.Dimension(80, 16));
+        lblKennwort.setMinimumSize(new java.awt.Dimension(80, 16));
+        lblKennwort.setPreferredSize(new java.awt.Dimension(80, 16));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = -10;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel1.add(lblKennwort, gridBagConstraints);
+
         pwdKennwort.setToolTipText("Geben Sie hier Ihr Kennwort ein!  Anstelle des Kennwortes erscheinen \"*\"-Zeichen.  Achten Sie auf Gro\u00df- und Kleinschreibung!");
-        pwdKennwort.setNextFocusableComponent(cmdLogin);
         pwdKennwort.setPreferredSize(new java.awt.Dimension(50, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -153,24 +153,19 @@ public class frmStart extends javax.swing.JFrame {
          String username = jTextField1.getText();
         
         if (username.equals("Raumpflege")) {
-          this.hide();
-          new frmZimNotizAnzeigen().setVisible(true);
+          this.dispose();
+          new frmAufgabenAnzeigen().setVisible(true);
         }
         else if (username.equals("Admin")) {
-          this.hide();
-          new frmDaten().setVisible(true);
-        }
-         else if (username.equals("Hauptadmin")) {
-          this.hide();
-          new frmDaten1().setVisible(true);
+          this.dispose();
+          new frmAdmin().setVisible(true);
         }
         else if (username.equals("Rezeption")) {
-           this.hide();
+           this.dispose();
            new frmZimmerplan().setVisible(true);
         }
         else {
-          helpMeldungen.showErrorMessage("\"" + username
-                  + "\" ist kein gültiger Benutzername.");
+          helpMeldungen.showErrorMessage("Es wurde kein gültiger Benutzername eingegebe!");
         }
     }//GEN-LAST:event_cmdLoginActionPerformed
     

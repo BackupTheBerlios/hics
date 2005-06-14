@@ -13,15 +13,13 @@ import java.awt.*;
  * @author  Sabrina
  */
 public class frmZimmerplan extends javax.swing.JFrame {
-    public static int WIDTH=600;
-    public static int HEIGHT=500;
     public static String TITLE="Zimmerplan";
     
     /** Creates new form frmStart */
     public frmZimmerplan() {
         super(TITLE);
         initComponents();       
-        setSize(WIDTH, HEIGHT);
+        setSize(getToolkit().getScreenSize());
         show();
     }
     
@@ -34,19 +32,45 @@ public class frmZimmerplan extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         tblZimmer = new javax.swing.JTable();
-        jPanelBottom = new javax.swing.JPanel();
-        btnLogout = new javax.swing.JButton();
-        jPanelTop = new javax.swing.JPanel();
-        cmbMenue = new javax.swing.JComboBox();
+        pnlTop = new javax.swing.JPanel();
+        btnNeu = new javax.swing.JButton();
         btnBearbeiten = new javax.swing.JButton();
-        btnNotiz = new javax.swing.JButton();
-        btnZimDetail = new javax.swing.JButton();
-        jPanelText = new javax.swing.JPanel();
+        btnAufgaben = new javax.swing.JButton();
+        btnCheckIn = new javax.swing.JButton();
+        btnCheckOut = new javax.swing.JButton();
+        pnlBottom = new javax.swing.JPanel();
+        btnLogout = new javax.swing.JButton();
+        pnlText = new javax.swing.JPanel();
         lblZimmernr = new javax.swing.JLabel();
-        lblBettenAnz = new javax.swing.JLabel();
-        lblResdauer = new javax.swing.JLabel();
-        lblName = new javax.swing.JLabel();
-        lblStatus = new javax.swing.JLabel();
+        pnlAnzeige = new javax.swing.JPanel();
+        pnlAnzeigeKunde = new javax.swing.JPanel();
+        lblKundennr = new javax.swing.JLabel();
+        txtKundennr = new javax.swing.JTextField();
+        lblNachname = new javax.swing.JLabel();
+        txtZimmer1 = new javax.swing.JTextField();
+        lblKundenVN = new javax.swing.JLabel();
+        txtKundenVN = new javax.swing.JTextField();
+        lblLand = new javax.swing.JLabel();
+        txtLand = new javax.swing.JTextField();
+        lblStrasse = new javax.swing.JLabel();
+        txtStrasse = new javax.swing.JTextField();
+        lblHausStiegeTuer = new javax.swing.JLabel();
+        txtHaus = new javax.swing.JTextField();
+        lblPlz = new javax.swing.JLabel();
+        txPlz = new javax.swing.JTextField();
+        pnlAnzeigeZimmer = new javax.swing.JPanel();
+        lblBettenanz = new javax.swing.JLabel();
+        txtBetten = new javax.swing.JTextField();
+        lblPreis = new javax.swing.JLabel();
+        txtPreis = new javax.swing.JTextField();
+        lblAussattung = new javax.swing.JLabel();
+        txtAusstattung = new javax.swing.JTextField();
+        pnlNotiz = new javax.swing.JPanel();
+        lblNotiz = new javax.swing.JLabel();
+        txtNotiz = new javax.swing.JTextField();
+        pnlAufgaben = new javax.swing.JPanel();
+        lblAufgaben = new javax.swing.JLabel();
+        txtAufgaben = new javax.swing.JTextField();
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -56,23 +80,23 @@ public class frmZimmerplan extends javax.swing.JFrame {
         tblZimmer.setBorder(new javax.swing.border.EtchedBorder());
         tblZimmer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"101", "XX (X)", "12.5.05 - 14.5.05", "Huber, Hans", "checked in"},
-                {"102", "X", "13.5.05 - 15.5.05", "Maier, Karl", null},
-                {"103", "XX X", null, null, null},
-                {"104", "XX X (X)", null, null, null},
-                {"105", "X X", null, null, null},
-                {"201", "X", null, null, null},
-                {"202", "XX", null, null, null},
-                {"203", "XX", null, null, null},
-                {"204", null, null, null, null},
-                {null, null, null, null, null}
+                {"101", ""},
+                {"102", ""},
+                {"103", ""},
+                {"104", ""},
+                {"105", ""},
+                {"201", ""},
+                {"202", ""},
+                {"203", ""},
+                {"204", null},
+                {null, null}
             },
             new String [] {
-                "Zimmer", "Betten", "Reservierung", "Gast", "Notiz"
+                "Zimmer", ""
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -84,11 +108,61 @@ public class frmZimmerplan extends javax.swing.JFrame {
         tblZimmer.setPreferredSize(new java.awt.Dimension(500, 300));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(tblZimmer, gridBagConstraints);
 
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
+        pnlTop.setMinimumSize(new java.awt.Dimension(500, 41));
+        pnlTop.setPreferredSize(new java.awt.Dimension(500, 70));
+        btnNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/neu.gif")));
+        btnNeu.setToolTipText("\u00f6ffnet die Zimmer Details");
+        btnNeu.setMaximumSize(new java.awt.Dimension(35, 30));
+        btnNeu.setMinimumSize(new java.awt.Dimension(35, 30));
+        btnNeu.setPreferredSize(new java.awt.Dimension(35, 30));
+        btnNeu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnZimmerDetailActionPerformed(evt);
+            }
+        });
+
+        pnlTop.add(btnNeu);
+
+        btnBearbeiten.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/bearbeiten.gif")));
+        btnBearbeiten.setMaximumSize(new java.awt.Dimension(35, 30));
+        btnBearbeiten.setMinimumSize(new java.awt.Dimension(35, 30));
+        btnBearbeiten.setPreferredSize(new java.awt.Dimension(35, 30));
+        pnlTop.add(btnBearbeiten);
+
+        btnAufgaben.setToolTipText("\u00f6ffnet die Zimmer Details");
+        btnAufgaben.setMaximumSize(new java.awt.Dimension(35, 30));
+        btnAufgaben.setMinimumSize(new java.awt.Dimension(35, 30));
+        btnAufgaben.setPreferredSize(new java.awt.Dimension(35, 30));
+        btnAufgaben.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAufgabenActionPerformed(evt);
+            }
+        });
+
+        pnlTop.add(btnAufgaben);
+
+        btnCheckIn.setToolTipText("\u00f6ffnet die Zimmer Details");
+        btnCheckIn.setMaximumSize(new java.awt.Dimension(35, 30));
+        btnCheckIn.setMinimumSize(new java.awt.Dimension(35, 30));
+        btnCheckIn.setPreferredSize(new java.awt.Dimension(35, 30));
+        pnlTop.add(btnCheckIn);
+
+        btnCheckOut.setToolTipText("\u00f6ffnet die Zimmer Details");
+        btnCheckOut.setMaximumSize(new java.awt.Dimension(35, 30));
+        btnCheckOut.setMinimumSize(new java.awt.Dimension(35, 30));
+        btnCheckOut.setPreferredSize(new java.awt.Dimension(35, 30));
+        pnlTop.add(btnCheckOut);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        getContentPane().add(pnlTop, gridBagConstraints);
+
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/logout.gif")));
         btnLogout.setMaximumSize(new java.awt.Dimension(22, 24));
         btnLogout.setMinimumSize(new java.awt.Dimension(22, 24));
         btnLogout.setPreferredSize(new java.awt.Dimension(35, 30));
@@ -98,156 +172,241 @@ public class frmZimmerplan extends javax.swing.JFrame {
             }
         });
 
-        jPanelBottom.add(btnLogout);
+        pnlBottom.add(btnLogout);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        getContentPane().add(pnlBottom, gridBagConstraints);
+
+        pnlText.setLayout(new java.awt.GridLayout(1, 4));
+
+        pnlText.setMinimumSize(new java.awt.Dimension(500, 25));
+        pnlText.setPreferredSize(new java.awt.Dimension(500, 25));
+        lblZimmernr.setText("Zimmer");
+        pnlText.add(lblZimmernr);
+        lblZimmernr.getAccessibleContext().setAccessibleName("");
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        getContentPane().add(pnlText, gridBagConstraints);
+
+        pnlAnzeige.setLayout(new java.awt.GridBagLayout());
+
+        pnlAnzeigeKunde.setLayout(new java.awt.GridLayout(7, 2));
+
+        lblKundennr.setText("Kundennr");
+        lblKundennr.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblKundennr.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblKundennr.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblKundennr.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(lblKundennr);
+
+        txtKundennr.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtKundennr.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtKundennr.setPreferredSize(new java.awt.Dimension(95, 25));
+        txtKundennr.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(txtKundennr);
+
+        lblNachname.setText("Nachname");
+        lblNachname.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblNachname.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblNachname.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblNachname.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(lblNachname);
+
+        txtZimmer1.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtZimmer1.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtZimmer1.setPreferredSize(new java.awt.Dimension(95, 25));
+        txtZimmer1.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(txtZimmer1);
+
+        lblKundenVN.setText("Vorname");
+        lblKundenVN.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblKundenVN.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblKundenVN.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblKundenVN.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(lblKundenVN);
+
+        txtKundenVN.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtKundenVN.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtKundenVN.setPreferredSize(new java.awt.Dimension(95, 25));
+        txtKundenVN.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(txtKundenVN);
+
+        lblLand.setText("Land");
+        lblLand.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblLand.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblLand.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblLand.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(lblLand);
+
+        txtLand.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtLand.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtLand.setPreferredSize(new java.awt.Dimension(95, 25));
+        txtLand.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(txtLand);
+
+        lblStrasse.setText("Strasse");
+        lblStrasse.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblStrasse.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblStrasse.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblStrasse.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(lblStrasse);
+
+        txtStrasse.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtStrasse.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtStrasse.setPreferredSize(new java.awt.Dimension(95, 25));
+        txtStrasse.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(txtStrasse);
+
+        lblHausStiegeTuer.setText("Nr/Stg/Tuer");
+        lblHausStiegeTuer.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblHausStiegeTuer.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblHausStiegeTuer.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblHausStiegeTuer.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(lblHausStiegeTuer);
+
+        txtHaus.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtHaus.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtHaus.setPreferredSize(new java.awt.Dimension(95, 25));
+        txtHaus.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(txtHaus);
+
+        lblPlz.setText("Plz");
+        lblPlz.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblPlz.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblPlz.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblPlz.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(lblPlz);
+
+        txPlz.setMaximumSize(new java.awt.Dimension(95, 25));
+        txPlz.setMinimumSize(new java.awt.Dimension(95, 25));
+        txPlz.setPreferredSize(new java.awt.Dimension(95, 25));
+        txPlz.setRequestFocusEnabled(false);
+        pnlAnzeigeKunde.add(txPlz);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridheight = 5;
+        pnlAnzeige.add(pnlAnzeigeKunde, gridBagConstraints);
+
+        pnlAnzeigeZimmer.setLayout(new java.awt.GridLayout(3, 2));
+
+        lblBettenanz.setText("Betten");
+        lblBettenanz.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblBettenanz.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblBettenanz.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblBettenanz.setRequestFocusEnabled(false);
+        pnlAnzeigeZimmer.add(lblBettenanz);
+
+        txtBetten.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtBetten.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtBetten.setPreferredSize(new java.awt.Dimension(95, 25));
+        txtBetten.setRequestFocusEnabled(false);
+        pnlAnzeigeZimmer.add(txtBetten);
+
+        lblPreis.setText("Preis");
+        lblPreis.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblPreis.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblPreis.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblPreis.setRequestFocusEnabled(false);
+        pnlAnzeigeZimmer.add(lblPreis);
+
+        txtPreis.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtPreis.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtPreis.setPreferredSize(new java.awt.Dimension(95, 25));
+        txtPreis.setRequestFocusEnabled(false);
+        pnlAnzeigeZimmer.add(txtPreis);
+
+        lblAussattung.setText("Ausstattung");
+        lblAussattung.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblAussattung.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblAussattung.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblAussattung.setRequestFocusEnabled(false);
+        pnlAnzeigeZimmer.add(lblAussattung);
+
+        txtAusstattung.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtAusstattung.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtAusstattung.setPreferredSize(new java.awt.Dimension(95, 25));
+        txtAusstattung.setRequestFocusEnabled(false);
+        pnlAnzeigeZimmer.add(txtAusstattung);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        pnlAnzeige.add(pnlAnzeigeZimmer, gridBagConstraints);
+
+        pnlNotiz.setLayout(new java.awt.GridLayout());
+
+        lblNotiz.setText("Notiz");
+        lblNotiz.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblNotiz.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblNotiz.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblNotiz.setRequestFocusEnabled(false);
+        pnlNotiz.add(lblNotiz);
+
+        txtNotiz.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtNotiz.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtNotiz.setPreferredSize(new java.awt.Dimension(95, 25));
+        txtNotiz.setRequestFocusEnabled(false);
+        pnlNotiz.add(txtNotiz);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        pnlAnzeige.add(pnlNotiz, gridBagConstraints);
+
+        pnlAufgaben.setLayout(new java.awt.GridLayout());
+
+        lblAufgaben.setText("Aufgaben");
+        lblAufgaben.setMaximumSize(new java.awt.Dimension(95, 25));
+        lblAufgaben.setMinimumSize(new java.awt.Dimension(95, 25));
+        lblAufgaben.setPreferredSize(new java.awt.Dimension(95, 25));
+        lblAufgaben.setRequestFocusEnabled(false);
+        pnlAufgaben.add(lblAufgaben);
+
+        txtAufgaben.setMaximumSize(new java.awt.Dimension(95, 25));
+        txtAufgaben.setMinimumSize(new java.awt.Dimension(95, 25));
+        txtAufgaben.setPreferredSize(new java.awt.Dimension(95, 25));
+        txtAufgaben.setRequestFocusEnabled(false);
+        pnlAufgaben.add(txtAufgaben);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(jPanelBottom, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        pnlAnzeige.add(pnlAufgaben, gridBagConstraints);
 
-        jPanelTop.setLayout(new java.awt.GridBagLayout());
-
-        jPanelTop.setMinimumSize(new java.awt.Dimension(500, 41));
-        jPanelTop.setPreferredSize(new java.awt.Dimension(500, 70));
-        cmbMenue.addItem("Kunde");
-        cmbMenue.addItem("Zimmer");
-        cmbMenue.addItem("Reservierung");
-        cmbMenue.addItem("Notiz");
-        cmbMenue.setEditable(false);
-        cmbMenue.setMinimumSize(new java.awt.Dimension(80, 20));
-        cmbMenue.setPreferredSize(new java.awt.Dimension(80, 20));
-        cmbMenue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbMenueActionPerformed(evt);
-            }
-        });
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 15, 80);
-        jPanelTop.add(cmbMenue, gridBagConstraints);
-
-        btnBearbeiten.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/bearbeiten.gif")));
-        btnBearbeiten.setMaximumSize(new java.awt.Dimension(35, 30));
-        btnBearbeiten.setMinimumSize(new java.awt.Dimension(35, 30));
-        btnBearbeiten.setPreferredSize(new java.awt.Dimension(35, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 15);
-        jPanelTop.add(btnBearbeiten, gridBagConstraints);
-
-        btnNotiz.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/info.gif")));
-        btnNotiz.setMaximumSize(new java.awt.Dimension(35, 30));
-        btnNotiz.setMinimumSize(new java.awt.Dimension(35, 30));
-        btnNotiz.setPreferredSize(new java.awt.Dimension(35, 30));
-        btnNotiz.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNotizActionPerformed(evt);
-            }
-        });
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 200);
-        jPanelTop.add(btnNotiz, gridBagConstraints);
-
-        btnZimDetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/zimmer.gif")));
-        btnZimDetail.setToolTipText("\u00f6ffnet die Zimmer Details");
-        btnZimDetail.setMaximumSize(new java.awt.Dimension(35, 30));
-        btnZimDetail.setMinimumSize(new java.awt.Dimension(35, 30));
-        btnZimDetail.setPreferredSize(new java.awt.Dimension(35, 30));
-        btnZimDetail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnZimmerDetailActionPerformed(evt);
-            }
-        });
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 15);
-        jPanelTop.add(btnZimDetail, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        getContentPane().add(jPanelTop, gridBagConstraints);
-
-        jPanelText.setLayout(new java.awt.GridLayout(1, 4));
-
-        jPanelText.setMinimumSize(new java.awt.Dimension(500, 25));
-        jPanelText.setPreferredSize(new java.awt.Dimension(500, 25));
-        lblZimmernr.setText("Zimmer");
-        jPanelText.add(lblZimmernr);
-        lblZimmernr.getAccessibleContext().setAccessibleName("");
-
-        lblBettenAnz.setText("Betten");
-        jPanelText.add(lblBettenAnz);
-
-        lblResdauer.setText("Reservierung");
-        jPanelText.add(lblResdauer);
-
-        lblName.setText("Gast");
-        jPanelText.add(lblName);
-
-        lblStatus.setText("Status");
-        jPanelText.add(lblStatus);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        getContentPane().add(jPanelText, gridBagConstraints);
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
+        getContentPane().add(pnlAnzeige, gridBagConstraints);
 
         pack();
     }//GEN-END:initComponents
 
+    private void btnAufgabenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAufgabenActionPerformed
+        this.hide();
+        new frmAufgabenAnzeigen().setVisible(true);
+    }//GEN-LAST:event_btnAufgabenActionPerformed
+
     private void btnZimmerDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZimmerDetailActionPerformed
        this.hide();
-       new frmZimmer().setVisible(true);
+       new frmDatenEing().setVisible(true);
     }//GEN-LAST:event_btnZimmerDetailActionPerformed
 
-    private void btnNotizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotizActionPerformed
-        this.hide();
-        new frmNotiz().setVisible(true);
-    }//GEN-LAST:event_btnNotizActionPerformed
-
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        this.hide();
+        this.dispose();
         new frmStart().setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
-
-    private void cmbMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMenueActionPerformed
-       int index = 0;
-              
-        index = cmbMenue.getSelectedIndex();
-        if(index == 0) {
-            this.setVisible(true);
-            new frmKundendaten().setVisible(true);
-           
-        }
-        if(index == 1) {
-            new frmZimmerplan().setVisible(true);
-            this.hide();
-        }
-        if(index == 2) {
-            new frmReservierung().setVisible(true);
-            this.hide();
-        }if(index == 3) {
-            new frmNotiz().setVisible(true);
-            this.hide();
-        }
-                
-        index = 4;
-    
-    }//GEN-LAST:event_cmbMenueActionPerformed
     
     /**
      * @param args the command line arguments
@@ -261,20 +420,46 @@ public class frmZimmerplan extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAufgaben;
     private javax.swing.JButton btnBearbeiten;
+    private javax.swing.JButton btnCheckIn;
+    private javax.swing.JButton btnCheckOut;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnNotiz;
-    private javax.swing.JButton btnZimDetail;
-    private javax.swing.JComboBox cmbMenue;
-    private javax.swing.JPanel jPanelBottom;
-    private javax.swing.JPanel jPanelText;
-    private javax.swing.JPanel jPanelTop;
-    private javax.swing.JLabel lblBettenAnz;
-    private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblResdauer;
-    private javax.swing.JLabel lblStatus;
+    private javax.swing.JButton btnNeu;
+    private javax.swing.JLabel lblAufgaben;
+    private javax.swing.JLabel lblAussattung;
+    private javax.swing.JLabel lblBettenanz;
+    private javax.swing.JLabel lblHausStiegeTuer;
+    private javax.swing.JLabel lblKundenVN;
+    private javax.swing.JLabel lblKundennr;
+    private javax.swing.JLabel lblLand;
+    private javax.swing.JLabel lblNachname;
+    private javax.swing.JLabel lblNotiz;
+    private javax.swing.JLabel lblPlz;
+    private javax.swing.JLabel lblPreis;
+    private javax.swing.JLabel lblStrasse;
     private javax.swing.JLabel lblZimmernr;
+    private javax.swing.JPanel pnlAnzeige;
+    private javax.swing.JPanel pnlAnzeigeKunde;
+    private javax.swing.JPanel pnlAnzeigeZimmer;
+    private javax.swing.JPanel pnlAufgaben;
+    private javax.swing.JPanel pnlBottom;
+    private javax.swing.JPanel pnlNotiz;
+    private javax.swing.JPanel pnlText;
+    private javax.swing.JPanel pnlTop;
     private javax.swing.JTable tblZimmer;
+    private javax.swing.JTextField txPlz;
+    private javax.swing.JTextField txtAufgaben;
+    private javax.swing.JTextField txtAusstattung;
+    private javax.swing.JTextField txtBetten;
+    private javax.swing.JTextField txtHaus;
+    private javax.swing.JTextField txtKundenVN;
+    private javax.swing.JTextField txtKundennr;
+    private javax.swing.JTextField txtLand;
+    private javax.swing.JTextField txtNotiz;
+    private javax.swing.JTextField txtPreis;
+    private javax.swing.JTextField txtStrasse;
+    private javax.swing.JTextField txtZimmer1;
     // End of variables declaration//GEN-END:variables
     
 }
