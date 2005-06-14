@@ -109,4 +109,21 @@ public class Database {
         }
         return true;
     }
+    
+    /**
+     * Convert a Java object to an SQL string.
+     */
+    public static String getSqlString( Object object )
+    {
+        if( object == null ) {
+            return "NULL";
+        }
+        if( object instanceof String ) {
+            return "'" + ((String) object) + "'";
+        }
+        //TODO: weitere Konvertierungen einbauen (für Date, usw.)
+        else {
+            return object.toString();
+        }
+    }
 }

@@ -150,7 +150,8 @@ public abstract class Entity
             if( i != 0 ) {
                 query += ", ";
             }
-            query += primaryKeyNames[i] + " = " + getSqlString(primaryKeys[i]);
+            query += primaryKeyNames[i] + " = "
+                     + Database.getSqlString(primaryKeys[i]);
         }
         query += ";";
         
@@ -247,13 +248,13 @@ public abstract class Entity
                 updateStatement += ", ";
             }
             updateStatement += primaryKeyNames[i] + " = "
-                               + getSqlString(primaryKeys[i]);
+                               + Database.getSqlString(primaryKeys[i]);
         }
         for( i = primaryKeyNames.length;
              i < primaryKeyNames.length + propertyNames.length; i++ )
         {
             updateStatement += ", " + propertyNames[i] + " = "
-                               + getSqlString(properties[i]);
+                               + Database.getSqlString(properties[i]);
         }
         updateStatement += ";";
         
@@ -302,13 +303,13 @@ public abstract class Entity
             if( primaryKeys[i] == null ) // gibts nicht, deshalb: default
                 insertStatement += "DEFAULT";
             else
-                insertStatement += getSqlString(primaryKeys[i]);
+                insertStatement += Database.getSqlString(primaryKeys[i]);
         }
         // Fortsetzung der Werteaufzaehlung mit den Eigenschaften
         for( i = primaryKeyNames.length;
              i < primaryKeyNames.length + propertyNames.length; i++ )
         {
-            insertStatement += ", " + getSqlString(properties[i]);
+            insertStatement += ", " + Database.getSqlString(properties[i]);
         }
         insertStatement += " );";
         
@@ -351,7 +352,7 @@ public abstract class Entity
                 deleteStatement += " AND ";
             }
             deleteStatement += primaryKeyNames[i] + " = "
-                               + getSqlString(primaryKeys[i]);
+                               + Database.getSqlString(primaryKeys[i]);
         }
         deleteStatement += ";";
         
@@ -394,7 +395,8 @@ public abstract class Entity
             if( i != 0 ) {
                 query += ", ";
             }
-            query += primaryKeyNames[i] + " = " + getSqlString(primaryKeys[i]);
+            query += primaryKeyNames[i] + " = "
+                     + Database.getSqlString(primaryKeys[i]);
         }
         query += ";";
         
@@ -405,16 +407,5 @@ public abstract class Entity
             return false;
         else
             return true;
-    }
-    
-    private String getSqlString( Object object )
-    {
-        if( object instanceof String ) {
-            return "'" + ((String) object) + "'";
-        }
-        //TODO: weitere Konvertierungen einbauen (für Date, usw.)
-        else {
-            return object.toString();
-        }
     }
 }

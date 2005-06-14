@@ -35,12 +35,7 @@ public abstract class Query
     
     
     /** 
-     * Erstellt eine neue Instanz von Query. Abgeleitete Klassen sollen hier
-     * den Abfrage-String query setzen (und später möglicherweise mit
-     * anderen Suchparametern ersetzen). Der String muss zu jedem Zeitpunkt
-     * eine gültige SQL-Abfrage beinhalten. Falls aus dem Abfrage-Ergebnis
-     * Entities extrahiert werden sollen, müssen dort Spalten mit den
-     * Namen der Primärschlüsseln der Entity enthalten sein.
+     * Erstellt eine neue Instanz von Query.
      *
      * @param database  Das Datenbank-Objekt, das zum Abfragen der Werte
      *                  verwendet werden soll.
@@ -52,19 +47,35 @@ public abstract class Query
     }
     
     /**
-     * Stellt die konkrete SQL-Abfrage zusammen und schickt sie an das
-     * Database-Objekt. Das Abfrage-Ergebnis wird im Query-Objekt
-     * zwischengespeichert und kann nach Aufruf von search()
-     * über diverse Methoden ermittelt werden.
+     * Diese Methode muss von abgeleiteten Klassen implementiert werden.
+     * Sie stellen hier den SQL-Abfragestring zusammen und rufen
+     * search( query ) auf. Falls aus dem Abfrage-Ergebnis Entities extrahiert
+     * werden sollen, müssen dort Spalten mit den Namen der Primärschlüsseln
+     * der Entity enthalten sein. Nach Aufruf dieser Methode ist das
+     * Abfrage-Ergebnis im Objekt zwischengespeichert und kann
+     * über diverse andere Methoden ermittelt werden.
      * 
      * @return  Falls die Abfrage nicht durchgeführt werden konnte (z.B.
      *          weil das Database-Objekt keine Verbindung zur Datenbank hat),
      *          gibt die Methode false zurück. Ansonsten, und insbesondere auch
      *          bei leeren Ergebnismengen, wird true zurückgegeben.
      */
-    public boolean search()
+    abstract public boolean search();
+    
+    /**
+     * Übernimmt die konkrete SQL-Abfrage und schickt sie an das
+     * Database-Objekt. Das Abfrage-Ergebnis wird im Query-Objekt
+     * zwischengespeichert und kann nach Aufruf dieser Methode
+     * über diverse andere Methoden ermittelt werden.
+     * 
+     * @return  Falls die Abfrage nicht durchgeführt werden konnte (z.B.
+     *          weil das Database-Objekt keine Verbindung zur Datenbank hat),
+     *          gibt die Methode false zurück. Ansonsten, und insbesondere auch
+     *          bei leeren Ergebnismengen, wird true zurückgegeben.
+     */
+    protected boolean search( String query )
     {
-        if( db == null )
+        if( db == null || query == null )
             return false;
         
         result = db.query( query );
