@@ -37,7 +37,12 @@ public class QueryZimmer extends Query
      */
     public Zimmer[] getZimmerEntites()
     {
-        return (Zimmer[]) this.getEntities( new Zimmer() );
+        Entity[] entities = this.getEntities( new Zimmer() );
+        Zimmer[] zimmers = new Zimmer[entities.length];
+        for( int i = 0; i < entities.length; i++ ) {
+            zimmers[i] = (Zimmer) entities[i];
+        }
+        return zimmers;
     }
     
     public boolean search()

@@ -161,7 +161,10 @@ public class frmStart extends javax.swing.JFrame
             }
         });
 
-        jPanel1.add(cmdLogin, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        jPanel1.add(cmdLogin, gridBagConstraints);
 
         cmdBeenden.setText("Beenden");
         cmdBeenden.setToolTipText("Schlie\u00dft das Programm.");
@@ -171,7 +174,10 @@ public class frmStart extends javax.swing.JFrame
             }
         });
 
-        jPanel1.add(cmdBeenden, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        jPanel1.add(cmdBeenden, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
 
