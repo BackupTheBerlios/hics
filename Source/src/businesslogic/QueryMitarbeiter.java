@@ -38,7 +38,12 @@ public class QueryMitarbeiter extends Query
      */
     public Mitarbeiter[] getMitarbeiterEntites()
     {
-        return (Mitarbeiter[]) this.getEntities( new Mitarbeiter() );
+        Entity[] entities = this.getEntities( new Mitarbeiter() );
+        Mitarbeiter[] mitarbs = new Mitarbeiter[entities.length];
+        for( int i = 0; i < entities.length; i++ ) {
+            mitarbs[i] = (Mitarbeiter) entities[i];
+        }
+        return mitarbs;
     }
     
     public boolean search()

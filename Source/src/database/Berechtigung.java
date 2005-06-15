@@ -22,7 +22,7 @@ public class Berechtigung extends Entity {
         properties = new Object[propertyNames.length];
     }
     
-    public void setPrimaryKeys(Integer berechtigungsNr) {
+    public void setPrimaryKeys( Integer berechtigungsNr ) {
         primaryKeys[0] = berechtigungsNr;
     }
     

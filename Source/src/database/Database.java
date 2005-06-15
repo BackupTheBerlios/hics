@@ -76,7 +76,10 @@ public class Database {
             return null;
         
         try{
-            Statement st = this.con.createStatement();
+            Statement st = this.con.createStatement(
+                                      ResultSet.TYPE_SCROLL_INSENSITIVE,
+                                      ResultSet.CONCUR_READ_ONLY
+                           );
             ResultSet rs = st.executeQuery( SQLStatement );
             return rs;
         }
@@ -100,7 +103,10 @@ public class Database {
             return false;
         
         try{
-            Statement stmt = this.con.createStatement();
+            Statement stmt = this.con.createStatement(
+                                      ResultSet.TYPE_SCROLL_INSENSITIVE,
+                                      ResultSet.CONCUR_UPDATABLE
+                             );
             stmt.execute(SQLStatement);
         }
         catch(SQLException sqle){

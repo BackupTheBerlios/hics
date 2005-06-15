@@ -54,7 +54,7 @@ public class MitarbeiterHelper
         else {
             // Berechtigung des Mitarbeiters ermitteln
             Berechtigung berechtigung = new Berechtigung();
-            berechtigung.setPrimaryKeys( mitarbs[0].getBerechtigung() );
+            berechtigung.setPrimaryKeys( mitarbs[0].getBerechtigungsNr() );
             berechtigung.assignDatabase( db );
             if( berechtigung.fromDatabase() == false )
                 return BERECHTIGUNG_KEINE;

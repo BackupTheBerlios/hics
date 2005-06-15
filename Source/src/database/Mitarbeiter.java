@@ -18,7 +18,7 @@ public class Mitarbeiter extends Entity {
         entityName = "Mitarbeiter";
         primaryKeyNames = new String[] {"MitarbeiterNr"};
         propertyNames = new String[] {"Nachname", "Vorname", "Login", 
-                "Passwort", "Berechtigung"};
+                "Passwort", "BerechtigungsNr"};
         primaryKeys = new Object[primaryKeyNames.length];
         properties = new Object[propertyNames.length];
     }
@@ -52,19 +52,19 @@ public class Mitarbeiter extends Entity {
         return (String) properties[3];
     }
     
-    public Integer getBerechtigung() {
+    public Integer getBerechtigungsNr() {
         return (Integer) properties[4];
     }
           
     public void setProperties( String nachname, String vorname, String login,
-            String passwort, Integer berechtigung)
+            String passwort, Integer berechtigungsNr )
     {
         
         properties[0] = nachname;
         properties[1] = vorname;
         properties[2] = login;
         properties[3] = passwort;
-        properties[4] = berechtigung;
+        properties[4] = berechtigungsNr;
     }
     
 }

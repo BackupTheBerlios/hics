@@ -116,6 +116,8 @@ public abstract class Query
             return null;
         
         Entity[] entities = new Entity[ getRowCount() ];
+        if( entities.length == 0 )
+            return entities; // keine Treffer, leere Menge zurückgeben
         
         int[] columns = getPrimaryKeyColumns( template );
         if( columns == null )
@@ -125,7 +127,7 @@ public abstract class Query
             // alle Zeilen durchgehen und von jeder die Entity mitnehmen
             for( result.first(); result.isAfterLast() == false; result.next() )
             {
-                entities[result.getRow()] = getEntity( template, columns );
+                entities[result.getRow()-1] = getEntity( template, columns );
             }
         }
         catch( SQLException e ) {
@@ -205,6 +207,7 @@ public abstract class Query
         newEntity.setPrimaryKeys( primaryKeys );
         
         // Aus der Datenbank holen und fertig. Das ging ja einfach.
+        newEntity.assignDatabase( db );
         if( newEntity.fromDatabase() == false )
             return null;
         else

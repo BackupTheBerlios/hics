@@ -7,6 +7,7 @@
 package gui;
 
 import database.*;
+import businesslogic.*;
 
 /**
  *
@@ -33,6 +34,7 @@ public class frmStart extends javax.swing.JFrame
         if( dbConnect() == false ) {
             helpMeldungen.showErrorMessage(
               "Die Verbindung zur Datenbank konnte nicht hergestellt werden.");
+            System.exit(1);
         }
     }
     
@@ -190,9 +192,32 @@ public class frmStart extends javax.swing.JFrame
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
-        // TODO add your handling code here:
-         String username = txtUsername.getText();
+        if( db == null ) {
+            helpMeldungen.showErrorMessage(
+              "Ohne Datenbankverbindung kann kein Login erfolgen.");
+        }
         
+        String login = txtUsername.getText();
+        String passwort = new String(pwdKennwort.getPassword());
+        MitarbeiterHelper helper = new MitarbeiterHelper(db);
+        int berechtigung = helper.getMitarbeiterBerechtigung(login, passwort);
+        
+        if( berechtigung == MitarbeiterHelper.BERECHTIGUNG_REINIGUNG ) {
+          this.dispose();
+          new frmAufgabenAnzeigen().setVisible(true);
+        }
+        else if( berechtigung == MitarbeiterHelper.BERECHTIGUNG_ADMIN ) {
+          this.dispose();
+          new frmAdmin().setVisible(true);
+        }
+        else if( berechtigung == MitarbeiterHelper.BERECHTIGUNG_REZEPTION ) {
+           this.dispose();
+           new frmZimmerplan().setVisible(true);
+        }
+        else {
+          helpMeldungen.showErrorMessage("Falscher Benutzername oder falsches Passwort!");
+        }
+        /*
         if (username.equals("Raumpflege")) {
           this.dispose();
           new frmAufgabenAnzeigen().setVisible(true);
@@ -208,6 +233,7 @@ public class frmStart extends javax.swing.JFrame
         else {
           helpMeldungen.showErrorMessage("Es wurde kein gültiger Benutzername eingegebe!");
         }
+        */
     }//GEN-LAST:event_cmdLoginActionPerformed
     
     /**

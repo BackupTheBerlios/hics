@@ -103,8 +103,10 @@ public abstract class Entity
     {
         if( database == null )
             return false;
-        else
+        else {
+            db = database;
             return true;
+        }
     }
     
     
@@ -145,7 +147,7 @@ public abstract class Entity
         }
         query += " FROM " + entityName + " WHERE ";
         
-        for( i = 1; i < primaryKeyNames.length; i++ )
+        for( i = 0; i < primaryKeyNames.length; i++ )
         {
             if( i != 0 ) {
                 query += ", ";
@@ -168,14 +170,14 @@ public abstract class Entity
         
         try
         {
+            result.next();
             // String-Werte aus dem ResultSet ermitteln
             for( i = 0; i < primaryKeyNames.length; i++ ) {
-                primaryKeys[i] = result.getObject(i);
+                primaryKeys[i] = result.getObject(i+1);
             }
-            for( i = primaryKeyNames.length;
-                 i < primaryKeyNames.length + propertyNames.length; i++ )
+            for( i = 0; i < propertyNames.length; i++ )
             {
-                properties[i] = result.getObject(i);
+                properties[i] = result.getObject(primaryKeyNames.length+i+1);
             }
         }
         catch( java.sql.SQLException e )
