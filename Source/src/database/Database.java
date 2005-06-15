@@ -72,7 +72,7 @@ public class Database {
      */
     public ResultSet query(String SQLStatement)
     {
-        if( con == null || SQLStatement =="")
+        if( con == null || SQLStatement.equals("") || SQLStatement == null)
             return null;
         
         try{
@@ -99,7 +99,7 @@ public class Database {
      */
     public boolean change(String SQLStatement)
     {
-        if( con == null || SQLStatement =="")
+        if( con == null || SQLStatement.equals(null) || SQLStatement == null)
             return false;
         
         try{
