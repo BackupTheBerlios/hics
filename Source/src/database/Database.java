@@ -131,6 +131,12 @@ public class Database {
         if( object instanceof Date ) {
             return "'" + ((Date) object).toString() + "'";
         }
+        if( object instanceof Boolean ) {
+            if( ((Boolean) object).booleanValue() == true )
+                return "TRUE";
+            else
+                return "FALSE";
+        }
         else {
             return object.toString();
         }
