@@ -150,7 +150,7 @@ public abstract class Entity
         for( i = 0; i < primaryKeyNames.length; i++ )
         {
             if( i != 0 ) {
-                query += ", ";
+                query += " AND ";
             }
             query += primaryKeyNames[i] + " = "
                      + Database.getSqlString(primaryKeys[i]);
