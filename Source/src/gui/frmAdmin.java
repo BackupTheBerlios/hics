@@ -6,11 +6,17 @@
 
 package gui;
 
+import database.*;
+import businesslogic.*;
+
+
 /**
  *
  * @author  TuBa
  */
 public class frmAdmin extends javax.swing.JFrame {
+    
+   public Database db; 
     
    public static String TITLE="HICS - Personendaten";
     
@@ -20,7 +26,19 @@ public class frmAdmin extends javax.swing.JFrame {
         initComponents();
         setSize(getToolkit().getScreenSize());
         show();
+        
+        
     }
+    
+     private boolean dbDisconnect()
+    {
+        if( db != null )
+            return db.disconnect();
+        else
+            return false;
+    }
+   
+        
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -41,6 +59,7 @@ public class frmAdmin extends javax.swing.JFrame {
         txtPwd = new javax.swing.JTextField();
         pnlLogout = new javax.swing.JPanel();
         cmdLogout = new javax.swing.JButton();
+        cmdBeenden = new javax.swing.JButton();
         pnlTop = new javax.swing.JPanel();
         cmdNeu = new javax.swing.JButton();
         cmdSuchen = new javax.swing.JButton();
@@ -122,7 +141,7 @@ public class frmAdmin extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         pnlMitarbeiter.add(txtMitarbeiterVN, gridBagConstraints);
 
-        lblLogin.setText("Passwort");
+        lblLogin.setText("Login");
         lblLogin.setMaximumSize(new java.awt.Dimension(95, 25));
         lblLogin.setMinimumSize(new java.awt.Dimension(95, 25));
         lblLogin.setPreferredSize(new java.awt.Dimension(95, 25));
@@ -186,6 +205,17 @@ public class frmAdmin extends javax.swing.JFrame {
 
         pnlLogout.add(cmdLogout);
 
+        cmdBeenden.setText("Beenden");
+        cmdBeenden.setToolTipText("Schlie\u00dft das Programm.");
+        cmdBeenden.setPreferredSize(new java.awt.Dimension(75, 30));
+        cmdBeenden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBeendenActionPerformed(evt);
+            }
+        });
+
+        pnlLogout.add(cmdBeenden);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -209,6 +239,12 @@ public class frmAdmin extends javax.swing.JFrame {
         cmdSuchen.setMinimumSize(new java.awt.Dimension(95, 25));
         cmdSuchen.setOpaque(false);
         cmdSuchen.setPreferredSize(new java.awt.Dimension(35, 30));
+        cmdSuchen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdSuchenActionPerformed(evt);
+            }
+        });
+
         pnlTop.add(cmdSuchen);
 
         cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/speichern.gif")));
@@ -331,6 +367,23 @@ public class frmAdmin extends javax.swing.JFrame {
         pack();
     }//GEN-END:initComponents
 
+    private void cmdBeendenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBeendenActionPerformed
+         dbDisconnect();
+        System.exit(0);
+    }//GEN-LAST:event_cmdBeendenActionPerformed
+
+    private void cmdSuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSuchenActionPerformed
+        
+        String ZNr = txtZimNr.getText();
+        
+        String ZPreis = txtPreis.getText();
+//        
+//        ZimmerHelper helper = new ZimmerHelper(db);
+//        int preis = helper.getPreis(ZNr);
+//                
+//        txtPreis.setText(Integer.toString(preis));
+    }//GEN-LAST:event_cmdSuchenActionPerformed
+
     private void cmdNeuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNeuActionPerformed
         
         txtMitarbeiterVN.setText("");
@@ -368,6 +421,7 @@ public class frmAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbBerechtigung;
     private javax.swing.JButton cmdAbbrechen;
+    private javax.swing.JButton cmdBeenden;
     private javax.swing.JButton cmdLoeschen;
     private javax.swing.JButton cmdLogout;
     private javax.swing.JButton cmdNeu;
