@@ -15,6 +15,8 @@ import database.*;
 public class QueryMitarbeiter extends Query
 {
     String[] filterMitarbeiterNr;
+    String[] filterNname;
+    String[] filterVname;
     String[] filterLogin;
     String[] filterPasswort;
     
@@ -28,6 +30,8 @@ public class QueryMitarbeiter extends Query
     {
         super(database);
         filterMitarbeiterNr = new String[0];
+        filterNname = new String[0];
+        filterVname = new String[0];
         filterLogin = new String[0];
         filterPasswort = new String[0];
     }
@@ -51,6 +55,8 @@ public class QueryMitarbeiter extends Query
         String query = "SELECT MitarbeiterNr, BerechtigungsNr FROM Mitarbeiter";
         
         String where = this.getWhereString("", filterMitarbeiterNr);
+//        where = this.getWhereString(where, filterNname);
+//        where = this.getWhereString(where, filterVname);
         where = this.getWhereString(where, filterLogin);
         where = this.getWhereString(where, filterPasswort);
         
@@ -174,5 +180,57 @@ public class QueryMitarbeiter extends Query
     public void unsetFilterPasswort()
     {
         filterPasswort = new String[0];
+    }
+    
+    /**
+     * Erstellt einen neuen Filter für einen Nachnamen.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param nname  Der Nachname, nach dem gefiltert werden soll.
+     */
+    public void addFilterNname( String nname )
+    {
+        String[] newFilter = new String[ filterNname.length + 1 ];
+        for( int i = 0; i < filterNname.length; i++ ) {
+            newFilter[i] = filterNname[i];
+        }
+        newFilter[ newFilter.length - 1 ]
+                = "Nachname = " + Database.getSqlString(nname);
+        filterNname = newFilter;
+    }
+    
+    /**
+     * Löscht alle Filter, die nach einem Nachnamen filtern.
+     */
+    public void unsetFilterNname()
+    {
+        filterNname = new String[0];
+    }
+    
+    /**
+     * Erstellt einen neuen Filter für einen Vornamen.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param vname  Der Vorname, nach dem gefiltert werden soll.
+     */
+    public void addFilterVname( String vname )
+    {
+        String[] newFilter = new String[ filterVname.length + 1 ];
+        for( int i = 0; i < filterVname.length; i++ ) {
+            newFilter[i] = filterVname[i];
+        }
+        newFilter[ newFilter.length - 1 ]
+                = "Vorname = " + Database.getSqlString(vname);
+        filterVname = newFilter;
+    }
+    
+    /**
+     * Löscht alle Filter, die nach einem Vornamen filtern.
+     */
+    public void unsetFilterVname()
+    {
+        filterVname = new String[0];
     }
 }
