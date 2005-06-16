@@ -20,8 +20,8 @@ public class Notiz extends Entity
     public Notiz()
     {
         entityName = "Notiz";
-        primaryKeyNames = new String[] {"NotizNr"};
-        propertyNames = new String[] {"KundenNr", "Bezeichnung"};
+        primaryKeyNames = new String[] {"NotizNr", "KundenNr"};
+        propertyNames = new String[] {"Bezeichnung"};
         primaryKeys = new Object[primaryKeyNames.length];
         properties = new Object[propertyNames.length];
     }
@@ -29,8 +29,9 @@ public class Notiz extends Entity
     /**
      * Setzt die Notiznummer für diese Entity fest.
      */
-    public void setPrimaryKeys( Integer notizNr ) {
+    public void setPrimaryKeys( Integer notizNr, Integer kundenNr ) {
         primaryKeys[0] = notizNr;
+        primaryKeys[1] = kundenNr;
     }
 
     /**
@@ -45,7 +46,7 @@ public class Notiz extends Entity
     }
 
     /**
-     * Ermittelt die Ausstattungsnummer dieser Entity. Falls der entsprechende
+     * Ermittelt die Notiznummer dieser Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
      */
     public Integer getNotizNr()
@@ -54,26 +55,25 @@ public class Notiz extends Entity
     }
 
     /**
+     * Ermittelt die Kundennummer der Entity. Falls der entsprechende
+     * Wert in der Datenbank NULL ist, wird null zurückgegeben.
+     */
+    public Integer getKundenNr()
+    {
+        return (Integer) primaryKeys[1];
+    }
+
+    /**
      * Setzt alle Eigenschaften dieser Entity auf einmal. Um einen Wert
      * auf NULL zu setzen, muss null als Argument übergeben werden.
      */
-    public void setProperties( Integer kundenNr, String bezeichnung)
+    public void setProperties( String bezeichnung )
     {
         // Die Werte sind so nummeriert wie oben in der Initialisierung
         // angegeben. Die Nummerierung ist unabhängig von der Reihenfolge
         // in der Datenbank.
 
-        properties[0] = kundenNr;
-        properties[1] = bezeichnung;
-    }
-
-    /**
-	     * Ermittelt die Eigenschaft Bezeichning der Entity. Falls der entsprechende
-	     * Wert in der Datenbank NULL ist, wird null zurückgegeben.
-	     */
-	    public Integer getKundenNr()
-	    {
-	        return (Integer) properties[0];
+        properties[0] = bezeichnung;
     }
 
     /**
@@ -82,6 +82,6 @@ public class Notiz extends Entity
      */
     public String getBezeichnung()
     {
-        return (String) properties[1];
+        return (String) properties[0];
     }
 }

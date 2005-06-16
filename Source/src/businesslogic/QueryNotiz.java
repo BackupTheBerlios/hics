@@ -164,7 +164,7 @@ public class QueryNotiz extends Query
             newFilter[i] = filterBezeichnung[i];
         }
         newFilter[ newFilter.length - 1 ]
-                = "Vorname = " + Database.getSqlString(bezeichnung);
+                = "Bezeichnung = " + Database.getSqlString(bezeichnung);
         filterBezeichnung = newFilter;
     }
     
