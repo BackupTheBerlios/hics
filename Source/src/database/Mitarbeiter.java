@@ -16,24 +16,31 @@ public class Mitarbeiter extends Entity {
     /** Creates a new instance of Mitarbeiter */
     public Mitarbeiter() {
         entityName = "Mitarbeiter";
-        primaryKeyNames = new String[] {"MitarbeiterNr"};
+        primaryKeyNames = new String[] {"MitarbeiterNr", "BerechtigungsNr"};
         propertyNames = new String[] {"Nachname", "Vorname", "Login", 
-                "Passwort", "BerechtigungsNr"};
+                "Passwort"};
         primaryKeys = new Object[primaryKeyNames.length];
         properties = new Object[propertyNames.length];
     }
     
-    public void setPrimaryKeys( Integer mitarbeiterNr ) {
+    public void setPrimaryKeys( Integer mitarbeiterNr, Integer berechtigungsNr )
+    {
         primaryKeys[0] = mitarbeiterNr;
+        primaryKeys[1] = berechtigungsNr;
     }
     
-    public void setSerialKey()
+    public void setSerialKey( Integer berechtigungsNr )
     {
         primaryKeys[0] = "DEFAULT";
+        primaryKeys[1] = berechtigungsNr;
     }
     
     public Integer getMitarbeiterNr() {
         return (Integer) primaryKeys[0];
+    }
+    
+    public Integer getBerechtigungsNr() {
+        return (Integer) primaryKeys[1];
     }
     
     public String getNachname() {
@@ -51,20 +58,15 @@ public class Mitarbeiter extends Entity {
     public String getPasswort() {
         return (String) properties[3];
     }
-    
-    public Integer getBerechtigungsNr() {
-        return (Integer) properties[4];
-    }
           
     public void setProperties( String nachname, String vorname, String login,
-            String passwort, Integer berechtigungsNr )
+            String passwort )
     {
         
         properties[0] = nachname;
         properties[1] = vorname;
         properties[2] = login;
         properties[3] = passwort;
-        properties[4] = berechtigungsNr;
     }
     
 }

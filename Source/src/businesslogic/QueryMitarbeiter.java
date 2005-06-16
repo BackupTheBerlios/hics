@@ -48,7 +48,7 @@ public class QueryMitarbeiter extends Query
     
     public boolean search()
     {
-        String query = "SELECT MitarbeiterNr FROM Mitarbeiter";
+        String query = "SELECT MitarbeiterNr, BerechtigungsNr FROM Mitarbeiter";
         
         String where = this.getWhereString("", filterMitarbeiterNr);
         where = this.getWhereString(where, filterLogin);
