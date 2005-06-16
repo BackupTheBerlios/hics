@@ -7,6 +7,7 @@
 package database;
 
 import java.sql.*;
+import java.util.Date;
 
 public class Database {
     protected String url,user,passwd;
@@ -127,7 +128,9 @@ public class Database {
         if( object instanceof String ) {
             return "'" + ((String) object) + "'";
         }
-        //TODO: weitere Konvertierungen einbauen (für Date, usw.)
+        if( object instanceof Date ) {
+            return "'" + ((Date) object).toString() + "'";
+        }
         else {
             return object.toString();
         }
