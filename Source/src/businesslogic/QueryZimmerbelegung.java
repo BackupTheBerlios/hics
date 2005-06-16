@@ -1,5 +1,5 @@
 /*
- * QueryZimmer.java
+ * QueryZimmerbelegung.java
  *
  * Created on 14. Juni 2005, 13:58
  */
@@ -13,30 +13,26 @@ import java.util.Date;
  *
  * @author Jakob Petsovits
  */
-public class QueryAufenthalt extends Query
+public class QueryZimmerbelegung extends Query
 {
     String[] filterAufenthaltsNr;
-    String[] filterKundenNr;
-    String[] filterMitarbeiterNr;
+    String[] filterZimmerNr;
     String[] filterVon;
     String[] filterBis;
-    String[] filterStatus;
     
     /**
-     * Erstellt eine neue Instanz von QueryAufenthalt.
+     * Erstellt eine neue Instanz von QueryZimmerbelegung.
      *
      * @param database  Das Datenbank-Objekt, das zum Abfragen der Werte
      *                  verwendet werden soll.
      */
-    public QueryAufenthalt( Database database )
+    public QueryZimmerbelegung( Database database )
     {
         super(database);
         filterAufenthaltsNr = new String[0];
-        filterKundenNr = new String[0];
-        filterMitarbeiterNr = new String[0];
+        filterZimmerNr = new String[0];
         filterVon = new String[0];
         filterBis = new String[0];
-        filterStatus = new String[0];
     }
     
     /**
@@ -53,16 +49,28 @@ public class QueryAufenthalt extends Query
         return aufenthalts;
     }
     
+    /**
+     * Ermittelt alle Zimmer-Entities,
+     * die mit der SQL-Abfrage gefunden wurden.
+     */
+    public Zimmer[] getZimmerEntites()
+    {
+        Entity[] entities = this.getEntities( new Zimmer() );
+        Zimmer[] zimmern = new Zimmer[entities.length];
+        for( int i = 0; i < entities.length; i++ ) {
+            zimmern[i] = (Zimmer) entities[i];
+        }
+        return zimmern;
+    }
+    
     public boolean search()
     {
-        String query = "SELECT AufenthaltsNr FROM Aufenthalt";
+        String query = "SELECT AufenthaltsNr, ZimmerNr FROM belegt";
         
         String where = this.getWhereString("", filterAufenthaltsNr);
-        where = this.getWhereString(where, filterKundenNr);
-        where = this.getWhereString(where, filterMitarbeiterNr);
+        where = this.getWhereString(where, filterZimmerNr);
         where = this.getWhereString(where, filterVon);
         where = this.getWhereString(where, filterBis);
-        where = this.getWhereString(where, filterStatus);
         
         query += where + ";";
         return this.search( query );
@@ -135,63 +143,37 @@ public class QueryAufenthalt extends Query
     }
     
     /**
-     * Erstellt einen neuen Filter für die KundenNr.
+     * Erstellt einen neuen Filter für die Zimmernummer.
      * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
      * mit einem OR kombiniert.
      *
-     * @param kundenNr  Die gewünschte Kundennummer.
+     * @param zimmerNr  Die gewünschte Zimmernummer.
      */
-    public void addFilterKundenNr( Integer kundenNr )
+    public void addFilterZimmerNr( Integer zimmerNr )
     {
-        String[] newFilter = new String[ filterKundenNr.length + 1 ];
-        for( int i = 0; i < filterKundenNr.length; i++ ) {
-            newFilter[i] = filterKundenNr[i];
+        String[] newFilter = new String[ filterZimmerNr.length + 1 ];
+        for( int i = 0; i < filterZimmerNr.length; i++ ) {
+            newFilter[i] = filterZimmerNr[i];
         }
         newFilter[ newFilter.length - 1 ]
-                = "KundenNr = " + Database.getSqlString(kundenNr);
-        filterKundenNr = newFilter;
+                = "ZimmerNr = " + Database.getSqlString(zimmerNr);
+        filterZimmerNr = newFilter;
     }
     
     /**
-     * Löscht alle Filter, die nach Kundennummern filtern.
+     * Löscht alle Filter, die nach Zimmernummern filtern.
      */
-    public void unsetFilterKundenNr()
+    public void unsetFilterZimmerNr()
     {
-        filterKundenNr = new String[0];
+        filterZimmerNr = new String[0];
     }
     
     /**
-     * Erstellt einen neuen Filter für die MitarbeiterNr.
+     * Erstellt einen neuen Filter für ein Anfangsdatum der Zimmerbelegung.
      * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
      * mit einem OR kombiniert.
      *
-     * @param mitarbeiterNr  Die gewünschte Mitarbeiternummer.
-     */
-    public void addFilterMitarbeiterNr( Integer mitarbeiterNr )
-    {
-        String[] newFilter = new String[ filterMitarbeiterNr.length + 1 ];
-        for( int i = 0; i < filterMitarbeiterNr.length; i++ ) {
-            newFilter[i] = filterMitarbeiterNr[i];
-        }
-        newFilter[ newFilter.length - 1 ]
-                = "MitarbeiterNr = " + Database.getSqlString(mitarbeiterNr);
-        filterMitarbeiterNr = newFilter;
-    }
-    
-    /**
-     * Löscht alle Filter, die nach Mitarbeiternummern filtern.
-     */
-    public void unsetFilterMitarbeiterNr()
-    {
-        filterMitarbeiterNr = new String[0];
-    }
-    
-    /**
-     * Erstellt einen neuen Filter für ein Anfangsdatum des Aufenthalts.
-     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
-     * mit einem OR kombiniert.
-     *
-     * @param von  Das Anfangsdatum des Aufenthalts,
+     * @param von  Das Anfangsdatum der Zimmerbelegung,
      *             nach dem gefiltert werden soll.
      */
     public void addFilterVon( Date von )
@@ -206,7 +188,8 @@ public class QueryAufenthalt extends Query
     }
     
     /**
-     * Löscht alle Filter, die nach einem Anfangsdatum des Aufenthalts filtern.
+     * Löscht alle Filter, die nach einem Anfangsdatum
+     * der Zimmerbelegung filtern.
      */
     public void unsetFilterVon()
     {
@@ -214,11 +197,11 @@ public class QueryAufenthalt extends Query
     }
     
     /**
-     * Erstellt einen neuen Filter für ein Enddatum des Aufenthalts.
+     * Erstellt einen neuen Filter für ein Enddatum der Zimmerbelegung.
      * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
      * mit einem OR kombiniert.
      *
-     * @param bis  Das Enddatum des Aufenthalts,
+     * @param bis  Das Enddatum der Zimmerbelegung,
      *             nach dem gefiltert werden soll.
      */
     public void addFilterBis( Date bis )
@@ -233,36 +216,10 @@ public class QueryAufenthalt extends Query
     }
     
     /**
-     * Löscht alle Filter, die nach einem Enddatum des Aufenthalts filtern.
+     * Löscht alle Filter, die nach einem Enddatum der Zimmerbelegung filtern.
      */
     public void unsetFilterBis()
     {
         filterVon = new String[0];
-    }
-    
-    /**
-     * Erstellt einen neuen Filter für einen bestimmten Aufenthalts-Status.
-     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
-     * mit einem OR kombiniert.
-     *
-     * @param status  Der Status, nach dem gefiltert werden soll.
-     */
-    public void addFilterStatus( String status )
-    {
-        String[] newFilter = new String[ filterStatus.length + 1 ];
-        for( int i = 0; i < filterStatus.length; i++ ) {
-            newFilter[i] = filterStatus[i];
-        }
-        newFilter[ newFilter.length - 1 ]
-                = "Status = " + Database.getSqlString(status);
-        filterStatus = newFilter;
-    }
-    
-    /**
-     * Löscht alle Filter, die nach einem Login filtern.
-     */
-    public void unsetFilterStatus()
-    {
-        filterStatus = new String[0];
     }
 }

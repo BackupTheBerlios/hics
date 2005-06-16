@@ -19,7 +19,7 @@ public class QueryNotiz extends Query
     String[] filterBezeichnung;
     
     /**
-     * Erstellt eine neue Instanz von QueryKunde.
+     * Erstellt eine neue Instanz von QueryNotiz.
      *
      * @param database  Das Datenbank-Objekt, das zum Abfragen der Werte
      *                  verwendet werden soll.
