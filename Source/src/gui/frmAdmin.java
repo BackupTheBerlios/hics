@@ -26,10 +26,22 @@ public class frmAdmin extends javax.swing.JFrame {
         initComponents();
         setSize(getToolkit().getScreenSize());
         show();
-        
-        
+       
+        if( dbConnect() == false ) {
+            helpMeldungen.showErrorMessage(
+              "Die Verbindung zur Datenbank konnte nicht hergestellt werden.");
+            System.exit(1);
+        }
     }
-    
+        
+     private boolean dbConnect()
+    {
+        db = new Database( DatabaseAccess.url,
+                           DatabaseAccess.user, DatabaseAccess.passwort );
+        return db.connect();
+    }
+       
+     
      private boolean dbDisconnect()
     {
         if( db != null )
@@ -374,14 +386,7 @@ public class frmAdmin extends javax.swing.JFrame {
 
     private void cmdSuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSuchenActionPerformed
         
-        String ZNr = txtZimNr.getText();
-        
-        String ZPreis = txtPreis.getText();
-//        
-//        ZimmerHelper helper = new ZimmerHelper(db);
-//        int preis = helper.getPreis(ZNr);
-//                
-//        txtPreis.setText(Integer.toString(preis));
+
     }//GEN-LAST:event_cmdSuchenActionPerformed
 
     private void cmdNeuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNeuActionPerformed
