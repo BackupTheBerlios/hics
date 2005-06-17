@@ -31,17 +31,15 @@ public class frmZimmerplan extends javax.swing.JFrame {
     private void initComponents() {//GEN-BEGIN:initComponents
         java.awt.GridBagConstraints gridBagConstraints;
 
-        tblZimmer = new javax.swing.JTable();
         pnlTop = new javax.swing.JPanel();
         btnNeu = new javax.swing.JButton();
         btnBearbeiten = new javax.swing.JButton();
         btnAufgaben = new javax.swing.JButton();
         btnCheckIn = new javax.swing.JButton();
         btnCheckOut = new javax.swing.JButton();
+        btnOk = new javax.swing.JButton();
         pnlBottom = new javax.swing.JPanel();
         btnLogout = new javax.swing.JButton();
-        pnlText = new javax.swing.JPanel();
-        lblZimmernr = new javax.swing.JLabel();
         pnlAnzeige = new javax.swing.JPanel();
         pnlAnzeigeKunde = new javax.swing.JPanel();
         lblKundennr = new javax.swing.JLabel();
@@ -71,51 +69,20 @@ public class frmZimmerplan extends javax.swing.JFrame {
         pnlAufgaben = new javax.swing.JPanel();
         lblAufgaben = new javax.swing.JLabel();
         txtAufgaben = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        tblZimmer = new javax.swing.JTable();
+        lblZimmernr = new javax.swing.JLabel();
 
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        getContentPane().setLayout(null);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
         getAccessibleContext().setAccessibleName("Zimmerplan");
-        tblZimmer.setBorder(new javax.swing.border.EtchedBorder());
-        tblZimmer.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"101", ""},
-                {"102", ""},
-                {"103", ""},
-                {"104", ""},
-                {"105", ""},
-                {"201", ""},
-                {"202", ""},
-                {"203", ""},
-                {"204", null},
-                {null, null}
-            },
-            new String [] {
-                "Zimmer", ""
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblZimmer.setGridColor(new java.awt.Color(255, 255, 255));
-        tblZimmer.setMinimumSize(new java.awt.Dimension(500, 300));
-        tblZimmer.setPreferredSize(new java.awt.Dimension(500, 300));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(tblZimmer, gridBagConstraints);
-
-        pnlTop.setMinimumSize(new java.awt.Dimension(500, 41));
-        pnlTop.setPreferredSize(new java.awt.Dimension(500, 70));
+        pnlTop.setBorder(new javax.swing.border.EtchedBorder());
+        pnlTop.setMinimumSize(new java.awt.Dimension(340, 41));
+        pnlTop.setPreferredSize(new java.awt.Dimension(300, 70));
         btnNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/neu.gif")));
-        btnNeu.setToolTipText("\u00f6ffnet die Zimmer Details");
+        btnNeu.setToolTipText("Bet\u00e4tigen Sie diesen Button um ein neues Objekt zu erstellen!");
         btnNeu.setMaximumSize(new java.awt.Dimension(35, 30));
         btnNeu.setMinimumSize(new java.awt.Dimension(35, 30));
         btnNeu.setPreferredSize(new java.awt.Dimension(35, 30));
@@ -128,12 +95,14 @@ public class frmZimmerplan extends javax.swing.JFrame {
         pnlTop.add(btnNeu);
 
         btnBearbeiten.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/bearbeiten.gif")));
+        btnBearbeiten.setToolTipText("Bet\u00e4tigen Sie diesen Button um ein  Objekt zu bearbeiten!");
         btnBearbeiten.setMaximumSize(new java.awt.Dimension(35, 30));
         btnBearbeiten.setMinimumSize(new java.awt.Dimension(35, 30));
         btnBearbeiten.setPreferredSize(new java.awt.Dimension(35, 30));
         pnlTop.add(btnBearbeiten);
 
-        btnAufgaben.setToolTipText("\u00f6ffnet die Zimmer Details");
+        btnAufgaben.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/aufgaben.gif")));
+        btnAufgaben.setToolTipText("Bet\u00e4tigen Sie diesen Button um Aufgaben zu erstellen!");
         btnAufgaben.setMaximumSize(new java.awt.Dimension(35, 30));
         btnAufgaben.setMinimumSize(new java.awt.Dimension(35, 30));
         btnAufgaben.setPreferredSize(new java.awt.Dimension(35, 30));
@@ -145,23 +114,33 @@ public class frmZimmerplan extends javax.swing.JFrame {
 
         pnlTop.add(btnAufgaben);
 
-        btnCheckIn.setToolTipText("\u00f6ffnet die Zimmer Details");
+        btnCheckIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/login.gif")));
+        btnCheckIn.setToolTipText("Bet\u00e4tigen Sie diesen Button um einzuchecken!");
         btnCheckIn.setMaximumSize(new java.awt.Dimension(35, 30));
         btnCheckIn.setMinimumSize(new java.awt.Dimension(35, 30));
         btnCheckIn.setPreferredSize(new java.awt.Dimension(35, 30));
         pnlTop.add(btnCheckIn);
 
-        btnCheckOut.setToolTipText("\u00f6ffnet die Zimmer Details");
+        btnCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
+        btnCheckOut.setToolTipText("Bet\u00e4tigen Sie diesen Button um eauszuchecken!");
         btnCheckOut.setMaximumSize(new java.awt.Dimension(35, 30));
         btnCheckOut.setMinimumSize(new java.awt.Dimension(35, 30));
         btnCheckOut.setPreferredSize(new java.awt.Dimension(35, 30));
         pnlTop.add(btnCheckOut);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        getContentPane().add(pnlTop, gridBagConstraints);
+        btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/ok.gif")));
+        btnOk.setToolTipText("Bet\u00e4tigen Sie diesen Button um zu best\u00e4tigen!");
+        btnOk.setMaximumSize(new java.awt.Dimension(35, 30));
+        btnOk.setMinimumSize(new java.awt.Dimension(35, 30));
+        btnOk.setPreferredSize(new java.awt.Dimension(35, 30));
+        pnlTop.add(btnOk);
 
+        getContentPane().add(pnlTop);
+        pnlTop.setBounds(10, 10, 490, 50);
+
+        pnlBottom.setBorder(new javax.swing.border.EtchedBorder());
+        pnlBottom.setMinimumSize(new java.awt.Dimension(735, 65));
+        pnlBottom.setPreferredSize(new java.awt.Dimension(249, 244));
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
         btnLogout.setMaximumSize(new java.awt.Dimension(22, 24));
         btnLogout.setMinimumSize(new java.awt.Dimension(22, 24));
@@ -174,30 +153,15 @@ public class frmZimmerplan extends javax.swing.JFrame {
 
         pnlBottom.add(btnLogout);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        getContentPane().add(pnlBottom, gridBagConstraints);
-
-        pnlText.setLayout(new java.awt.GridLayout(1, 4));
-
-        pnlText.setMinimumSize(new java.awt.Dimension(500, 25));
-        pnlText.setPreferredSize(new java.awt.Dimension(500, 25));
-        lblZimmernr.setText("Zimmer");
-        pnlText.add(lblZimmernr);
-        lblZimmernr.getAccessibleContext().setAccessibleName("");
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        getContentPane().add(pnlText, gridBagConstraints);
+        getContentPane().add(pnlBottom);
+        pnlBottom.setBounds(0, 431, 740, 65);
 
         pnlAnzeige.setLayout(new java.awt.GridBagLayout());
 
+        pnlAnzeige.setPreferredSize(new java.awt.Dimension(302, 394));
         pnlAnzeigeKunde.setLayout(new java.awt.GridLayout(7, 2));
 
+        pnlAnzeigeKunde.setBorder(new javax.swing.border.TitledBorder("Kundendaten"));
         lblKundennr.setText("Kundennr");
         lblKundennr.setMaximumSize(new java.awt.Dimension(95, 25));
         lblKundennr.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -205,10 +169,18 @@ public class frmZimmerplan extends javax.swing.JFrame {
         lblKundennr.setRequestFocusEnabled(false);
         pnlAnzeigeKunde.add(lblKundennr);
 
+        txtKundennr.setText("0");
+        txtKundennr.setToolTipText("Geben Sie hier die Kundennumer ein!");
         txtKundennr.setMaximumSize(new java.awt.Dimension(95, 25));
         txtKundennr.setMinimumSize(new java.awt.Dimension(95, 25));
         txtKundennr.setPreferredSize(new java.awt.Dimension(95, 25));
         txtKundennr.setRequestFocusEnabled(false);
+        txtKundennr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKundennrActionPerformed(evt);
+            }
+        });
+
         pnlAnzeigeKunde.add(txtKundennr);
 
         lblNachname.setText("Nachname");
@@ -218,6 +190,8 @@ public class frmZimmerplan extends javax.swing.JFrame {
         lblNachname.setRequestFocusEnabled(false);
         pnlAnzeigeKunde.add(lblNachname);
 
+        txtZimmer1.setText("Nachname");
+        txtZimmer1.setToolTipText("Geben Sie hier den Nachnamen/Familiennamen des Kunden ein!");
         txtZimmer1.setMaximumSize(new java.awt.Dimension(95, 25));
         txtZimmer1.setMinimumSize(new java.awt.Dimension(95, 25));
         txtZimmer1.setPreferredSize(new java.awt.Dimension(95, 25));
@@ -231,6 +205,8 @@ public class frmZimmerplan extends javax.swing.JFrame {
         lblKundenVN.setRequestFocusEnabled(false);
         pnlAnzeigeKunde.add(lblKundenVN);
 
+        txtKundenVN.setText("Vorname");
+        txtKundenVN.setToolTipText("Geben Sie hier den Vornamen des Kunden ein!");
         txtKundenVN.setMaximumSize(new java.awt.Dimension(95, 25));
         txtKundenVN.setMinimumSize(new java.awt.Dimension(95, 25));
         txtKundenVN.setPreferredSize(new java.awt.Dimension(95, 25));
@@ -244,6 +220,8 @@ public class frmZimmerplan extends javax.swing.JFrame {
         lblLand.setRequestFocusEnabled(false);
         pnlAnzeigeKunde.add(lblLand);
 
+        txtLand.setText("Land");
+        txtLand.setToolTipText("Geben Sie hier das Land ein!");
         txtLand.setMaximumSize(new java.awt.Dimension(95, 25));
         txtLand.setMinimumSize(new java.awt.Dimension(95, 25));
         txtLand.setPreferredSize(new java.awt.Dimension(95, 25));
@@ -257,6 +235,8 @@ public class frmZimmerplan extends javax.swing.JFrame {
         lblStrasse.setRequestFocusEnabled(false);
         pnlAnzeigeKunde.add(lblStrasse);
 
+        txtStrasse.setText("Strasse");
+        txtStrasse.setToolTipText("Geben Sie hier die Strasse, in der der Kunde wohnt, ein!");
         txtStrasse.setMaximumSize(new java.awt.Dimension(95, 25));
         txtStrasse.setMinimumSize(new java.awt.Dimension(95, 25));
         txtStrasse.setPreferredSize(new java.awt.Dimension(95, 25));
@@ -270,6 +250,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
         lblHausStiegeTuer.setRequestFocusEnabled(false);
         pnlAnzeigeKunde.add(lblHausStiegeTuer);
 
+        txtHaus.setToolTipText("Geben Sie hier Hausnummer, Stiege und T\u00fcr des Kunden ein!");
         txtHaus.setMaximumSize(new java.awt.Dimension(95, 25));
         txtHaus.setMinimumSize(new java.awt.Dimension(95, 25));
         txtHaus.setPreferredSize(new java.awt.Dimension(95, 25));
@@ -283,18 +264,18 @@ public class frmZimmerplan extends javax.swing.JFrame {
         lblPlz.setRequestFocusEnabled(false);
         pnlAnzeigeKunde.add(lblPlz);
 
+        txPlz.setToolTipText("Geben Sie hier die Postleitzahl ein!");
         txPlz.setMaximumSize(new java.awt.Dimension(95, 25));
         txPlz.setMinimumSize(new java.awt.Dimension(95, 25));
         txPlz.setPreferredSize(new java.awt.Dimension(95, 25));
         txPlz.setRequestFocusEnabled(false);
         pnlAnzeigeKunde.add(txPlz);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridheight = 5;
-        pnlAnzeige.add(pnlAnzeigeKunde, gridBagConstraints);
+        pnlAnzeige.add(pnlAnzeigeKunde, new java.awt.GridBagConstraints());
 
         pnlAnzeigeZimmer.setLayout(new java.awt.GridLayout(3, 2));
 
+        pnlAnzeigeZimmer.setBorder(new javax.swing.border.TitledBorder("Zimmer"));
         lblBettenanz.setText("Betten");
         lblBettenanz.setMaximumSize(new java.awt.Dimension(95, 25));
         lblBettenanz.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -342,6 +323,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
 
         pnlNotiz.setLayout(new java.awt.GridLayout(1, 0));
 
+        pnlNotiz.setBorder(new javax.swing.border.EtchedBorder());
         lblNotiz.setText("Notiz");
         lblNotiz.setMaximumSize(new java.awt.Dimension(95, 25));
         lblNotiz.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -363,6 +345,7 @@ public class frmZimmerplan extends javax.swing.JFrame {
 
         pnlAufgaben.setLayout(new java.awt.GridLayout(1, 0));
 
+        pnlAufgaben.setBorder(new javax.swing.border.EtchedBorder());
         lblAufgaben.setText("Aufgaben");
         lblAufgaben.setMaximumSize(new java.awt.Dimension(95, 25));
         lblAufgaben.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -382,16 +365,63 @@ public class frmZimmerplan extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         pnlAnzeige.add(pnlAufgaben, gridBagConstraints);
 
+        getContentPane().add(pnlAnzeige);
+        pnlAnzeige.setBounds(510, 10, 202, 410);
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(500, 450));
+        jPanel1.setPreferredSize(new java.awt.Dimension(300, 400));
+        tblZimmer.setBorder(new javax.swing.border.EtchedBorder());
+        tblZimmer.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"101", ""},
+                {"102", ""},
+                {"103", ""},
+                {"104", ""},
+                {"105", ""},
+                {"201", ""},
+                {"202", ""},
+                {"203", ""},
+                {"204", null},
+                {null, null}
+            },
+            new String [] {
+                "Zimmer", ""
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblZimmer.setGridColor(new java.awt.Color(255, 255, 255));
+        tblZimmer.setMaximumSize(new java.awt.Dimension(450, 600));
+        tblZimmer.setMinimumSize(new java.awt.Dimension(450, 300));
+        tblZimmer.setPreferredSize(new java.awt.Dimension(350, 500));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
-        getContentPane().add(pnlAnzeige, gridBagConstraints);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel1.add(tblZimmer, gridBagConstraints);
+
+        lblZimmernr.setText("Zimmer");
+        lblZimmernr.setMinimumSize(new java.awt.Dimension(450, 16));
+        jPanel1.add(lblZimmernr, new java.awt.GridBagConstraints());
+        lblZimmernr.getAccessibleContext().setAccessibleName("");
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(10, 80, 490, 330);
 
         pack();
     }//GEN-END:initComponents
+
+    private void txtKundennrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKundennrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKundennrActionPerformed
 
     private void btnAufgabenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAufgabenActionPerformed
         this.hide();
@@ -426,6 +456,8 @@ public class frmZimmerplan extends javax.swing.JFrame {
     private javax.swing.JButton btnCheckOut;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnNeu;
+    private javax.swing.JButton btnOk;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAufgaben;
     private javax.swing.JLabel lblAussattung;
     private javax.swing.JLabel lblBettenanz;
@@ -445,7 +477,6 @@ public class frmZimmerplan extends javax.swing.JFrame {
     private javax.swing.JPanel pnlAufgaben;
     private javax.swing.JPanel pnlBottom;
     private javax.swing.JPanel pnlNotiz;
-    private javax.swing.JPanel pnlText;
     private javax.swing.JPanel pnlTop;
     private javax.swing.JTable tblZimmer;
     private javax.swing.JTextField txPlz;
