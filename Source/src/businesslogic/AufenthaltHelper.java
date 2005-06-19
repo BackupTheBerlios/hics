@@ -65,7 +65,7 @@ public class AufenthaltHelper {
         }
         if(nu != false){
             query.search();
-            Aufenthalt[] aufent = query.getAufenthaltEntities();
+            Aufenthalt[] aufent = query.getAufenthaltEntites();
             return aufent;
         }
         else{
