@@ -8,6 +8,9 @@ package gui;
 
 import database.*;
 import businesslogic.*;
+import java.awt.event.*;
+import javax.swing.*;
+
 
 /**
  *
@@ -31,11 +34,15 @@ public class frmStart extends javax.swing.JFrame
         setLocation(((getToolkit().getScreenSize().width)/2)-(WIDTH/2),100);
         show();
         
+        
+        
         if( dbConnect() == false ) {
             helpMeldungen.showErrorMessage(
               "Die Verbindung zur Datenbank konnte nicht hergestellt werden.");
             System.exit(1);
         }
+        
+        
     }
     
     private boolean dbConnect()
@@ -114,14 +121,9 @@ public class frmStart extends javax.swing.JFrame
 
         txtUsername.setToolTipText("Tragen Sie hier Ihren Benutzenamen ein! Achten Sie auf Gro\u00df- und Kleinschreibung!");
         txtUsername.setMinimumSize(new java.awt.Dimension(11, 22));
+        txtUsername.setNextFocusableComponent(pwdKennwort);
         txtUsername.setPreferredSize(new java.awt.Dimension(50, 22));
         txtUsername.setSelectedTextColor(new java.awt.Color(0, 0, 0));
-        txtUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsernameActionPerformed(evt);
-            }
-        });
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -141,6 +143,7 @@ public class frmStart extends javax.swing.JFrame
         jPanel1.add(lblKennwort, gridBagConstraints);
 
         pwdKennwort.setToolTipText("Geben Sie hier Ihr Kennwort ein!  Anstelle des Kennwortes erscheinen \"*\"-Zeichen.  Achten Sie auf Gro\u00df- und Kleinschreibung!");
+        pwdKennwort.setNextFocusableComponent(cmdLogin);
         pwdKennwort.setPreferredSize(new java.awt.Dimension(50, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -154,10 +157,16 @@ public class frmStart extends javax.swing.JFrame
         cmdLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cmdLogin.setMaximumSize(new java.awt.Dimension(80, 22));
         cmdLogin.setMinimumSize(new java.awt.Dimension(80, 22));
+        cmdLogin.setNextFocusableComponent(cmdBeenden);
         cmdLogin.setPreferredSize(new java.awt.Dimension(80, 22));
         cmdLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLoginActionPerformed(evt);
+            }
+        });
+        cmdLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmdLoginKeyPressed(evt);
             }
         });
 
@@ -173,6 +182,11 @@ public class frmStart extends javax.swing.JFrame
                 quit(evt);
             }
         });
+        cmdBeenden.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmdBeendenKeyPressed(evt);
+            }
+        });
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -184,20 +198,29 @@ public class frmStart extends javax.swing.JFrame
         pack();
     }//GEN-END:initComponents
 
+    private void cmdBeendenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmdBeendenKeyPressed
+        cmdBeenden.doClick();
+    }//GEN-LAST:event_cmdBeendenKeyPressed
+
+    private void cmdLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmdLoginKeyPressed
+        cmdLogin.doClick();
+    }//GEN-LAST:event_cmdLoginKeyPressed
+
+    
     private void quit(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quit
         dbDisconnect();
         System.exit(0);
     }//GEN-LAST:event_quit
 
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
+        
+       
+        
         if( db == null ) {
             helpMeldungen.showErrorMessage(
               "Ohne Datenbankverbindung kann kein Login erfolgen.");
@@ -223,23 +246,8 @@ public class frmStart extends javax.swing.JFrame
         else {
           helpMeldungen.showErrorMessage("Falscher Benutzername oder falsches Passwort!");
         }
-        /*
-        if (username.equals("Raumpflege")) {
-          this.dispose();
-          new frmAufgabenAnzeigen().setVisible(true);
-        }
-        else if (username.equals("Admin")) {
-          this.dispose();
-          new frmAdmin().setVisible(true);
-        }
-        else if (username.equals("Rezeption")) {
-           this.dispose();
-           new frmZimmerplan().setVisible(true);
-        }
-        else {
-          helpMeldungen.showErrorMessage("Es wurde kein gültiger Benutzername eingegebe!");
-        }
-        */
+        
+        
     }//GEN-LAST:event_cmdLoginActionPerformed
     
     /**
