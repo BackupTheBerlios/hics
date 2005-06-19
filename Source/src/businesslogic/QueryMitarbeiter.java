@@ -15,6 +15,7 @@ import database.*;
 public class QueryMitarbeiter extends Query
 {
     String[] filterMitarbeiterNr;
+    String[] filterBerechtigungsNr;
     String[] filterNname;
     String[] filterVname;
     String[] filterLogin;
@@ -30,6 +31,7 @@ public class QueryMitarbeiter extends Query
     {
         super(database);
         filterMitarbeiterNr = new String[0];
+        filterBerechtigungsNr = new String[0];
         filterNname = new String[0];
         filterVname = new String[0];
         filterLogin = new String[0];
@@ -55,8 +57,9 @@ public class QueryMitarbeiter extends Query
         String query = "SELECT MitarbeiterNr, BerechtigungsNr FROM Mitarbeiter";
         
         String where = this.getWhereString("", filterMitarbeiterNr);
-//        where = this.getWhereString(where, filterNname);
-//        where = this.getWhereString(where, filterVname);
+        where = this.getWhereString(where, filterBerechtigungsNr);
+        where = this.getWhereString(where, filterNname);
+        where = this.getWhereString(where, filterVname);
         where = this.getWhereString(where, filterLogin);
         where = this.getWhereString(where, filterPasswort);
         
@@ -129,6 +132,33 @@ public class QueryMitarbeiter extends Query
     {
         filterMitarbeiterNr = new String[0];
     }
+    
+    /**
+     * Erstellt einen neuen Filter für die BerechtigungsNr.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param berechtigungsNr  Die gewünschte BerechtigungsNr.
+     */
+    public void addFilterBerechtigungsNr( Integer berechtigungsNr )
+    {
+        String[] newFilter = new String[ filterBerechtigungsNr.length + 1 ];
+        for( int i = 0; i < filterBerechtigungsNr.length; i++ ) {
+            newFilter[i] = filterBerechtigungsNr[i];
+        }
+        newFilter[ newFilter.length - 1 ]
+                = "BerechtigungsNr = " + Database.getSqlString(berechtigungsNr);
+        filterBerechtigungsNr = newFilter;
+    }
+    
+    /**
+     * Löscht alle Filter, die nach Berechtigungsnr filtern.
+     */
+    public void unsetFilterBerechtigungsNr()
+    {
+        filterBerechtigungsNr = new String[0];
+    }
+    
     
     /**
      * Erstellt einen neuen Filter für ein Login.
