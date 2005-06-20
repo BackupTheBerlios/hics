@@ -108,16 +108,12 @@ public class MitarbeiterHelper
             System.out.println("DEBUG: Mitarbeiter besteht bereits");
             return false;
         }
-        if(mitarbeiterNr != null && berechtigungsNr != null && vorname != null &&
-                nachname != null && login != null && passwort != null){
-            
-            String ins = "INSERT INTO mitarbeiter VALUES(" + mitarbeiterNr + ", " + 
+        String ins = "INSERT INTO mitarbeiter VALUES(" + mitarbeiterNr + ", " + 
                 berechtigungsNr + ",'" + nachname + "','" + vorname + "', '" + login + "', '" + 
                 passwort + "');";
             
-            if(db.change(ins)){
-                return true;
-            }
+        if(db.change(ins)){
+            return true;
         }
         return false;   
     }

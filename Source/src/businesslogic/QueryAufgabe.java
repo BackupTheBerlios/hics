@@ -41,7 +41,7 @@ public class QueryAufgabe extends Query
      * Ermittelt alle Aufgaben-Entities,
      * die mit der SQL-Abfrage gefunden wurden.
      */
-    public Aufgabe[] getAufgabenEntites()
+    public Aufgabe[] getAufgabenEntities()
     {
         Entity[] entities = this.getEntities( new Aufgabe() );
         Aufgabe[] aufgaben = new Aufgabe[entities.length];
@@ -51,10 +51,11 @@ public class QueryAufgabe extends Query
         return aufgaben;
     }
     
-    /**
+    /** ?????????????????????????????????????????????????
      * Ermittelt alle Zimmer-Entities,
      * die mit der SQL-Abfrage gefunden wurden.
      */
+    /*
     public Zimmer[] getZimmerEntites()
     {
         Entity[] entities = this.getEntities( new Zimmer() );
@@ -64,10 +65,10 @@ public class QueryAufgabe extends Query
         }
         return zimmern;
     }
-    
+    */
     public boolean search()
     {
-        String query = "SELECT AufgabenNr, ZimmerNr FROM Aufgabe";
+        String query = "SELECT AufgabenNr FROM Aufgabe";
         
         String where = this.getWhereString("", filterAufgabenNr);
         where = this.getWhereString(where, filterZimmerNr);
@@ -214,7 +215,7 @@ public class QueryAufgabe extends Query
             newFilter[i] = filterDeadline[i];
         }
         newFilter[ newFilter.length - 1 ]
-                = "bis = " + Database.getSqlString(deadline);
+                = "deadline = " + Database.getSqlString(deadline);
         filterDeadline = newFilter;
     }
     

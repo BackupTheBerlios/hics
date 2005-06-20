@@ -80,10 +80,14 @@ public abstract class Query
         
         result = db.query( query );
         
-        if( result == null )
+        if( result == null ){
+            
             return false;
-        else
+        }
+        else{
+            
             return true;
+        }
     }
     
     /**
@@ -112,16 +116,18 @@ public abstract class Query
      */
     protected Entity[] getEntities( Entity template )
     {
-        if( result == null || template == null )
+        if( result == null || template == null ){
             return null;
+        }
         
         Entity[] entities = new Entity[ getRowCount() ];
-        if( entities.length == 0 )
+        if( entities.length == 0 ){
             return entities; // keine Treffer, leere Menge zurückgeben
-        
+        }
         int[] columns = getPrimaryKeyColumns( template );
-        if( columns == null )
+        if( columns == null ){
             return null;
+        }
         
         try {
             // alle Zeilen durchgehen und von jeder die Entity mitnehmen
@@ -241,6 +247,7 @@ public abstract class Query
     private int[] getPrimaryKeyColumns( Entity template )
     {
         String[] primaryKeyNames = template.getPrimaryKeyNames();
+        
         int[] columns = new int[ primaryKeyNames.length ];
         
         try {

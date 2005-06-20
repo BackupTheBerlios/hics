@@ -15,16 +15,6 @@ import java.sql.*;
  * @author Zeynep
  */
 public class KundenHelper {
-    
-    public static final Integer KUNDENNR = null;
-    public static final String NACHNAME = "kein";
-    public static final String VORNAME = "kein";
-    public static final String LAND = "kein";
-    public static final Integer PLZ = null;
-    public static final String WOHNORT = "kein";
-    public static final String STRASSE = "kein";
-    public static final String TELNR = "kein";
-    
   
     private Database db;
     
@@ -117,17 +107,14 @@ public class KundenHelper {
             System.out.println("DEBUG: Kunde besteht bereits");
             return false;
         }
-        if(kundenNr != null && nachname != null && vorname != null && 
-           land != null && plz != null && wohnort != null && strasse != null && telNr != null){
-            
-          String ins = "INSERT INTO kunde VALUES(" + kundenNr + ", " + 
+       String ins = "INSERT INTO kunde VALUES(" + kundenNr + ", " + 
                 nachname + ", " + vorname + ", " + land + ", " + plz + ", " + 
                 wohnort + ", " + strasse + ", " + telNr + ");";
             
-            if(db.change(ins)){
-                return true;
-            }
-        }
+       if(db.change(ins)){
+        return true;
+       }
+
         return false;   
     }
     /**

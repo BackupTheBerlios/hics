@@ -20,7 +20,7 @@ public class Aufgabe extends Entity
     public Aufgabe()
     {
         entityName = "Aufgabe";
-        primaryKeyNames = new String[] {"AufgabeNr"};
+        primaryKeyNames = new String[] {"AufgabenNr"};
         propertyNames = new String[] {"ZimmerNr", "Bezeichnung","Ab","Deadline","Erledigt"};
         primaryKeys = new Object[primaryKeyNames.length];
         properties = new Object[propertyNames.length];
