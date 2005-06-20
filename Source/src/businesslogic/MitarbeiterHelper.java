@@ -133,7 +133,7 @@ public class MitarbeiterHelper
             mit[i] = mitHelp.getMitarbeiter(mitarbeiterNr[i], null, null, null,
                     null, null);
             
-            db.change("DELETE FROM mitarbieter WHERE aufenthaltsnr = " + mitarbeiterNr[i] + ";");
+            db.change("DELETE FROM mitarbeiter WHERE mitarbeiternr = " + mitarbeiterNr[i] + ";");
         }
     }
     /**

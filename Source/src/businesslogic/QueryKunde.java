@@ -17,7 +17,11 @@ public class QueryKunde extends Query
     String[] filterKundenNr;
     String[] filterNachname;
     String[] filterVorname;
-    
+    String[] filterLand;
+    String[] filterPlz;
+    String[] filterWohnort;
+    String[] filterStrasse;
+    String[] filterTelNr;
     /**
      * Erstellt eine neue Instanz von QueryKunde.
      *
@@ -30,13 +34,18 @@ public class QueryKunde extends Query
         filterKundenNr = new String[0];
         filterNachname = new String[0];
         filterVorname = new String[0];
+        filterLand = new String[0];
+        filterPlz = new String[0];
+        filterWohnort = new String[0];
+        filterStrasse = new String[0];
+        filterTelNr = new String[0];
     }
     
     /**
      * Ermittelt alle Kunden-Entities,
      * die mit der SQL-Abfrage gefunden wurden.
      */
-    public Kunde[] getKundenEntites()
+    public Kunde[] getKundenEntities()
     {
         Entity[] entities = this.getEntities( new Kunde() );
         Kunde[] kunden = new Kunde[entities.length];
@@ -53,7 +62,11 @@ public class QueryKunde extends Query
         String where = this.getWhereString("", filterKundenNr);
         where = this.getWhereString(where, filterNachname);
         where = this.getWhereString(where, filterVorname);
-        
+        where = this.getWhereString(where, filterLand);
+        where = this.getWhereString(where, filterPlz);
+        where = this.getWhereString(where, filterWohnort);
+        where = this.getWhereString(where, filterStrasse);
+        where = this.getWhereString(where, filterTelNr);
         query += where + ";";
         return this.search( query );
     }
@@ -174,5 +187,135 @@ public class QueryKunde extends Query
     public void unsetFilterVorname()
     {
         filterVorname = new String[0];
+    }
+    
+    /**
+     * Erstellt einen neuen Filter für ein Land.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param land  Der Land, nach dem gefiltert werden soll.
+     */
+    public void addFilterLand( String land )
+    {
+        String[] newFilter = new String[ filterLand.length + 1 ];
+        for( int i = 0; i < filterLand.length; i++ ) {
+            newFilter[i] = filterLand[i];
+        }
+        newFilter[ newFilter.length - 1 ]
+                = "Land = " + Database.getSqlString(land);
+        filterLand = newFilter;
+    }
+    
+    /**
+     * Löscht alle Filter, die nach einem Land filtern.
+     */
+    public void unsetFilterLand()
+    {
+        filterLand = new String[0];
+    }
+    
+    /**
+     * Erstellt einen neuen Filter für die plz.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param plz  Die gewünschte Kundennummer.
+     */
+    public void addFilterPlz( Integer plz)
+    {
+        String[] newFilter = new String[ filterPlz.length + 1 ];
+        for( int i = 0; i < filterPlz.length; i++ ) {
+            newFilter[i] = filterPlz[i];
+        }
+        newFilter[ newFilter.length - 1 ]
+                = "Plz = " + Database.getSqlString(plz);
+        filterPlz = newFilter;
+    }
+    
+    /**
+     * Löscht alle Filter, die nach PLZ filtern.
+     */
+    public void unsetFilterPlz()
+    {
+        filterPlz = new String[0];
+    }
+    
+     /**
+     * Erstellt einen neuen Filter für ein Wohnort.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param wohnort Der Wohnort, nach dem gefiltert werden soll.
+     */
+    public void addFilterWohnort( String wohnort )
+    {
+        String[] newFilter = new String[ filterWohnort.length + 1 ];
+        for( int i = 0; i < filterWohnort.length; i++ ) {
+            newFilter[i] = filterWohnort[i];
+        }
+        newFilter[ newFilter.length - 1 ]
+                = "Wohnort = " + Database.getSqlString(wohnort);
+        filterWohnort = newFilter;
+    }
+    
+    /**
+     * Löscht alle Filter, die nach einem Wohnort filtern.
+     */
+    public void unsetFilterWohnort()
+    {
+        filterWohnort = new String[0];
+    }
+    
+     /**
+     * Erstellt einen neuen Filter für eine Strasse.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param strasse Die Strasse, nach dem gefiltert werden soll.
+     */
+    public void addFilterStrasse( String strasse)
+    {
+        String[] newFilter = new String[ filterStrasse.length + 1 ];
+        for( int i = 0; i < filterStrasse.length; i++ ) {
+            newFilter[i] = filterStrasse[i];
+        }
+        newFilter[ newFilter.length - 1 ]
+                = "Strasse = " + Database.getSqlString(strasse);
+        filterStrasse = newFilter;
+    }
+    
+    /**
+     * Löscht alle Filter, die nach einer Strasse filtern.
+     */
+    public void unsetFilterStrasse()
+    {
+        filterStrasse = new String[0];
+    }
+    
+     /**
+     * Erstellt einen neuen Filter für eine TelNr.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param telNr Die TelNr, nach dem gefiltert werden soll.
+     */
+    public void addFilterTelNr( String telNr)
+    {
+        String[] newFilter = new String[ filterTelNr.length + 1 ];
+        for( int i = 0; i < filterTelNr.length; i++ ) {
+            newFilter[i] = filterTelNr[i];
+        }
+        newFilter[ newFilter.length - 1 ]
+                = "TelNr = " + Database.getSqlString(telNr);
+        filterTelNr = newFilter;
+    }
+    
+    /**
+     * Löscht alle Filter, die nach einer TelNr filtern.
+     */
+    public void unsetFilterTelNr()
+    {
+        filterTelNr = new String[0];
     }
 }
