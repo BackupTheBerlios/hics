@@ -151,6 +151,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="cmdLogin">
           <Properties>
+            <Property name="mnemonic" type="int" value="73"/>
             <Property name="text" type="java.lang.String" value="Login"/>
             <Property name="toolTipText" type="java.lang.String" value="Geben Sie Ihren Benutzernamen und Ihr Kennwort in die entsprechenden Felder ein und&#xa; klicken Sie anschließend auf  &quot;Login&quot; um einzuloggen! &#xa;Achten Sie auf Groß- und Kleinschreibung!"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -182,6 +183,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="cmdBeenden">
           <Properties>
+            <Property name="mnemonic" type="int" value="66"/>
             <Property name="text" type="java.lang.String" value="Beenden"/>
             <Property name="toolTipText" type="java.lang.String" value="Schließt das Programm."/>
           </Properties>

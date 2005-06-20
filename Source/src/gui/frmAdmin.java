@@ -204,6 +204,7 @@ public class frmAdmin extends javax.swing.JFrame {
         getContentPane().add(pnlMitarbeiter, gridBagConstraints);
 
         cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
+        cmdLogout.setMnemonic('O');
         cmdLogout.setToolTipText("Ausloggen!");
         cmdLogout.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLogout.setMinimumSize(new java.awt.Dimension(10, 30));
@@ -217,6 +218,7 @@ public class frmAdmin extends javax.swing.JFrame {
 
         pnlLogout.add(cmdLogout);
 
+        cmdBeenden.setMnemonic('B');
         cmdBeenden.setText("Beenden");
         cmdBeenden.setToolTipText("Schlie\u00dft das Programm.");
         cmdBeenden.setPreferredSize(new java.awt.Dimension(75, 30));
@@ -236,6 +238,7 @@ public class frmAdmin extends javax.swing.JFrame {
         getContentPane().add(pnlLogout, gridBagConstraints);
 
         cmdNeu.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/neu.gif")));
+        cmdNeu.setMnemonic('N');
         cmdNeu.setToolTipText("Klicken Sie  auf  \"Neu\" um neue Daten anzulegen!");
         cmdNeu.setPreferredSize(new java.awt.Dimension(35, 30));
         cmdNeu.addActionListener(new java.awt.event.ActionListener() {
@@ -247,6 +250,7 @@ public class frmAdmin extends javax.swing.JFrame {
         pnlTop.add(cmdNeu);
 
         cmdSuchen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/suchen.gif")));
+        cmdSuchen.setMnemonic('L');
         cmdSuchen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdSuchen.setMinimumSize(new java.awt.Dimension(95, 25));
         cmdSuchen.setOpaque(false);
@@ -260,6 +264,7 @@ public class frmAdmin extends javax.swing.JFrame {
         pnlTop.add(cmdSuchen);
 
         cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/speichern.gif")));
+        cmdSpeichern.setMnemonic('S');
         cmdSpeichern.setToolTipText("Klicken Sie hier um die ge\u00e4nderten Daten zu speichern!");
         cmdSpeichern.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdSpeichern.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -268,6 +273,7 @@ public class frmAdmin extends javax.swing.JFrame {
         pnlTop.add(cmdSpeichern);
 
         cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/loeschen.gif")));
+        cmdLoeschen.setMnemonic('D');
         cmdLoeschen.setToolTipText("Klicken Sie  auf  \"L\u00f6schen\" um Daten zu l\u00f6schen!");
         cmdLoeschen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdLoeschen.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -282,6 +288,7 @@ public class frmAdmin extends javax.swing.JFrame {
         pnlTop.add(cmdLoeschen);
 
         cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
+        cmdAbbrechen.setMnemonic('A');
         cmdAbbrechen.setToolTipText("Klicken Sie  auf  \"Abbrechen\" um die \u00c4nderungen nicht zu speichern!");
         cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdAbbrechen.setMinimumSize(new java.awt.Dimension(95, 25));
@@ -385,6 +392,22 @@ public class frmAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdBeendenActionPerformed
 
     private void cmdSuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSuchenActionPerformed
+        
+  //      String berechtigung = (cmbBerechtigung.getSelectedItem()).toString();
+        String vname = txtMitarbeiterVN.getText();
+        String nname = txtMitarbeiterNN.getText();
+        String login = txtLogin.getText();
+        String pwd = txtPwd.getText();
+
+        
+        MitarbeiterHelper helper = new MitarbeiterHelper(db);
+        Mitarbeiter[] mita = helper.getMitarbeiter(null, null, nname, vname,
+                login,pwd);
+           
+        if( mita == null || mita.length != 1 ) {
+            helpMeldungen.showErrorMessage("Es wurde kein Mitarbeiter gefunden!");
+        }
+        
         
 
     }//GEN-LAST:event_cmdSuchenActionPerformed

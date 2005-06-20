@@ -152,6 +152,7 @@ public class frmStart extends javax.swing.JFrame
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(pwdKennwort, gridBagConstraints);
 
+        cmdLogin.setMnemonic('I');
         cmdLogin.setText("Login");
         cmdLogin.setToolTipText("Geben Sie Ihren Benutzernamen und Ihr Kennwort in die entsprechenden Felder ein und\n klicken Sie anschlie\u00dfend auf  \"Login\" um einzuloggen! \nAchten Sie auf Gro\u00df- und Kleinschreibung!");
         cmdLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -175,6 +176,7 @@ public class frmStart extends javax.swing.JFrame
         gridBagConstraints.gridy = 0;
         jPanel1.add(cmdLogin, gridBagConstraints);
 
+        cmdBeenden.setMnemonic('B');
         cmdBeenden.setText("Beenden");
         cmdBeenden.setToolTipText("Schlie\u00dft das Programm.");
         cmdBeenden.addActionListener(new java.awt.event.ActionListener() {
