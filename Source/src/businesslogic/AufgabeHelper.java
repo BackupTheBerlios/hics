@@ -130,8 +130,8 @@ public class AufgabeHelper {
             up[0] = "UPDATE aufgabe SET zimmernr = " + zimmerNr + 
                         " WHERE aufgabennr = " + aufgabenNr + ";";
             
-            up[1] = "UPDATE aufgabe SET bezeichnung = " + bezeichnung +
-                        " WHERE aufgabennr = " + aufgabenNr + ";";
+            up[1] = "UPDATE aufgabe SET bezeichnung = '" + bezeichnung +
+                        "' WHERE aufgabennr = " + aufgabenNr + ";";
                 
             up[2] = "UPDATE aufgabe SET ab = '" + ab.toString() +
                         "' WHERE aufgabennr = " + aufgabenNr + ";";
@@ -139,7 +139,7 @@ public class AufgabeHelper {
             up[3] = "UPDATE aufgabe SET deadline = '" + deadline.toString() +
                         "' WHERE aufgabennr = " + aufgabenNr + ";";
                 
-            up[4] = "UPDATE aufgabe SET status = '" + erledigt +
+            up[4] = "UPDATE aufgabe SET erledigt = '" + erledigt +
                         "' WHERE aufgabennr = " + aufgabenNr + ";";
                 
             for(int i = 0; i < up.length; i++){
