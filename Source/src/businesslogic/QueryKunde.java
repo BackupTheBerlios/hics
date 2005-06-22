@@ -14,6 +14,10 @@ import database.*;
  */
 public class QueryKunde extends Query
 {
+    public static final int FILTER_AND = 0;
+    public static final int FILTER_OR = 1;
+    int filterMode;
+    
     String[] filterKundenNr;
     String[] filterNachname;
     String[] filterVorname;
@@ -42,6 +46,8 @@ public class QueryKunde extends Query
         filterStrasse = new String[0];
         filterTelNr = new String[0];
         filterNotiz = new String[0];
+        
+        filterMode = FILTER_AND;
     }
     
     /**
@@ -76,6 +82,16 @@ public class QueryKunde extends Query
     }
     
     /**
+     * Setzt fest, wie die unterschiedlichen Filtertypen kombiniert werden.
+     * Falls FILTER_AND als Argument übergeben wird, werden Filter
+     * unterschiedlicher Properties mit AND kombiniert, bei FILTER_OR mit OR.
+     */
+    public void setFilterMode( int filterMode )
+    {
+        this.filterMode = filterMode;
+    }
+    
+    /**
      * Konstruiert einen String, der die einzelnen Filter-Strings
      * in filters in einem größeren String enthält (ausgehend vom bisher
      * konstruierten Filter-String für andere Eigenschaften).
@@ -96,7 +112,10 @@ public class QueryKunde extends Query
                 result = " WHERE (";
             }
             else {
-                result += " AND (";
+                if( filterMode == FILTER_AND )
+                    result += " AND (";
+                else if( filterMode == FILTER_OR )
+                    result += " OR (";
             }
         }
         
@@ -160,6 +179,26 @@ public class QueryKunde extends Query
     }
     
     /**
+     * Erstellt einen neuen Suchfilter für einen Nachnamen.
+     * Im Gegensatz zu normalen Filtern findet dieser Filter auch
+     * dann Nachnamen, wenn nur ein Teilstring angegeben wurde.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param nachname  Der Nachname, nach dem gefiltert werden soll.
+     */
+    public void addSearchFilterNachname( String nachname )
+    {
+        String[] newFilter = new String[ filterNachname.length + 1 ];
+        for( int i = 0; i < filterNachname.length; i++ ) {
+            newFilter[i] = filterNachname[i];
+        }
+        newFilter[ newFilter.length - 1 ]
+                = "Nachname LIKE " + Database.getSqlString("%" + nachname + "%");
+        filterNachname = newFilter;
+    }
+    
+    /**
      * Löscht alle Filter, die nach einem Nachnamen filtern.
      */
     public void unsetFilterNachname()
@@ -182,6 +221,26 @@ public class QueryKunde extends Query
         }
         newFilter[ newFilter.length - 1 ]
                 = "Vorname = " + Database.getSqlString(vorname);
+        filterVorname = newFilter;
+    }
+    
+    /**
+     * Erstellt einen neuen Suchfilter für einen Vornamen.
+     * Im Gegensatz zu normalen Filtern findet dieser Filter auch
+     * dann Vornamen, wenn nur ein Teilstring angegeben wurde.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param vorname  Der Vorname, nach dem gefiltert werden soll.
+     */
+    public void addSearchFilterVorname( String vorname )
+    {
+        String[] newFilter = new String[ filterVorname.length + 1 ];
+        for( int i = 0; i < filterVorname.length; i++ ) {
+            newFilter[i] = filterVorname[i];
+        }
+        newFilter[ newFilter.length - 1 ]
+                = "Vorname LIKE " + Database.getSqlString("%" + vorname + "%");
         filterVorname = newFilter;
     }
     

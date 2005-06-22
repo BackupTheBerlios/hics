@@ -67,21 +67,31 @@ public class frmKundenliste extends javax.swing.JFrame
             }
         );
     }
-
+    
     /**
-     * Füllt mit Hilfe eines Helper-Objekts die Zimmertabelle mit Daten.
+     * Füllt mit Hilfe eines Helper-Objekts die Zimmertabelle mit allen Kunden.
      */
     public void loadTableData()
     {
+        Kunde[] kunden = helper.getKunden();
+        if( kunden == null )
+            return;
+        
+        kundenNummern = new Integer[kunden.length];
+        loadTableData( kunden );
+    }
+
+    /**
+     * Füllt mit Hilfe eines Helper-Objekts die Zimmertabelle bestimmten Kunden.
+     */
+    public void loadTableData( Kunde[] kunden )
+    {
+        if( kunden == null )
+            return;
+        
         tblKunden.setModel( new javax.swing.table.DefaultTableModel(
                                 new Object[0][columns.length], columns )
         );
-        
-        if( DatabaseManager.db == null )
-            return;
-        
-        Kunde[] kunden = helper.getKunden();
-        kundenNummern = new Integer[kunden.length];
         
         Object[][] contents = new Object[kunden.length][columns.length];
         
@@ -237,6 +247,31 @@ public class frmKundenliste extends javax.swing.JFrame
         }
         loadTableData();
     }
+    
+    /**
+     * Filtert die Kundenliste anhand des Texts im Such-Textfeld.
+     */
+    public void search()
+    {
+        if( txtSuchen.getText().length() < 3 ) {
+            helpMeldungen.showInformationMessage("Der Suchbegriff muss " +
+                "mindestens drei Zeichen lang sein.");
+            return;
+        }
+        Kunde[] kunden = helper.searchByName( txtSuchen.getText() );
+        if( kunden == null ) {
+            helpMeldungen.showInformationMessage(
+                "Beim Suchen ist ein Fehler aufgetreten. Ätsch.");
+            return;
+        }
+        
+        loadTableData( kunden );
+        
+        if( kunden.length == 0 ) {
+            helpMeldungen.showInformationMessage(
+                "Mit diesem Suchbegriff wurden keine Kunden gefunden.");
+        }
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -251,6 +286,8 @@ public class frmKundenliste extends javax.swing.JFrame
         pnlSuchen = new javax.swing.JPanel();
         txtSuchen = new javax.swing.JTextField();
         lblSuchen = new javax.swing.JLabel();
+        pnlSuchaktionen = new javax.swing.JPanel();
+        btnSuchenReset = new javax.swing.JButton();
         btnSuchen = new javax.swing.JButton();
         pnlAnzeigeKunde = new javax.swing.JPanel();
         lblNachname = new javax.swing.JLabel();
@@ -304,8 +341,25 @@ public class frmKundenliste extends javax.swing.JFrame
         lblSuchen.setRequestFocusEnabled(false);
         pnlSuchen.add(lblSuchen, java.awt.BorderLayout.WEST);
 
+        btnSuchenReset.setText("Suche zur\u00fccksetzen");
+        btnSuchenReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuchenResetActionPerformed(evt);
+            }
+        });
+
+        pnlSuchaktionen.add(btnSuchenReset);
+
         btnSuchen.setText("Suche starten");
-        pnlSuchen.add(btnSuchen, java.awt.BorderLayout.EAST);
+        btnSuchen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuchenActionPerformed(evt);
+            }
+        });
+
+        pnlSuchaktionen.add(btnSuchen);
+
+        pnlSuchen.add(pnlSuchaktionen, java.awt.BorderLayout.SOUTH);
 
         pnlAnzeigeOben.add(pnlSuchen);
 
@@ -451,6 +505,15 @@ public class frmKundenliste extends javax.swing.JFrame
         pack();
     }//GEN-END:initComponents
 
+    private void btnSuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuchenActionPerformed
+        search();
+    }//GEN-LAST:event_btnSuchenActionPerformed
+
+    private void btnSuchenResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuchenResetActionPerformed
+        txtSuchen.setText("");
+        loadTableData();
+    }//GEN-LAST:event_btnSuchenResetActionPerformed
+
     private void cmdLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoeschenActionPerformed
         deleteCurrentEntry();
     }//GEN-LAST:event_cmdLoeschenActionPerformed
@@ -487,6 +550,7 @@ public class frmKundenliste extends javax.swing.JFrame
     private javax.swing.JButton btnNeuerKunde;
     private javax.swing.JButton btnSpeichern;
     private javax.swing.JButton btnSuchen;
+    private javax.swing.JButton btnSuchenReset;
     private javax.swing.JButton cmdLoeschen;
     private javax.swing.JLabel lblCaption;
     private javax.swing.JLabel lblLand;
@@ -506,6 +570,7 @@ public class frmKundenliste extends javax.swing.JFrame
     private javax.swing.JPanel pnlLogout;
     private javax.swing.JPanel pnlLöschen;
     private javax.swing.JPanel pnlOk;
+    private javax.swing.JPanel pnlSuchaktionen;
     private javax.swing.JPanel pnlSuchen;
     private javax.swing.JTable tblKunden;
     private javax.swing.JTextField txtLand;

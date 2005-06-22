@@ -30,8 +30,29 @@ public class KundenHelper {
     {
         QueryKunde query = new QueryKunde( db );
         
-        query.search();
+        if( query.search() == false )
+            return null;
         Kunde[] kunden = query.getKundenEntities();
+        return kunden;
+    }
+    
+    /**
+     * Gibt eine Liste aller Kunden zurück, bei denen der gewünschte String
+     * im Namen enthalten ist. Falls beim Suchen ein Fehler aufgetreten ist,
+     * wird null zurückgegeben.
+     */
+    public Kunde[] searchByName( String searchString )
+    {
+        QueryKunde query = new QueryKunde( db );
+        
+        query.setFilterMode( QueryKunde.FILTER_OR );
+        query.addSearchFilterNachname( searchString );
+        query.addSearchFilterVorname( searchString );
+        
+        if( query.search() == false )
+            return null;
+        Kunde[] kunden = query.getKundenEntities();
+        
         return kunden;
     }
     
