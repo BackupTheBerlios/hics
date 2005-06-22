@@ -113,10 +113,12 @@ public class frmStart extends javax.swing.JFrame
         jPanel1.setMinimumSize(new java.awt.Dimension(200, 50));
         jPanel1.setPreferredSize(new java.awt.Dimension(450, 100));
         lblBenutzername.setText("Benutzername");
+        lblBenutzername.setMaximumSize(new java.awt.Dimension(100, 22));
+        lblBenutzername.setMinimumSize(new java.awt.Dimension(100, 22));
+        lblBenutzername.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(lblBenutzername, gridBagConstraints);
 
         txtUsername.setToolTipText("Tragen Sie hier Ihren Benutzenamen ein! Achten Sie auf Gro\u00df- und Kleinschreibung!");
@@ -134,12 +136,11 @@ public class frmStart extends javax.swing.JFrame
         lblKennwort.setText("Kennwort");
         lblKennwort.setMaximumSize(new java.awt.Dimension(80, 16));
         lblKennwort.setMinimumSize(new java.awt.Dimension(80, 16));
-        lblKennwort.setPreferredSize(new java.awt.Dimension(80, 16));
+        lblKennwort.setOpaque(true);
+        lblKennwort.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = -10;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(lblKennwort, gridBagConstraints);
 
         pwdKennwort.setToolTipText("Geben Sie hier Ihr Kennwort ein!  Anstelle des Kennwortes erscheinen \"*\"-Zeichen.  Achten Sie auf Gro\u00df- und Kleinschreibung!");
@@ -156,10 +157,10 @@ public class frmStart extends javax.swing.JFrame
         cmdLogin.setText("Login");
         cmdLogin.setToolTipText("Geben Sie Ihren Benutzernamen und Ihr Kennwort in die entsprechenden Felder ein und\n klicken Sie anschlie\u00dfend auf  \"Login\" um einzuloggen! \nAchten Sie auf Gro\u00df- und Kleinschreibung!");
         cmdLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cmdLogin.setMaximumSize(new java.awt.Dimension(80, 22));
-        cmdLogin.setMinimumSize(new java.awt.Dimension(80, 22));
+        cmdLogin.setMaximumSize(new java.awt.Dimension(90, 23));
+        cmdLogin.setMinimumSize(new java.awt.Dimension(90, 23));
         cmdLogin.setNextFocusableComponent(cmdBeenden);
-        cmdLogin.setPreferredSize(new java.awt.Dimension(80, 22));
+        cmdLogin.setPreferredSize(new java.awt.Dimension(90, 23));
         cmdLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLoginActionPerformed(evt);
@@ -179,6 +180,9 @@ public class frmStart extends javax.swing.JFrame
         cmdBeenden.setMnemonic('B');
         cmdBeenden.setText("Beenden");
         cmdBeenden.setToolTipText("Schlie\u00dft das Programm.");
+        cmdBeenden.setMaximumSize(new java.awt.Dimension(90, 23));
+        cmdBeenden.setMinimumSize(new java.awt.Dimension(90, 23));
+        cmdBeenden.setPreferredSize(new java.awt.Dimension(90, 23));
         cmdBeenden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quit(evt);

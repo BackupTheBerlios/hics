@@ -36,7 +36,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cmbBerechtigung.addItem(&quot;Rezeption&quot;);&#xa;cmbBerechtigung.addItem(&quot;Raumpflege&quot;);&#xa;cmbBerechtigung.addItem(&quot;Admin&quot;);&#xa;cmbBerechtigung.setEditable(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cmbBerechtigung.addItem(&quot;&quot;);&#xa;cmbBerechtigung.addItem(&quot;Admin&quot;);&#xa;cmbBerechtigung.addItem(&quot;Rezeption&quot;);&#xa;cmbBerechtigung.addItem(&quot;Reinigung&quot;);&#xa;cmbBerechtigung.setEditable(false);"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -307,6 +307,9 @@
               <Dimension value="[35, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdSpeichernActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="cmdLoeschen">
           <Properties>

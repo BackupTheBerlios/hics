@@ -44,7 +44,7 @@ public class MitarbeiterHelper
      * Objekte. Bei einer negativen Suche wird null zurückgegeben. 
      **/
     public Mitarbeiter[] getMitarbeiter(Integer mitarbeiterNr, 
-            Integer berechtigungsNr, String vorname, String nachname,
+            Integer berechtigungsNr, String nachname, String vorname,
             String login, String passwort){
         
         boolean nu = false;
@@ -85,6 +85,28 @@ public class MitarbeiterHelper
             return null;
         }
     }
+    
+    /**
+     * Sucht einen die nächste freie MitarbeiterNr
+     **/
+    public Integer newMitarbNr() {
+        String search = "select MAX(mitarbeiterNR) as mitarbnr from mitarbeiter;";
+        Integer mitarbNr = null;
+        try {
+            ResultSet mitarb =  db.query(search);   
+            while (mitarb.next()){
+                mitarbNr = new Integer(mitarb.getInt("mitarbnr"));
+            }
+            
+            return mitarbNr;
+        }
+        catch(SQLException e){
+            System.out.println("DEBUG: keine neue MitarbeiterNr gefuden");
+            return null;
+        }
+        
+    }
+    
     /**
      * Legt einen neuen Aufenthalt in der DB an falls die AufenthaltsNr. noch 
      * nicht belegt ist.
@@ -92,7 +114,7 @@ public class MitarbeiterHelper
      * zurückgegeben.
      **/
     public boolean setMitarbeiter(Integer mitarbeiterNr, 
-            Integer berechtigungsNr, String vorname, String nachname,
+            Integer berechtigungsNr, String nachname, String vorname,
             String login, String passwort, Database db){
         
         if( mitarbeiterNr == null || berechtigungsNr == null || vorname == null ||
@@ -137,7 +159,7 @@ public class MitarbeiterHelper
      * ansonsten false zurückgegeben.
      **/
     public boolean changeMitarbeiter(Integer mitarbeiterNr, 
-            Integer berechtigungsNr, String vorname, String nachname,
+            Integer berechtigungsNr, String nachname, String vorname,
             String login, String passwort){
         
          if( mitarbeiterNr == null || berechtigungsNr == null || vorname == null ||

@@ -16,7 +16,8 @@ import businesslogic.*;
  */
 public class frmAdmin extends javax.swing.JFrame {
     
-   public Database db; 
+   public Database db;
+   public Integer mitarbeiterNr;
     
    public static String TITLE="HICS - Personendaten";
     
@@ -93,9 +94,10 @@ public class frmAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         pnlMitarbeiter.setLayout(new java.awt.GridBagLayout());
 
-        cmbBerechtigung.addItem("Rezeption");
-        cmbBerechtigung.addItem("Raumpflege");
+        cmbBerechtigung.addItem("");
         cmbBerechtigung.addItem("Admin");
+        cmbBerechtigung.addItem("Rezeption");
+        cmbBerechtigung.addItem("Reinigung");
         cmbBerechtigung.setEditable(false);
         cmbBerechtigung.setMaximumSize(new java.awt.Dimension(110, 25));
         cmbBerechtigung.setMinimumSize(new java.awt.Dimension(110, 25));
@@ -270,6 +272,12 @@ public class frmAdmin extends javax.swing.JFrame {
         cmdSpeichern.setMinimumSize(new java.awt.Dimension(95, 25));
         cmdSpeichern.setOpaque(false);
         cmdSpeichern.setPreferredSize(new java.awt.Dimension(35, 30));
+        cmdSpeichern.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdSpeichernActionPerformed(evt);
+            }
+        });
+
         pnlTop.add(cmdSpeichern);
 
         cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/loeschen.gif")));
@@ -386,34 +394,110 @@ public class frmAdmin extends javax.swing.JFrame {
         pack();
     }//GEN-END:initComponents
 
+    private void cmdSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSpeichernActionPerformed
+        
+        Integer berechtigung = new Integer(cmbBerechtigung.getSelectedIndex());
+        
+        String vname = txtMitarbeiterVN.getText();
+        String nname = txtMitarbeiterNN.getText();
+        String login = txtLogin.getText();
+        String pwd = txtPwd.getText();
+        
+        if( berechtigung.intValue() == 0)
+            berechtigung = null;
+        if( vname.equals("") )
+            vname = null;
+        if( nname.equals("") )
+            nname = null;
+        if( login.equals("") )
+            login = null;
+        if( pwd.equals("") )
+            pwd = null;
+        
+        if(mitarbeiterNr == null) {
+             boolean bestätigung;
+             
+             MitarbeiterHelper helper = new MitarbeiterHelper(db);
+             mitarbeiterNr = new Integer(helper.newMitarbNr().intValue()+1);
+             if (mitarbeiterNr == null) {
+                 helpMeldungen.showErrorMessage("Es ist keinen neue Mitarbeiternr verfügbar!");
+             }
+             else {
+                 bestätigung = helper.setMitarbeiter(mitarbeiterNr, 
+                     berechtigung, nname, vname, login, pwd, db);
+             
+                 if (bestätigung == false) {
+                     helpMeldungen.showErrorMessage("Der Mitarbeiter konnte nicht gespeichert werden!");
+                }
+                else {
+                    helpMeldungen.showInformationMessage("Der Mitarbeiter wurde gespeichert!");
+                    cmdNeu.doClick();
+                }
+             }
+             
+            
+        }
+       
+
+        
+    }//GEN-LAST:event_cmdSpeichernActionPerformed
+
     private void cmdBeendenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBeendenActionPerformed
          dbDisconnect();
         System.exit(0);
     }//GEN-LAST:event_cmdBeendenActionPerformed
 
     private void cmdSuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSuchenActionPerformed
-        
-  //      String berechtigung = (cmbBerechtigung.getSelectedItem()).toString();
+         
+        Integer berechtigung = new Integer(cmbBerechtigung.getSelectedIndex());
+
         String vname = txtMitarbeiterVN.getText();
         String nname = txtMitarbeiterNN.getText();
         String login = txtLogin.getText();
         String pwd = txtPwd.getText();
-
         
+     
+        if( berechtigung.intValue() == 0)
+            berechtigung = null;
+        if( vname.equals("") )
+            vname = null;
+        if( nname.equals("") )
+            nname = null;
+        if( login.equals("") )
+            login = null;
+        if( pwd.equals("") )
+            pwd = null;
+
+              
         MitarbeiterHelper helper = new MitarbeiterHelper(db);
-        Mitarbeiter[] mita = helper.getMitarbeiter(null, null, nname, vname,
-                login,pwd);
+        Mitarbeiter[] mita = helper.getMitarbeiter(null, berechtigung, nname, 
+                vname, login, pwd);
            
-        if( mita == null || mita.length != 1 ) {
+        if( mita == null || mita.length == 0 ) {
             helpMeldungen.showErrorMessage("Es wurde kein Mitarbeiter gefunden!");
         }
-        
+        else if (mita.length == 1) {
+            
+            mitarbeiterNr = (mita[0].getMitarbeiterNr());
+            cmbBerechtigung.setSelectedIndex((mita[0].getBerechtigungsNr()).intValue());
+            txtMitarbeiterVN.setText(mita[0].getVorname());
+            txtMitarbeiterNN.setText(mita[0].getNachname());
+            txtLogin.setText(mita[0].getLogin());
+            txtPwd.setText(mita[0].getPasswort());
+        }
+        else {
+            // muss noch eine Lösung für mehrere suchergebnisse gefunden werden!
+        }    
+            
+         
         
 
     }//GEN-LAST:event_cmdSuchenActionPerformed
 
     private void cmdNeuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNeuActionPerformed
         
+        mitarbeiterNr = null;
+        cmbBerechtigung.setSelectedIndex(0);        
         txtMitarbeiterVN.setText("");
         txtMitarbeiterNN.setText("");
         txtLogin.setText("");
@@ -425,8 +509,27 @@ public class frmAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdNeuActionPerformed
 
     private void cmdLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoeschenActionPerformed
-        // TODO add your handling code here:
-        // helpMeldungen.showOptionDialog1("Möchten Sie diesen Datensatz endgültig löschen?","Löschen",);
+       
+        
+        if(mitarbeiterNr == null){
+            helpMeldungen.showErrorMessage("Sie müssen einen Datensatz auswählen!");
+            
+        }
+        else {
+            String[] buttons = {"Löschen","Abbrechen"};
+            boolean bestätigung = helpMeldungen.showOptionDialog1("Möchten Sie diesen Datensatz endgültig löschen?",
+                    "Löschen",buttons);
+            
+            if (bestätigung == true){
+                Integer[] mitarbNr = {mitarbeiterNr};
+                MitarbeiterHelper helper = new MitarbeiterHelper(db);
+                helper.delMitarbeiter(mitarbNr);
+                cmdNeu.doClick();
+            }
+            
+            
+        }
+        
     }//GEN-LAST:event_cmdLoeschenActionPerformed
 
     private void cmdLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLogoutActionPerformed
