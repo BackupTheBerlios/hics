@@ -41,7 +41,7 @@ public class Aufgabe extends Entity
      */
     public void setSerialKey()
     {
-        primaryKeys[0] = "DEFAULT";
+        primaryKeys[0] = null;
     }
 
     /**

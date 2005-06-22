@@ -22,8 +22,6 @@ public class frmStart extends javax.swing.JFrame
     public static final int HEIGHT = 400;
     public static final String TITLE = "HICS - Login";
     
-    public Database db;
-    
     /**
      * Erstellt ein neues Formular vom Typ frmStart.
      */
@@ -32,32 +30,14 @@ public class frmStart extends javax.swing.JFrame
         initComponents();       
         setSize(WIDTH, HEIGHT);
         setLocation(((getToolkit().getScreenSize().width)/2)-(WIDTH/2),100);
-        show();
         
-        
-        
-        if( dbConnect() == false ) {
+        if( DatabaseManager.connect() == false ) {
             helpMeldungen.showErrorMessage(
               "Die Verbindung zur Datenbank konnte nicht hergestellt werden.");
             System.exit(1);
         }
         
-        
-    }
-    
-    private boolean dbConnect()
-    {
-        db = new Database( DatabaseAccess.url,
-                           DatabaseAccess.user, DatabaseAccess.passwort );
-        return db.connect();
-    }
-    
-    private boolean dbDisconnect()
-    {
-        if( db != null )
-            return db.disconnect();
-        else
-            return false;
+        show();
     }
     
     /** This method is called from within the constructor to
@@ -214,7 +194,7 @@ public class frmStart extends javax.swing.JFrame
 
     
     private void quit(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quit
-        dbDisconnect();
+        DatabaseManager.disconnect();
         System.exit(0);
     }//GEN-LAST:event_quit
 
@@ -227,14 +207,14 @@ public class frmStart extends javax.swing.JFrame
         
        
         
-        if( db == null ) {
+        if( DatabaseManager.db == null ) {
             helpMeldungen.showErrorMessage(
               "Ohne Datenbankverbindung kann kein Login erfolgen.");
         }
         
         String login = txtUsername.getText();
         String passwort = new String(pwdKennwort.getPassword());
-        MitarbeiterHelper helper = new MitarbeiterHelper(db);
+        MitarbeiterHelper helper = new MitarbeiterHelper(DatabaseManager.db);
         int berechtigung = helper.getMitarbeiterBerechtigung(login, passwort);
         
         if( berechtigung == MitarbeiterHelper.BERECHTIGUNG_REINIGUNG ) {
@@ -247,7 +227,7 @@ public class frmStart extends javax.swing.JFrame
         }
         else if( berechtigung == MitarbeiterHelper.BERECHTIGUNG_REZEPTION ) {
            this.dispose();
-           new frmZimmerplan().setVisible(true);
+           new frmKundenliste().setVisible(true);
         }
         else {
           helpMeldungen.showErrorMessage("Falscher Benutzername oder falsches Passwort!");

@@ -31,7 +31,7 @@ public class Mitarbeiter extends Entity {
     
     public void setSerialKey( Integer berechtigungsNr )
     {
-        primaryKeys[0] = "DEFAULT";
+        primaryKeys[0] = null;
         primaryKeys[1] = berechtigungsNr;
     }
     

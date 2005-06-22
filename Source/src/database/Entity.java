@@ -243,26 +243,30 @@ public abstract class Entity
         // Der erste Primärschluessel hat noch keinen Beistrich vorn.
         updateStatement = "UPDATE " + entityName + " SET ";
         
-        // Strings vom Typ ", ZimmerNr = 666"
-        for( i = 0; i < primaryKeyNames.length; i++ )
+        // Strings vom Typ "[, ]ZimmerNr = 666"
+        for( i = 0; i < propertyNames.length; i++ )
         {
             if( i != 0 ) {
                 updateStatement += ", ";
             }
+            updateStatement += propertyNames[i] + " = "
+                               + Database.getSqlString(properties[i]);
+        }
+        
+        updateStatement += " WHERE ";
+        
+        // Strings vom Typ "[, ]ZimmerNr = 666"
+        for( i = 0; i < primaryKeyNames.length; i++ )
+        {
+            if( i != 0 ) {
+                updateStatement += " AND ";
+            }
             updateStatement += primaryKeyNames[i] + " = "
                                + Database.getSqlString(primaryKeys[i]);
         }
-        for( i = primaryKeyNames.length;
-             i < primaryKeyNames.length + propertyNames.length; i++ )
-        {
-            updateStatement += ", " + propertyNames[i] + " = "
-                               + Database.getSqlString(properties[i]);
-        }
+        
         updateStatement += ";";
         
-        // und fertig. WHERE-Bedingung brauchen wir keine, die soll der
-        // Programmierer, bzw. die Programmiererin, high-level auf Objektbasis
-        // machen, wenn sie gebraucht wird.
         return updateStatement;
     }
     
@@ -289,8 +293,7 @@ public abstract class Entity
             insertStatement += primaryKeyNames[i];
         }
         // Fortsetzung der Spaltennamenaufzaehlung mit den Eigenschaften
-        for( i = primaryKeyNames.length;
-             i < primaryKeyNames.length + propertyNames.length; i++ )
+        for( i = 0; i < propertyNames.length; i++ )
         {
             insertStatement += ", " + propertyNames[i];
         }
@@ -308,8 +311,7 @@ public abstract class Entity
                 insertStatement += Database.getSqlString(primaryKeys[i]);
         }
         // Fortsetzung der Werteaufzaehlung mit den Eigenschaften
-        for( i = primaryKeyNames.length;
-             i < primaryKeyNames.length + propertyNames.length; i++ )
+        for( i = 0; i < propertyNames.length; i++ )
         {
             insertStatement += ", " + Database.getSqlString(properties[i]);
         }
@@ -347,7 +349,7 @@ public abstract class Entity
         // Der erste Primärschluessel hat noch keinen Beistrich vorn.
         deleteStatement = "DELETE FROM " + entityName + " WHERE ";
         
-        // Strings vom Typ ", ZimmerNr = 666"
+        // Strings vom Typ "[, ]ZimmerNr = 666"
         for( i = 0; i < primaryKeyNames.length; i++ )
         {
             if( i != 0 ) {
@@ -383,8 +385,11 @@ public abstract class Entity
         // (ohne Eigenschaften, die sind in dem Zusammenhang unwichtig)
         String query = "SELECT ";
         
-        for( i = 1; i < primaryKeyNames.length; i++ )
+        for( i = 0; i < primaryKeyNames.length; i++ )
         {
+            if( this.primaryKeys[i] == null ) {
+                return false;
+            }
             if( i != 0 ) {
                 query += ", ";
             }
@@ -392,10 +397,10 @@ public abstract class Entity
         }
         query += " FROM " + entityName + " WHERE ";
         
-        for( i = 1; i < primaryKeyNames.length; i++ )
+        for( i = 0; i < primaryKeyNames.length; i++ )
         {
             if( i != 0 ) {
-                query += ", ";
+                query += " AND ";
             }
             query += primaryKeyNames[i] + " = "
                      + Database.getSqlString(primaryKeys[i]);

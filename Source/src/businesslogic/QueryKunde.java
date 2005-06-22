@@ -22,6 +22,8 @@ public class QueryKunde extends Query
     String[] filterWohnort;
     String[] filterStrasse;
     String[] filterTelNr;
+    String[] filterNotiz;
+    
     /**
      * Erstellt eine neue Instanz von QueryKunde.
      *
@@ -39,6 +41,7 @@ public class QueryKunde extends Query
         filterWohnort = new String[0];
         filterStrasse = new String[0];
         filterTelNr = new String[0];
+        filterNotiz = new String[0];
     }
     
     /**
@@ -67,6 +70,7 @@ public class QueryKunde extends Query
         where = this.getWhereString(where, filterWohnort);
         where = this.getWhereString(where, filterStrasse);
         where = this.getWhereString(where, filterTelNr);
+        where = this.getWhereString(where, filterNotiz);
         query += where + ";";
         return this.search( query );
     }
@@ -317,5 +321,31 @@ public class QueryKunde extends Query
     public void unsetFilterTelNr()
     {
         filterTelNr = new String[0];
+    }
+    
+     /**
+     * Erstellt einen neuen Filter für eine Notiz.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param notiz  Die Notiz, nach dem gefiltert werden soll.
+     */
+    public void addFilterNotiz( String notiz )
+    {
+        String[] newFilter = new String[ filterNotiz.length + 1 ];
+        for( int i = 0; i < filterNotiz.length; i++ ) {
+            newFilter[i] = filterNotiz[i];
+        }
+        newFilter[ newFilter.length - 1 ]
+                = "Notiz = " + Database.getSqlString(notiz);
+        filterNotiz = newFilter;
+    }
+    
+    /**
+     * Löscht alle Filter, die nach einer Notiz filtern.
+     */
+    public void unsetFilterNotiz()
+    {
+        filterNotiz = new String[0];
     }
 }

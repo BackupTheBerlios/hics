@@ -7,7 +7,6 @@
 package businesslogic;
 
 import database.*;
-//import java.util.Date;
 import java.sql.*;
 
 /**
@@ -22,11 +21,25 @@ public class KundenHelper {
     public KundenHelper( Database database ) {
         db = database;
     }
+    
+    /**
+     * Gibt eine Liste aller Kunden zurück, oder null, falls beim Suchen
+     * ein Fehler aufgetreten ist.
+     */
+    public Kunde[] getKunden()
+    {
+        QueryKunde query = new QueryKunde( db );
+        
+        query.search();
+        Kunde[] kunden = query.getKundenEntities();
+        return kunden;
+    }
+    
     /**
      * Sucht nach einem oder auch mehreren parametern einer Kunde.
      * Rückgabewert ist bei positiver Suche das oder die gefundenen Kunde - 
      * Objekte. Bei einer negativen Suche wird null zurückgegeben. 
-     **/
+     */
     public Kunde[] getKunde( Integer kundenNr, String nachname, String vorname,
                              String land, Integer plz, String wohnort, 
                              String strasse, String telNr ){

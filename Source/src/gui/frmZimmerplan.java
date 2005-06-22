@@ -12,15 +12,25 @@ import java.awt.*;
  *
  * @author  Sabrina
  */
-public class frmZimmerplan extends javax.swing.JFrame {
+public class frmZimmerplan extends javax.swing.JFrame
+{
     public static String TITLE="Zimmerplan";
     
     /** Creates new form frmStart */
     public frmZimmerplan() {
         super(TITLE);
-        initComponents();       
+        initComponents();
+        loadTableData();
         setSize(getToolkit().getScreenSize());
         show();
+    }
+    
+    /**
+     * Füllt mit Hilfe eines Helper-Objekts die Zimmertabelle mit Daten.
+     */
+    public void loadTableData()
+    {
+        
     }
     
     /** This method is called from within the constructor to
@@ -375,23 +385,14 @@ public class frmZimmerplan extends javax.swing.JFrame {
         tblZimmer.setBorder(new javax.swing.border.EtchedBorder());
         tblZimmer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"101", ""},
-                {"102", ""},
-                {"103", ""},
-                {"104", ""},
-                {"105", ""},
-                {"201", ""},
-                {"202", ""},
-                {"203", ""},
-                {"204", null},
-                {null, null}
+
             },
             new String [] {
-                "Zimmer", ""
+                "Zimmer", "Betten", "Preis", "Notiz", "Title 5"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -399,9 +400,10 @@ public class frmZimmerplan extends javax.swing.JFrame {
             }
         });
         tblZimmer.setGridColor(new java.awt.Color(255, 255, 255));
-        tblZimmer.setMaximumSize(new java.awt.Dimension(450, 600));
+        tblZimmer.setMaximumSize(new java.awt.Dimension(1600, 1400));
         tblZimmer.setMinimumSize(new java.awt.Dimension(450, 300));
-        tblZimmer.setPreferredSize(new java.awt.Dimension(350, 500));
+        tblZimmer.setPreferredSize(new java.awt.Dimension(1600, 1400));
+        tblZimmer.setTableHeader(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;

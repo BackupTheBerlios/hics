@@ -23,7 +23,7 @@ public class Kunde extends Entity
         entityName = "Kunde";
         primaryKeyNames = new String[] {"KundenNr"};
         propertyNames = new String[] {"Nachname", "Vorname", "Land", "PLZ",
-                                      "Wohnort", "Strasse", "TelNr"};
+                                      "Wohnort", "Strasse", "TelNr", "Notiz"};
         primaryKeys = new Object[primaryKeyNames.length];
         properties = new Object[propertyNames.length];
     }
@@ -43,7 +43,7 @@ public class Kunde extends Entity
      */
     public void setSerialKey()
     {
-        primaryKeys[0] = "DEFAULT";
+        primaryKeys[0] = null;
     }
 
     /**
@@ -61,7 +61,7 @@ public class Kunde extends Entity
      */
     public void setProperties( String nachname, String vorname, String land,
                                Integer plz, String wohnort, String strasse,
-                               String telnr )
+                               String telnr, String notiz )
     {
         // Die Werte sind so nummeriert wie oben in der Initialisierung
         // angegeben. Die Nummerierung ist unabhängig von der Reihenfolge
@@ -74,6 +74,7 @@ public class Kunde extends Entity
         properties[4] = wohnort;
         properties[5] = strasse;
         properties[6] = telnr;
+        properties[7] = notiz;
     }
 
     /**
@@ -137,5 +138,14 @@ public class Kunde extends Entity
     public String getTelNr()
     {
         return (String) properties[6];
+    }
+    
+    /**
+     * Ermittelt die Eigenschaft TelNr der Entity. Falls der entsprechende
+     * Wert in der Datenbank NULL ist, wird null zurückgegeben.
+     */
+    public String getNotiz()
+    {
+        return (String) properties[7];
     }
 }
