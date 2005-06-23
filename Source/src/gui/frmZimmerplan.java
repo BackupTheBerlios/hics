@@ -639,8 +639,6 @@ public class frmZimmerplan extends javax.swing.JFrame
         txtNotiz = new javax.swing.JTextField();
         pnlOk = new javax.swing.JPanel();
         btnSpeichern = new javax.swing.JButton();
-        pnlLöschen = new javax.swing.JPanel();
-        cmdLoeschen = new javax.swing.JButton();
         pnlCenter = new javax.swing.JPanel();
         tblZimmer = new javax.swing.JTable();
         pnlZimmerProperties = new javax.swing.JPanel();
@@ -823,20 +821,6 @@ public class frmZimmerplan extends javax.swing.JFrame
 
         pnlAnzeige.add(pnlAnzeigeOben, java.awt.BorderLayout.NORTH);
 
-        pnlLöschen.setLayout(new java.awt.BorderLayout());
-
-        cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
-        cmdLoeschen.setText("Ausgew\u00e4hltes Zimmer l\u00f6schen");
-        cmdLoeschen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdLoeschenActionPerformed(evt);
-            }
-        });
-
-        pnlLöschen.add(cmdLoeschen, java.awt.BorderLayout.WEST);
-
-        pnlAnzeige.add(pnlLöschen, java.awt.BorderLayout.SOUTH);
-
         getContentPane().add(pnlAnzeige, java.awt.BorderLayout.WEST);
 
         pnlCenter.setLayout(new java.awt.BorderLayout());
@@ -982,9 +966,11 @@ public class frmZimmerplan extends javax.swing.JFrame
         pnlAusstattungsActions.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0));
 
         btnAusstattungNeu.setText("Neues Element");
+        btnAusstattungNeu.setEnabled(false);
         pnlAusstattungsActions.add(btnAusstattungNeu);
 
         btnAusstattungLoeschen.setText("Element l\u00f6schen");
+        btnAusstattungLoeschen.setEnabled(false);
         pnlAusstattungsActions.add(btnAusstattungLoeschen);
 
         pnlAusstattung.add(pnlAusstattungsActions, java.awt.BorderLayout.NORTH);
@@ -992,8 +978,10 @@ public class frmZimmerplan extends javax.swing.JFrame
         pnlAusstattungEdit.setLayout(new javax.swing.BoxLayout(pnlAusstattungEdit, javax.swing.BoxLayout.X_AXIS));
 
         lblElement.setText("Ausstattungselement: ");
+        lblElement.setEnabled(false);
         pnlAusstattungEdit.add(lblElement);
 
+        cmbElement.setEnabled(false);
         pnlAusstattungEdit.add(cmbElement);
 
         pnlAusstattung.add(pnlAusstattungEdit, java.awt.BorderLayout.SOUTH);
@@ -1053,10 +1041,6 @@ public class frmZimmerplan extends javax.swing.JFrame
         loadTableData();
     }//GEN-LAST:event_btnSuchenResetActionPerformed
 
-    private void cmdLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoeschenActionPerformed
-        deleteCurrentEntry();
-    }//GEN-LAST:event_cmdLoeschenActionPerformed
-
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         this.saveTextFields( );
     }//GEN-LAST:event_btnSpeichernActionPerformed
@@ -1088,7 +1072,6 @@ public class frmZimmerplan extends javax.swing.JFrame
     private javax.swing.JButton btnSuchenReset;
     private javax.swing.JCheckBox chkErledigt;
     private javax.swing.JComboBox cmbElement;
-    private javax.swing.JButton cmdLoeschen;
     private javax.swing.JLabel lblAb;
     private javax.swing.JLabel lblAnzahlBetten;
     private javax.swing.JLabel lblBezeichnung;
@@ -1121,7 +1104,6 @@ public class frmZimmerplan extends javax.swing.JFrame
     private javax.swing.JPanel pnlCaption;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlLogout;
-    private javax.swing.JPanel pnlLöschen;
     private javax.swing.JPanel pnlOk;
     private javax.swing.JPanel pnlSuchaktionen;
     private javax.swing.JPanel pnlSuchen;
