@@ -586,7 +586,7 @@ public class frmAdmin extends javax.swing.JFrame {
             }
             else if (zim.length == 1) {
 
-                txtZimNr.setText(""+zim[0].getZimmerNR());
+                txtZimNr.setText(""+zim[0].getZimmerNr());
                 txtBettenANz.setText(""+zim[0].getAnzahlBetten());
                 txtPreis.setText(""+zim[0].getPreisProNacht());
 
