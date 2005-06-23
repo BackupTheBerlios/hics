@@ -14,6 +14,7 @@ import javax.swing.event.*;
 import javax.swing.table.*;
 
 
+
 /**
  *
  * @author  Standard
@@ -34,6 +35,8 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
     private int currentIndex;
     private boolean newEntry = true;
     
+   
+    
 //    TableModel model = new AbstrachtTableModel(){
 //        public String getColumnName(int col) {
 //            return coumnNames[col].toString();
@@ -51,11 +54,9 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
         setSize(WIDTH, HEIGHT);
         setLocation(((getToolkit().getScreenSize().width)/2)-(WIDTH/2),((getToolkit().getScreenSize().height)/2)-(HEIGHT/2));
         
-        setupListeners();
+ //       setupListeners();
         
         helper = new AufgabeHelper(DatabaseManager.db);
-        
-        
         
         loadTableData();
         
@@ -71,30 +72,7 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
             return false;
     }
      
-      private void setupListeners()
-    {
-        //Ask to be notified of selection changes.
-        ListSelectionModel rowSM = tblInfo.getSelectionModel();
-        rowSM.addListSelectionListener(
-            new ListSelectionListener()
-            {
-                public void valueChanged(ListSelectionEvent e) {
-                    //Ignore extra messages.
-                    if (e.getValueIsAdjusting()) return;
-
-                    ListSelectionModel lsm =
-                        (ListSelectionModel)e.getSource();
-//                    if (lsm.isSelectionEmpty()) {
-//                        clearTextFields();
-//                    } else {
-//                        int selectedRow = lsm.getMinSelectionIndex();
-//                        fillTextFields( selectedRow );
-//                    }
-                }
-            }
-        );
-    }
-    
+ 
      
   /**
      * Füllt mit Hilfe eines Helper-Objekts die Zimmertabelle mit allen Kunden.
@@ -119,11 +97,9 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
         
                
         tblInfo.setModel( new javax.swing.table.DefaultTableModel(
-                                new Object[0][columns.length], columns )
-        );
+                                new Object[0][columns.length], columns ));
         
-               
-        
+       
         Object[][] contents = new Object[aufgabe.length][columns.length];
         
         // Zunächst wird die Tabelle mit Dummy-Einträgen gefüllt
@@ -135,7 +111,25 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
         }
         tblInfo.setModel(
             new javax.swing.table.DefaultTableModel( contents, columns )
-        );
+        
+        {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+        
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            
+            }
+        });
         
         tblInfo.getColumnModel().getColumn(0).setPreferredWidth(60);
         tblInfo.getColumnModel().getColumn(1).setPreferredWidth(300);
@@ -164,8 +158,7 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
         tblInfo.setValueAt(
             newValue.getErledigt(), tableIndex, COL_STATUS );
     }
-     
-     
+    
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -239,8 +232,9 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
         pnlLogout.setOpaque(false);
         pnlLogout.setPreferredSize(new java.awt.Dimension(300, 50));
         cmdLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/logout.gif")));
+        cmdLogout.setMnemonic('O');
         cmdLogout.setText("Ausloggen");
-        cmdLogout.setToolTipText("Klicken Sie  auf  \"Ausloggen\" um wieder auf den Startbildschim zu gelangen!");
+        cmdLogout.setToolTipText("Das Login wird ge\u00f6ffnet und ihre Sitzung beendet!");
         cmdLogout.setMaximumSize(new java.awt.Dimension(125, 30));
         cmdLogout.setMinimumSize(new java.awt.Dimension(125, 30));
         cmdLogout.setPreferredSize(new java.awt.Dimension(125, 30));
@@ -276,8 +270,9 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
         pnlButtons.setMinimumSize(new java.awt.Dimension(400, 50));
         pnlButtons.setPreferredSize(new java.awt.Dimension(400, 50));
         cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
+        cmdAbbrechen.setMnemonic('A');
         cmdAbbrechen.setText("Abbrechen");
-        cmdAbbrechen.setToolTipText("Klicken Sie  auf  \"Abbrechen\" um die \u00c4nderungen nicht zu speichern!");
+        cmdAbbrechen.setToolTipText("Ver\u00e4nderungen werden r\u00fcckg\u00e4ngig gemacht!");
         cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
         cmdAbbrechen.setMinimumSize(new java.awt.Dimension(95, 25));
         cmdAbbrechen.setPreferredSize(new java.awt.Dimension(125, 30));
@@ -290,8 +285,9 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
         pnlButtons.add(cmdAbbrechen);
 
         cmdSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/speichern.gif")));
+        cmdSpeichern.setMnemonic('S');
         cmdSpeichern.setText("Speichern");
-        cmdSpeichern.setToolTipText("Klicken Sie hier um die ge\u00e4nderten Daten zu speichern!");
+        cmdSpeichern.setToolTipText("Ver\u00e4nderungen werden dauerhaft gespeichert!");
         cmdSpeichern.setMaximumSize(new java.awt.Dimension(95, 30));
         cmdSpeichern.setMinimumSize(new java.awt.Dimension(95, 30));
         cmdSpeichern.setOpaque(false);
@@ -318,19 +314,58 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_cmdBeendenActionPerformed
 
-//    AufgabenHelper helper = new AufgabenHelper(db);
-//    Aufgabe[] aufg = helper.getAufgaben(null, null, null, 
-//                null,null);
-//           
-//        if( aufg == null || aufg.length == 0 ) {
-//            helpMeldungen.showErrorMessage("Es wurden keine Aufgaben gefunden!");
-//        }
-//        else {
-//              helpMeldungen.showErrorMessage("Es wurden Aufgaben gefunden!");
-//        }
+
     
     private void cmdSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSpeichernActionPerformed
-        // TODO add your handling code here:
+     
+        
+        Boolean status = new Boolean(true);
+       
+        
+        for( int i = 0; i < tblInfo.getRowCount(); i++ ) {
+            if (tblInfo.getValueAt( i, COL_STATUS ).toString().equals("true") ){
+                
+                
+                newEntry = false;
+                Aufgabe aufg = new Aufgabe();
+                aufg.assignDatabase( DatabaseManager.db );
+                aufg.setPrimaryKeys( aufgabenNummern[i] );
+                if( aufg.fromDatabase() == false )
+                    helpMeldungen.showErrorMessage("Konnte die Daten nicht auslesen!");
+
+                Integer zimmerNr = aufg.getZimmerNr();
+                String bezeichn = aufg.getBezeichnung();
+                java.util.Date ab = aufg.getAb();
+                java.util.Date deadline = aufg.getDeadline();
+                Boolean erledigt = Boolean.valueOf(true);
+                
+ 
+                Aufgabe auf = new Aufgabe();
+                auf.assignDatabase( DatabaseManager.db );
+
+                if( newEntry == false )
+                    auf.setPrimaryKeys( aufgabenNummern[i] );
+                else
+                    auf.setSerialKey();
+
+                auf.setProperties(zimmerNr, bezeichn, ab, deadline, 
+                        erledigt);
+        
+                if( auf.toDatabase() == false ) {
+                    helpMeldungen.showErrorMessage("Die Aufgaben konnten wegen " +
+                        "eines Fehlers nicht in die Datenbank geschrieben werden.");
+                    return;
+                }
+                else {
+                    
+                        loadTableData();
+                    
+                }
+            }   
+                
+        }
+                               
+
     }//GEN-LAST:event_cmdSpeichernActionPerformed
 
     private void cmdLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLogoutActionPerformed
@@ -340,8 +375,7 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdLogoutActionPerformed
 
     private void cmdAbbrechenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAbbrechenActionPerformed
-        // TODO add your handling code here:
-        return;
+        loadTableData();
     }//GEN-LAST:event_cmdAbbrechenActionPerformed
     
     /**

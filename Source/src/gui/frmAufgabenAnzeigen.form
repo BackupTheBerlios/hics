@@ -103,8 +103,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="gifs/logout.gif"/>
             </Property>
+            <Property name="mnemonic" type="int" value="79"/>
             <Property name="text" type="java.lang.String" value="Ausloggen"/>
-            <Property name="toolTipText" type="java.lang.String" value="Klicken Sie  auf  &quot;Ausloggen&quot; um wieder auf den Startbildschim zu gelangen!"/>
+            <Property name="toolTipText" type="java.lang.String" value="Das Login wird geöffnet und ihre Sitzung beendet!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[125, 30]"/>
             </Property>
@@ -165,8 +166,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="gifs/abbrechen.gif"/>
             </Property>
+            <Property name="mnemonic" type="int" value="65"/>
             <Property name="text" type="java.lang.String" value="Abbrechen"/>
-            <Property name="toolTipText" type="java.lang.String" value="Klicken Sie  auf  &quot;Abbrechen&quot; um die Änderungen nicht zu speichern!"/>
+            <Property name="toolTipText" type="java.lang.String" value="Veränderungen werden rückgängig gemacht!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[95, 25]"/>
             </Property>
@@ -186,8 +188,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="gifs/speichern.gif"/>
             </Property>
+            <Property name="mnemonic" type="int" value="83"/>
             <Property name="text" type="java.lang.String" value="Speichern"/>
-            <Property name="toolTipText" type="java.lang.String" value="Klicken Sie hier um die geänderten Daten zu speichern!"/>
+            <Property name="toolTipText" type="java.lang.String" value="Veränderungen werden dauerhaft gespeichert!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[95, 30]"/>
             </Property>

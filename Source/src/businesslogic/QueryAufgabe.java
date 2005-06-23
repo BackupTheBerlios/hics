@@ -146,6 +146,8 @@ public class QueryAufgabe extends Query
         filterAufgabenNr = new String[0];
     }
     
+    
+    
     /**
      * Erstellt einen neuen Filter für die Zimmernummer.
      * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
@@ -187,7 +189,7 @@ public class QueryAufgabe extends Query
             newFilter[i] = filterAb[i];
         }
         newFilter[ newFilter.length - 1 ]
-                = "ab = " + Database.getSqlString(ab);
+                = "ab <= " + Database.getSqlString(ab);
         filterAb = newFilter;
     }
     
@@ -255,4 +257,7 @@ public class QueryAufgabe extends Query
     {
         filterDeadline = new String[0];
     }
+    
+    
+    
 }
