@@ -9,15 +9,21 @@ package gui;
 import database.*;
 import businesslogic.*;
 
+import java.awt.*;
+import javax.swing.*;
 
 /**
  *
  * @author  TuBa
  */
 public class frmAdmin extends javax.swing.JFrame {
-    
+   
    public Database db;
-   public Integer mitarbeiterNr;
+   private Integer mitarbeiterNr;
+   private Integer zimmerNr;
+   
+  
+ 
     
    public static String TITLE="HICS - Personendaten";
     
@@ -60,6 +66,7 @@ public class frmAdmin extends javax.swing.JFrame {
     private void initComponents() {//GEN-BEGIN:initComponents
         java.awt.GridBagConstraints gridBagConstraints;
 
+        rbtnGroup = new javax.swing.ButtonGroup();
         pnlMitarbeiter = new javax.swing.JPanel();
         cmbBerechtigung = new javax.swing.JComboBox();
         lblMitarbeiterNN = new javax.swing.JLabel();
@@ -78,7 +85,6 @@ public class frmAdmin extends javax.swing.JFrame {
         cmdSuchen = new javax.swing.JButton();
         cmdSpeichern = new javax.swing.JButton();
         cmdLoeschen = new javax.swing.JButton();
-        cmdAbbrechen = new javax.swing.JButton();
         pnlZimmer = new javax.swing.JPanel();
         lblZimNr = new javax.swing.JLabel();
         txtZimNr = new javax.swing.JTextField();
@@ -86,8 +92,9 @@ public class frmAdmin extends javax.swing.JFrame {
         txtBettenANz = new javax.swing.JTextField();
         lblPreis = new javax.swing.JLabel();
         txtPreis = new javax.swing.JTextField();
-        lblAusstattung = new javax.swing.JLabel();
-        lstAusstattung = new javax.swing.JList();
+        pnlRadioButton = new javax.swing.JPanel();
+        rbtnMitarbeiter = new javax.swing.JRadioButton();
+        rbtnZimmer = new javax.swing.JRadioButton();
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -201,7 +208,8 @@ public class frmAdmin extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 10);
         getContentPane().add(pnlMitarbeiter, gridBagConstraints);
 
@@ -234,7 +242,7 @@ public class frmAdmin extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(20, 10, 10, 10);
         getContentPane().add(pnlLogout, gridBagConstraints);
@@ -294,15 +302,6 @@ public class frmAdmin extends javax.swing.JFrame {
         });
 
         pnlTop.add(cmdLoeschen);
-
-        cmdAbbrechen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
-        cmdAbbrechen.setMnemonic('A');
-        cmdAbbrechen.setToolTipText("Klicken Sie  auf  \"Abbrechen\" um die \u00c4nderungen nicht zu speichern!");
-        cmdAbbrechen.setMaximumSize(new java.awt.Dimension(95, 25));
-        cmdAbbrechen.setMinimumSize(new java.awt.Dimension(95, 25));
-        cmdAbbrechen.setOpaque(false);
-        cmdAbbrechen.setPreferredSize(new java.awt.Dimension(35, 30));
-        pnlTop.add(cmdAbbrechen);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
@@ -365,80 +364,143 @@ public class frmAdmin extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         pnlZimmer.add(txtPreis, gridBagConstraints);
 
-        lblAusstattung.setText("Ausstattung");
-        lblAusstattung.setPreferredSize(new java.awt.Dimension(100, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 33, 5);
+        getContentPane().add(pnlZimmer, gridBagConstraints);
+
+        rbtnGroup.add(rbtnMitarbeiter);
+        rbtnMitarbeiter.setSelected(true);
+        rbtnMitarbeiter.setText("Mitarbeiter bearbeiten");
+        rbtnMitarbeiter.setActionCommand("mitarbeiter");
+        pnlRadioButton.add(rbtnMitarbeiter);
+
+        rbtnGroup.add(rbtnZimmer);
+        rbtnZimmer.setActionCommand("zimmer");
+        rbtnZimmer.setLabel("Zimmer bearbeiten");
+        pnlRadioButton.add(rbtnZimmer);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        pnlZimmer.add(lblAusstattung, gridBagConstraints);
-
-        lstAusstattung.setMinimumSize(new java.awt.Dimension(95, 25));
-        lstAusstattung.setPreferredSize(new java.awt.Dimension(95, 25));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
-        pnlZimmer.add(lstAusstattung, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 5);
-        getContentPane().add(pnlZimmer, gridBagConstraints);
+        gridBagConstraints.gridwidth = 2;
+        getContentPane().add(pnlRadioButton, gridBagConstraints);
 
         pack();
     }//GEN-END:initComponents
 
+    
+ 
+    
     private void cmdSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSpeichernActionPerformed
         
-        Integer berechtigung = new Integer(cmbBerechtigung.getSelectedIndex());
+        boolean bestätigung = false;
         
-        String vname = txtMitarbeiterVN.getText();
-        String nname = txtMitarbeiterNN.getText();
-        String login = txtLogin.getText();
-        String pwd = txtPwd.getText();
+        ButtonModel selected = rbtnGroup.getSelection();
+        String selection = (selected.getActionCommand());
         
-        if( berechtigung.intValue() == 0)
-            berechtigung = null;
-        if( vname.equals("") )
-            vname = null;
-        if( nname.equals("") )
-            nname = null;
-        if( login.equals("") )
-            login = null;
-        if( pwd.equals("") )
-            pwd = null;
-        
-        if(mitarbeiterNr == null) {
-             boolean bestätigung;
-             
-             MitarbeiterHelper helper = new MitarbeiterHelper(db);
-             mitarbeiterNr = new Integer(helper.newMitarbNr().intValue()+1);
-             if (mitarbeiterNr == null) {
-                 helpMeldungen.showErrorMessage("Es ist keinen neue Mitarbeiternr verfügbar!");
-             }
-             else {
-                 bestätigung = helper.setMitarbeiter(mitarbeiterNr, 
-                     berechtigung, nname, vname, login, pwd, db);
-             
-                 if (bestätigung == false) {
-                     helpMeldungen.showErrorMessage("Der Mitarbeiter konnte nicht gespeichert werden!");
+        if (selection.equals("mitarbeiter")){
+            
+            Integer berechtigung = new Integer(cmbBerechtigung.getSelectedIndex());
+
+            String vname = txtMitarbeiterVN.getText();
+            String nname = txtMitarbeiterNN.getText();
+            String login = txtLogin.getText();
+            String pwd = txtPwd.getText();
+            
+            if( berechtigung.intValue() == 0)
+            helpMeldungen.showInformationMessage("Bitte wählen Sie eine " +
+                    "Berechtigung aus!");
+            else if( vname.equals("") )
+                helpMeldungen.showInformationMessage("Bitte geben Sie einen " +
+                        "Vornamen ein!");
+
+            else if( nname.equals("") )
+                helpMeldungen.showInformationMessage("Bitte geben Sie einen " +
+                        "Nachnamen ein!");
+            else if( login.equals("") )
+                helpMeldungen.showInformationMessage("Bitte geben Sie einen " +
+                        "Loginnamen ein!");
+            else if( pwd.equals("") )
+               helpMeldungen.showInformationMessage("Bitte geben Sie ein " +
+                       "Passwort ein!");
+            else {
+                if(mitarbeiterNr == null) {
+
+                     MitarbeiterHelper helper = new MitarbeiterHelper(db);
+                     mitarbeiterNr = new Integer(helper.newMitarbNr().intValue()+1);
+                     if (mitarbeiterNr == null) {
+                         helpMeldungen.showErrorMessage("Es ist keine neue " +
+                                 "Mitarbeiternr verfügbar!");
+                     }
+                     else {
+                         bestätigung = helper.setMitarbeiter(mitarbeiterNr, 
+                             berechtigung, nname, vname, login, pwd, db);
+                     }
+                 }
+                else {
+
+                    MitarbeiterHelper helper = new MitarbeiterHelper(db);
+                    bestätigung = helper.changeMitarbeiter(mitarbeiterNr, 
+                         berechtigung, nname, vname, login, pwd);
+                }
+
+                if (bestätigung == false) {
+                    helpMeldungen.showErrorMessage("Der Mitarbeiter konnte nicht " +
+                            "gespeichert werden!");
                 }
                 else {
-                    helpMeldungen.showInformationMessage("Der Mitarbeiter wurde gespeichert!");
+                    helpMeldungen.showInformationMessage("Der Mitarbeiter wurde " +
+                            "gespeichert!");
                     cmdNeu.doClick();
                 }
-             }
-             
-            
-        }
-       
+            }
 
+        }
+        
+        if(selection.equals("zimmer")){
+            
+            zimmerNr = null;
+            Integer betten = null;
+            Float preis = null;   
+            
+            if( txtZimNr.getText().equals(""))
+                helpMeldungen.showInformationMessage("Bitte geben Sie eine " +
+                    "Zimmernummer ein!");
+             else
+                zimmerNr = new Integer(txtZimNr.getText());
+             if(txtBettenANz.getText().equals(""))
+                helpMeldungen.showInformationMessage("Bitte geben Sie eine " +
+                        "Bettenanzahl ein!");
+             else
+                betten = new Integer(txtBettenANz.getText());
+             if(txtPreis.getText().equals(""))
+                helpMeldungen.showInformationMessage("Bitte geben Sie einen " +
+                        "Preis ein!");         
+             else
+                preis = new Float(txtPreis.getText());
+            
+             
+             ZimmerHelper helper = new ZimmerHelper(db);
+             bestätigung = helper.setZimmer(zimmerNr, betten, preis,db);
+             
+             if (bestätigung == false){
+               bestätigung = helper.changeZimmer(zimmerNr, betten, preis);
+             
+                if (bestätigung == false){
+                    helpMeldungen.showErrorMessage("Das Zimmer konnte nicht " +
+                            "gespeichert werden!");
+                }
+             }
+             if(bestätigung == true) {
+                    helpMeldungen.showInformationMessage("Das Zimmer wurde " +
+                        "gespeichert!");
+                    cmdNeu.doClick();
+             }
+              
+        }
         
     }//GEN-LAST:event_cmdSpeichernActionPerformed
 
@@ -448,48 +510,94 @@ public class frmAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdBeendenActionPerformed
 
     private void cmdSuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSuchenActionPerformed
-         
-        Integer berechtigung = new Integer(cmbBerechtigung.getSelectedIndex());
-
-        String vname = txtMitarbeiterVN.getText();
-        String nname = txtMitarbeiterNN.getText();
-        String login = txtLogin.getText();
-        String pwd = txtPwd.getText();
+  
+        ButtonModel selected = rbtnGroup.getSelection();
+        String selection = (selected.getActionCommand());
         
-     
-        if( berechtigung.intValue() == 0)
-            berechtigung = null;
-        if( vname.equals("") )
-            vname = null;
-        if( nname.equals("") )
-            nname = null;
-        if( login.equals("") )
-            login = null;
-        if( pwd.equals("") )
-            pwd = null;
+        if (selection.equals("mitarbeiter")){
+            
+            Integer berechtigung = new Integer(cmbBerechtigung.getSelectedIndex());
+            String vname = txtMitarbeiterVN.getText();
+            String nname = txtMitarbeiterNN.getText();
+            String login = txtLogin.getText();
+            String pwd = txtPwd.getText();
+            
+            if( berechtigung.intValue() == 0)
+                        berechtigung = null;
+            if( vname.equals("") )
+                vname = null;
+            if( nname.equals("") )
+                nname = null;
+            if( login.equals("") )
+                login = null;
+            if( pwd.equals("") )
+                pwd = null;
+            
+            MitarbeiterHelper helper = new MitarbeiterHelper(db);
+            Mitarbeiter[] mita = helper.getMitarbeiter(null, berechtigung, nname, 
+                    vname, login, pwd);
 
-              
-        MitarbeiterHelper helper = new MitarbeiterHelper(db);
-        Mitarbeiter[] mita = helper.getMitarbeiter(null, berechtigung, nname, 
-                vname, login, pwd);
-           
-        if( mita == null || mita.length == 0 ) {
-            helpMeldungen.showErrorMessage("Es wurde kein Mitarbeiter gefunden!");
-        }
-        else if (mita.length == 1) {
+            if( mita == null || mita.length == 0 ) {
+                helpMeldungen.showErrorMessage("Es wurde kein Mitarbeiter gefunden!");
+            }
+            else if (mita.length == 1) {
+
+                mitarbeiterNr = (mita[0].getMitarbeiterNr());
+                cmbBerechtigung.setSelectedIndex((mita[0].getBerechtigungsNr()).intValue());
+                txtMitarbeiterVN.setText(mita[0].getVorname());
+                txtMitarbeiterNN.setText(mita[0].getNachname());
+                txtLogin.setText(mita[0].getLogin());
+                txtPwd.setText(mita[0].getPasswort());
+            }
+            else {
+                helpMeldungen.showErrorMessage("Bitte grenzen Sie " +
+                        "ihre Suche ein!");
+            }   
             
-            mitarbeiterNr = (mita[0].getMitarbeiterNr());
-            cmbBerechtigung.setSelectedIndex((mita[0].getBerechtigungsNr()).intValue());
-            txtMitarbeiterVN.setText(mita[0].getVorname());
-            txtMitarbeiterNN.setText(mita[0].getNachname());
-            txtLogin.setText(mita[0].getLogin());
-            txtPwd.setText(mita[0].getPasswort());
-        }
-        else {
-            // muss noch eine Lösung für mehrere suchergebnisse gefunden werden!
-        }    
             
+        }
          
+        if (selection.equals("zimmer")){
+            zimmerNr = null;
+            Integer betten = null;
+            Float preis = null;
+            
+                     
+             if( txtZimNr.getText().equals(""))
+                zimmerNr = null;
+             else
+                zimmerNr = new Integer(txtZimNr.getText());
+             if(txtBettenANz.getText().equals(""))
+                betten = null;
+             else
+                betten = new Integer(txtBettenANz.getText());
+            if(txtPreis.getText().equals(""))
+                preis = null;
+             else
+                preis = new Float(txtPreis.getText());
+         
+            
+            
+            ZimmerHelper helper = new ZimmerHelper(db);
+            Zimmer[] zim = helper.getZimmer(zimmerNr, betten, preis);
+
+            if( zim == null || zim.length == 0 ) {
+                helpMeldungen.showErrorMessage("Es wurde kein Zimmer gefunden!");
+            }
+            else if (zim.length == 1) {
+
+                txtZimNr.setText(""+zim[0].getZimmerNR());
+                txtBettenANz.setText(""+zim[0].getAnzahlBetten());
+                txtPreis.setText(""+zim[0].getPreisProNacht());
+
+            }
+            else {
+                helpMeldungen.showErrorMessage("Bitte grenzen Sie " +
+                        "ihre Suche ein!");
+            }    
+        
+        }
+        
         
 
     }//GEN-LAST:event_cmdSuchenActionPerformed
@@ -506,28 +614,60 @@ public class frmAdmin extends javax.swing.JFrame {
         txtBettenANz.setText("");
         txtPreis.setText("");
         
+        zimmerNr = null;
+        txtZimNr.setText("");
+        txtBettenANz.setText("");
+        txtPreis.setText("");
+        
+      
+        
+      
+        
     }//GEN-LAST:event_cmdNeuActionPerformed
 
     private void cmdLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoeschenActionPerformed
        
+        ButtonModel selected = rbtnGroup.getSelection();
+        String selection = (selected.getActionCommand());
         
-        if(mitarbeiterNr == null){
-            helpMeldungen.showErrorMessage("Sie müssen einen Datensatz auswählen!");
-            
-        }
-        else {
-            String[] buttons = {"Löschen","Abbrechen"};
-            boolean bestätigung = helpMeldungen.showOptionDialog1("Möchten Sie diesen Datensatz endgültig löschen?",
-                    "Löschen",buttons);
-            
-            if (bestätigung == true){
-                Integer[] mitarbNr = {mitarbeiterNr};
-                MitarbeiterHelper helper = new MitarbeiterHelper(db);
-                helper.delMitarbeiter(mitarbNr);
-                cmdNeu.doClick();
+        if (selection.equals("mitarbeiter")){
+        
+            if(mitarbeiterNr == null){
+                helpMeldungen.showErrorMessage("Sie müssen einen " +
+                        "Datensatz auswählen!");
             }
-            
-            
+            else {
+                String[] buttons = {"Löschen","Abbrechen"};
+                boolean bestätigung = helpMeldungen.showOptionDialog1("Möchten " +
+                        "Sie diesen Datensatz endgültig löschen?",
+                        "Löschen",buttons);
+
+                if (bestätigung == true){
+                    Integer[] mitarbNr = {mitarbeiterNr};
+                    MitarbeiterHelper helper = new MitarbeiterHelper(db);
+                    helper.delMitarbeiter(mitarbNr);
+                    cmdNeu.doClick();
+                }
+            }
+        }
+        if (selection.equals("zimmer")) {
+            if(zimmerNr == null) {
+                helpMeldungen.showErrorMessage("Sie müssen einen " +
+                        "Datensatz auswählen!");
+            }
+            else {
+                String[] buttons = {"Löschen","Abbrechen"};
+                boolean bestätigung = helpMeldungen.showOptionDialog1("Möchten " +
+                        "Sie diesen Datensatz endgültig löschen?",
+                        "Löschen",buttons);
+                
+                if (bestätigung == true){
+                    Integer[] zimNr = {zimmerNr};
+                    ZimmerHelper helper = new ZimmerHelper(db);
+                    helper.delZimmer(zimNr);
+                    cmdNeu.doClick();
+                }
+            }
         }
         
     }//GEN-LAST:event_cmdLoeschenActionPerformed
@@ -551,14 +691,12 @@ public class frmAdmin extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbBerechtigung;
-    private javax.swing.JButton cmdAbbrechen;
     private javax.swing.JButton cmdBeenden;
     private javax.swing.JButton cmdLoeschen;
     private javax.swing.JButton cmdLogout;
     private javax.swing.JButton cmdNeu;
     private javax.swing.JButton cmdSpeichern;
     private javax.swing.JButton cmdSuchen;
-    private javax.swing.JLabel lblAusstattung;
     private javax.swing.JLabel lblBettenAnz;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblMitarbeiterNN;
@@ -566,11 +704,14 @@ public class frmAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel lblPreis;
     private javax.swing.JLabel lblPwd;
     private javax.swing.JLabel lblZimNr;
-    private javax.swing.JList lstAusstattung;
     private javax.swing.JPanel pnlLogout;
     private javax.swing.JPanel pnlMitarbeiter;
+    private javax.swing.JPanel pnlRadioButton;
     private javax.swing.JPanel pnlTop;
     private javax.swing.JPanel pnlZimmer;
+    private javax.swing.ButtonGroup rbtnGroup;
+    private javax.swing.JRadioButton rbtnMitarbeiter;
+    private javax.swing.JRadioButton rbtnZimmer;
     private javax.swing.JTextField txtBettenANz;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtMitarbeiterNN;

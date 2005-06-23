@@ -23,6 +23,22 @@ public class AufgabeHelper {
     public AufgabeHelper( Database database ) {
         db = database;
     }
+    
+     /**
+     * Gibt eine Liste aller Kunden zurück, oder null, falls beim Suchen
+     * ein Fehler aufgetreten ist.
+     */
+    public Aufgabe[] getAufgaben()
+    {
+        QueryAufgabe query = new QueryAufgabe( db );
+        
+        if( query.search() == false )
+            return null;
+        Aufgabe[] aufgaben = query.getAufgabenEntities();
+        return aufgaben;
+    }
+    
+    
     /**
      * Sucht nach einem oder auch mehreren parametern einer Augabe.
      * Rückgabewert ist bei positiver Suche das oder die gefundenen Aufgaben - 
