@@ -227,7 +227,7 @@ public class frmStart extends javax.swing.JFrame
         }
         else if( berechtigung == MitarbeiterHelper.BERECHTIGUNG_REZEPTION ) {
            this.dispose();
-           new frmKundenliste().setVisible(true);
+           new frmZimmerplan().setVisible(true);
         }
         else {
           helpMeldungen.showErrorMessage("Falscher Benutzername oder falsches Passwort!");

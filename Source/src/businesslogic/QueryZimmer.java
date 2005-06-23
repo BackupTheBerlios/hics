@@ -35,7 +35,7 @@ public class QueryZimmer extends Query
     /**
      * Ermittelt alle Zimmer-Entities, die mit der SQL-Abfrage gefunden wurden.
      */
-    public Zimmer[] getZimmerEntites()
+    public Zimmer[] getZimmerEntities()
     {
         Entity[] entities = this.getEntities( new Zimmer() );
         Zimmer[] zimmers = new Zimmer[entities.length];

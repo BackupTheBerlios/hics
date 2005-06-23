@@ -126,7 +126,7 @@ public class Database {
             return "NULL";
         }
         if( object instanceof String ) {
-            return "'" + ((String) object) + "'";
+            return "'" + ((String) object).replaceAll("'", "''") + "'";
         }
         if( object instanceof Date ) {
             return "'" + ((Date) object).toString() + "'";

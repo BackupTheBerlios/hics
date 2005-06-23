@@ -97,10 +97,9 @@ public class frmKundenliste extends javax.swing.JFrame
         
         // Zunächst wird die Tabelle mit Dummy-Einträgen gefüllt
         for( int i = 0; i < kunden.length; i++ ) {
-            contents[i][COL_NAME] = "";
-            contents[i][COL_ADRESSE] = "";
-            contents[i][COL_TELNR] = "";
-            contents[i][COL_NOTIZ] = "";
+            for( int k = 0; k < columns.length; k++ ) {
+                contents[i][k] = "";
+            }
         }
         tblKunden.setModel(
             new javax.swing.table.DefaultTableModel( contents, columns )

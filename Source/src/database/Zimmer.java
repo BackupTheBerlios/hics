@@ -48,7 +48,7 @@ public class Zimmer extends Entity
      * Ermittelt die Zimmernummer dieser Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
      */
-    public Integer getZimmerNR()
+    public Integer getZimmerNr()
     {
         return (Integer) primaryKeys[0];
     }

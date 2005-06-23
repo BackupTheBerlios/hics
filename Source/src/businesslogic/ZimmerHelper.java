@@ -31,7 +31,54 @@ public class ZimmerHelper
         db = database;
     }
     
-   
+    /**
+     * Gibt eine Liste aller Zimmer zurück, oder null, falls beim Suchen
+     * ein Fehler aufgetreten ist.
+     */
+    public Zimmer[] getZimmern()
+    {
+        QueryZimmer query = new QueryZimmer( db );
+        
+        if( query.search() == false )
+            return null;
+        Zimmer[] zimmern = query.getZimmerEntities();
+        return zimmern;
+    }
+    
+    /**
+     * Gibt den Kunden zurück, der zum derzeitigen Zeitpunkt das angegebene
+     * Zimmer belegt.
+     */
+    public Kunde getKundeInZimmer( Zimmer zimmer )
+    {
+        //QueryBla query = new QueryBla( db );
+        
+        //if( query.search() == false )
+            return null;
+        //Kunde[] kunden = query.getKundeEntities();
+        //if( kunden.length > 0 ) {
+        //    return kunden[0];
+        //}
+    }
+    
+    /**
+     * Gibt eine Liste aller Zimmer zurück, bei denen der gewünschte String
+     * auftritt. Falls beim Suchen ein Fehler passiert, wird null zurückgegeben.
+     */
+    public Zimmer[] searchByName( String searchString )
+    {
+        QueryZimmer query = new QueryZimmer( db );
+        
+        //query.setFilterMode( QueryZimmer.FILTER_OR );
+        //query.addSearchFilterNachname( searchString );
+        //query.addSearchFilterVorname( searchString );
+        
+        if( query.search() == false )
+            return null;
+        Zimmer[] zimmern = query.getZimmerEntities();
+        
+        return zimmern;
+    }
     
     /**
      * Sucht nach einem oder auch mehreren parametern eines Zimmers.
@@ -60,7 +107,7 @@ public class ZimmerHelper
       
         if(nu != false){
             query.search();
-            Zimmer[] zimmer = query.getZimmerEntites();
+            Zimmer[] zimmer = query.getZimmerEntities();
             return zimmer;
         }
         else{
