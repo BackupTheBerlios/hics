@@ -154,7 +154,7 @@ public class frmAufgabenAnzeigen extends javax.swing.JFrame {
      */
     public void refreshAufgabe( int tableIndex, Aufgabe newValue )
     {
-        aufgabenNummern[tableIndex] = newValue.getAufgabeNR();
+        aufgabenNummern[tableIndex] = newValue.getAufgabenNr();
         tblInfo.setValueAt(
             newValue.getZimmerNr(), tableIndex, COL_NR );
         tblInfo.setValueAt(
