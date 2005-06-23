@@ -95,13 +95,11 @@ public class ZimmerHelper
      * Gibt eine Liste aller Zimmer zurück, bei denen der gewünschte String
      * auftritt. Falls beim Suchen ein Fehler passiert, wird null zurückgegeben.
      */
-    public Zimmer[] searchByName( String searchString )
+    public Zimmer[] searchByNumber( String searchString )
     {
         QueryZimmer query = new QueryZimmer( db );
         
-        //query.setFilterMode( QueryZimmer.FILTER_OR );
-        //query.addSearchFilterNachname( searchString );
-        //query.addSearchFilterVorname( searchString );
+        query.addSearchFilterZimmerNr( searchString );
         
         if( query.search() == false )
             return null;

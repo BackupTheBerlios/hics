@@ -42,8 +42,6 @@ public class frmZimmerplan extends javax.swing.JFrame
     private int currentAufgabenIndex;
     private int currentAusstattungsIndex;
     private boolean newEntry = true;
-    private boolean newAufgabenEntry = true;
-    private boolean newAusstattungsEntry = true;
     
 
     /** Creates new form frmStart */
@@ -61,7 +59,7 @@ public class frmZimmerplan extends javax.swing.JFrame
     
     private void setupListeners()
     {
-        //Ask to be notified of selection changes.
+        // Verändern der Zimmerauswahl
         ListSelectionModel rowSM = tblZimmer.getSelectionModel();
         rowSM.addListSelectionListener(
             new ListSelectionListener()
@@ -77,6 +75,26 @@ public class frmZimmerplan extends javax.swing.JFrame
                     } else {
                         int selectedRow = lsm.getMinSelectionIndex();
                         fillWidgets( selectedRow );
+                    }
+                }
+            }
+        );
+        // Verändern der Aufgabenauswahl
+        rowSM = tblAufgaben.getSelectionModel();
+        rowSM.addListSelectionListener(
+            new ListSelectionListener()
+            {
+                public void valueChanged(ListSelectionEvent e) {
+                    //Ignore extra messages.
+                    if (e.getValueIsAdjusting()) return;
+
+                    ListSelectionModel lsm =
+                        (ListSelectionModel)e.getSource();
+                    if (lsm.isSelectionEmpty()) {
+                        clearAufgabenWidgets();
+                    } else {
+                        int selectedRow = lsm.getMinSelectionIndex();
+                        fillAufgabenWidgets( selectedRow );
                     }
                 }
             }
@@ -239,10 +257,10 @@ public class frmZimmerplan extends javax.swing.JFrame
         if( newValue.getErledigt() == null
             || newValue.getErledigt().booleanValue() == false )
         {
-            tblAufgaben.setValueAt( "erledigt", tableIndex, AGCOL_ERLEDIGT );
+            tblAufgaben.setValueAt( "nicht erledigt", tableIndex, AGCOL_ERLEDIGT );
         }
         else {
-            tblAufgaben.setValueAt( "nicht erledigt", tableIndex, AGCOL_ERLEDIGT );
+            tblAufgaben.setValueAt( "erledigt", tableIndex, AGCOL_ERLEDIGT );
         }
     }
     
@@ -266,23 +284,34 @@ public class frmZimmerplan extends javax.swing.JFrame
         txtAnzahlBetten.setText("");
         txtPreis.setText("");
         
+        clearAufgabenWidgets();
+        clearAusstattungsWidgets();
+        clearKundenTextFields();
+    }
+    
+    private void clearAufgabenWidgets()
+    {
         // Zimmeraufgaben nicht mehr anzeigen
         tblAufgaben.setModel( new javax.swing.table.DefaultTableModel(
                                   new Object[0][aufgabenColumns.length],
                                   aufgabenColumns )
         );
         aufgabenNummern = null;
-        newAufgabenEntry = true;
-        
+        txtBezeichnung.setText("");
+        txtAb.setText("");
+        txtDeadline.setText("");
+        chkErledigt.setSelected( false );
+    }
+    
+    private void clearAusstattungsWidgets()
+    {
         // Ausstattung nicht mehr anzeigen
         tblAusstattung.setModel( new javax.swing.table.DefaultTableModel(
                                      new Object[0][ausstattungColumns.length],
                                      ausstattungColumns )
         );
         ausstattungsNummern = null;
-        newAusstattungsEntry = true;
-        
-        clearKundenTextFields();
+        txtAb.setText("");
     }
     
     /**
@@ -336,6 +365,28 @@ public class frmZimmerplan extends javax.swing.JFrame
         
         loadAufgabenTableData( zimmer );
         loadAusstattungsTableData( zimmer );
+    }
+    
+    /**
+     * Füllt die Aufgaben-Steuerelemente mit Daten.
+     */
+    public void fillAufgabenWidgets( int selectedRow )
+    {
+        currentAufgabenIndex = selectedRow;
+        if( aufgabenNummern == null )
+            return;
+        
+        Aufgabe aufgabe = new Aufgabe();
+        aufgabe.assignDatabase( DatabaseManager.db );
+        aufgabe.setPrimaryKeys( aufgabenNummern[currentAufgabenIndex] );
+        if( aufgabe.fromDatabase() == false ) {
+            helpMeldungen.showErrorMessage(
+                "Konnte die Aufgabendaten nicht auslesen!");
+        }
+        txtBezeichnung.setText( aufgabe.getBezeichnung() );
+        chkErledigt.setSelected( aufgabe.getErledigt().booleanValue() );
+        txtAb.setText( aufgabe.getAb().toString() );
+        txtDeadline.setText( aufgabe.getDeadline().toString() );
     }
     
     /**
@@ -399,7 +450,49 @@ public class frmZimmerplan extends javax.swing.JFrame
     }
     
     /**
-     * Löscht den derzeit ausgewählten Kunden.
+     * Speichert die derzeit bearbeitete Aufgabe.
+     */
+    private void saveCurrentAufgabe()
+    {
+        if( newEntry == true ) {
+            return;
+        }
+        
+        Aufgabe aufgabe = new Aufgabe();
+        aufgabe.assignDatabase( DatabaseManager.db );
+        aufgabe.setPrimaryKeys( aufgabenNummern[currentAufgabenIndex] );
+        
+        if( aufgabe.fromDatabase() == false ) {
+            helpMeldungen.showErrorMessage("Die Aufgabe konnten wegen " +
+                "eines Fehlers nicht gespeichert werden.");
+            return;
+        }
+        
+        java.sql.Date ab, deadline;
+        try {
+            ab = java.sql.Date.valueOf( txtAb.getText() );
+            deadline = java.sql.Date.valueOf( txtDeadline.getText() );
+        } catch( IllegalArgumentException e ) {
+            txtAb.setText( aufgabe.getAb().toString() );
+            txtDeadline.setText( aufgabe.getDeadline().toString() );
+            return;
+        }
+        aufgabe.setProperties( aufgabe.getZimmerNr(),
+            txtBezeichnung.getText(), ab, deadline, 
+            new Boolean(chkErledigt.isSelected())
+        );
+        
+        if( aufgabe.toDatabase() == false ) {
+            helpMeldungen.showErrorMessage("Die Aufgabe konnten wegen " +
+                "eines Fehlers nicht gespeichert werden.");
+            return;
+        }
+        
+        refreshAufgabe( currentAufgabenIndex, aufgabe );
+    }
+    
+    /**
+     * Löscht das derzeit ausgewählte Zimmer.
      */
     private void deleteCurrentEntry()
     {
@@ -422,6 +515,66 @@ public class frmZimmerplan extends javax.swing.JFrame
     }
     
     /**
+     * Löscht die derzeit ausgewählte Aufgabe.
+     */
+    private void deleteCurrentAufgabe()
+    {
+        if( newEntry == true )
+        {
+            helpMeldungen.showErrorMessage("Da gerade kein Zimmer ausgewaehlt " +
+                "ist, wird auch nichts gelöscht.");
+            return;
+        }
+        
+        Aufgabe aufgabe = new Aufgabe();
+        aufgabe.assignDatabase( DatabaseManager.db );
+        aufgabe.setPrimaryKeys( aufgabenNummern[currentAufgabenIndex] );
+        
+        if( aufgabe.deleteFromDatabase() == false ) {
+            helpMeldungen.showErrorMessage("Die Aufgabe konnten wegen " +
+                "eines Fehlers nicht gelöscht werden.");
+        }
+        
+        Zimmer zimmer = new Zimmer();
+        zimmer.assignDatabase( DatabaseManager.db );
+        zimmer.setPrimaryKeys( zimmerNummern[currentIndex] );
+        loadAufgabenTableData( zimmer );
+    }
+    
+    /**
+     * Fügt eine neue Aufgabe fürs aktuelle Zimmer in die Aufgabenansicht ein.
+     */
+    public void neueAufgabe()
+    {
+        if( newEntry == true ) {
+            helpMeldungen.showErrorMessage("Da gerade kein Zimmer ausgewählt ist, "
+                + "kann für dieses zurzeit keine Aufgabe erstellt werden.");
+            return;
+        }
+        
+        Aufgabe aufgabe = new Aufgabe();
+        aufgabe.assignDatabase( DatabaseManager.db );
+        aufgabe.setSerialKey();
+        aufgabe.setProperties( zimmerNummern[currentIndex], "(Neue Aufgabe)",
+                               new java.util.Date(), new java.util.Date(),
+                               new Boolean(false) );
+        
+        if( aufgabe.toDatabase() == false ) {
+            helpMeldungen.showErrorMessage("Beim Erstellen einer neuen Aufgabe "
+                + "ist ein Fehler aufgetreten. Ätsch.");
+            return;
+        }
+        
+        Zimmer zimmer = new Zimmer();
+        zimmer.assignDatabase( DatabaseManager.db );
+        zimmer.setPrimaryKeys( zimmerNummern[currentIndex] );
+        if( zimmer.fromDatabase() == true ) {
+            loadAufgabenTableData( zimmer );
+        }
+    }
+    
+    
+    /**
      * Filtert die Zimmerliste anhand des Texts im Such-Textfeld.
      */
     public void search()
@@ -429,7 +582,7 @@ public class frmZimmerplan extends javax.swing.JFrame
         if( txtSuchen.getText().length() < 1 )
             return;
         
-        Zimmer[] zimmern = helper.searchByName( txtSuchen.getText() );
+        Zimmer[] zimmern = helper.searchByNumber( txtSuchen.getText() );
         if( zimmern == null ) {
             helpMeldungen.showInformationMessage(
                 "Beim Suchen ist ein Fehler aufgetreten. Ätsch.");
@@ -492,11 +645,28 @@ public class frmZimmerplan extends javax.swing.JFrame
         tblZimmer = new javax.swing.JTable();
         pnlZimmerProperties = new javax.swing.JPanel();
         pnlAufgaben = new javax.swing.JPanel();
-        lblAufgaben = new javax.swing.JLabel();
         tblAufgaben = new javax.swing.JTable();
+        pnlAufgabenEdit = new javax.swing.JPanel();
+        pnlAufgabenEditOben = new javax.swing.JPanel();
+        lblBezeichnung = new javax.swing.JLabel();
+        txtBezeichnung = new javax.swing.JTextField();
+        chkErledigt = new javax.swing.JCheckBox();
+        pnlAufgabenEditUnten = new javax.swing.JPanel();
+        lblAb = new javax.swing.JLabel();
+        txtAb = new javax.swing.JTextField();
+        lblDeadline = new javax.swing.JLabel();
+        txtDeadline = new javax.swing.JTextField();
+        pnlAufgabenActions = new javax.swing.JPanel();
+        btnAufgabeNeu = new javax.swing.JButton();
+        btnAufgabeLoeschen = new javax.swing.JButton();
         pnlAusstattung = new javax.swing.JPanel();
         tblAusstattung = new javax.swing.JTable();
-        lblAusstattung = new javax.swing.JLabel();
+        pnlAusstattungsActions = new javax.swing.JPanel();
+        btnAusstattungNeu = new javax.swing.JButton();
+        btnAusstattungLoeschen = new javax.swing.JButton();
+        pnlAusstattungEdit = new javax.swing.JPanel();
+        lblElement = new javax.swing.JLabel();
+        cmbElement = new javax.swing.JComboBox();
         pnlLogout = new javax.swing.JPanel();
         btnLogout = new javax.swing.JButton();
 
@@ -636,6 +806,8 @@ public class frmZimmerplan extends javax.swing.JFrame
 
         pnlAnzeigeOben.add(pnlAnzeigeKunde);
 
+        pnlOk.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
         btnSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/ok.gif")));
         btnSpeichern.setText("Werte \u00fcbernehmen");
         btnSpeichern.setToolTipText("Bet\u00e4tigen Sie diesen Button um zu best\u00e4tigen!");
@@ -661,7 +833,7 @@ public class frmZimmerplan extends javax.swing.JFrame
             }
         });
 
-        pnlLöschen.add(cmdLoeschen, java.awt.BorderLayout.EAST);
+        pnlLöschen.add(cmdLoeschen, java.awt.BorderLayout.WEST);
 
         pnlAnzeige.add(pnlLöschen, java.awt.BorderLayout.SOUTH);
 
@@ -693,9 +865,7 @@ public class frmZimmerplan extends javax.swing.JFrame
 
         pnlAufgaben.setLayout(new java.awt.BorderLayout());
 
-        lblAufgaben.setText("Aufgaben");
-        pnlAufgaben.add(lblAufgaben, java.awt.BorderLayout.NORTH);
-
+        pnlAufgaben.setBorder(new javax.swing.border.TitledBorder("Aufgaben"));
         tblAufgaben.setBorder(new javax.swing.border.EtchedBorder());
         tblAufgaben.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -709,13 +879,90 @@ public class frmZimmerplan extends javax.swing.JFrame
             }
         ));
         tblAufgaben.setGridColor(new java.awt.Color(255, 255, 255));
-        tblAufgaben.setMinimumSize(new java.awt.Dimension(60, 65));
+        tblAufgaben.setMinimumSize(new java.awt.Dimension(60, 100));
         pnlAufgaben.add(tblAufgaben, java.awt.BorderLayout.CENTER);
+
+        pnlAufgabenEdit.setLayout(new java.awt.BorderLayout());
+
+        pnlAufgabenEditOben.setLayout(new java.awt.BorderLayout());
+
+        lblBezeichnung.setText("Aufgabe: ");
+        pnlAufgabenEditOben.add(lblBezeichnung, java.awt.BorderLayout.WEST);
+
+        txtBezeichnung.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtBezeichnungFocusLost(evt);
+            }
+        });
+
+        pnlAufgabenEditOben.add(txtBezeichnung, java.awt.BorderLayout.CENTER);
+
+        chkErledigt.setText("erledigt");
+        chkErledigt.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chkErledigtStateChanged(evt);
+            }
+        });
+
+        pnlAufgabenEditOben.add(chkErledigt, java.awt.BorderLayout.EAST);
+
+        pnlAufgabenEdit.add(pnlAufgabenEditOben, java.awt.BorderLayout.NORTH);
+
+        pnlAufgabenEditUnten.setLayout(new javax.swing.BoxLayout(pnlAufgabenEditUnten, javax.swing.BoxLayout.X_AXIS));
+
+        lblAb.setText("G\u00fcltig ab: ");
+        pnlAufgabenEditUnten.add(lblAb);
+
+        txtAb.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtAbFocusLost(evt);
+            }
+        });
+
+        pnlAufgabenEditUnten.add(txtAb);
+
+        lblDeadline.setText("  Deadline: ");
+        pnlAufgabenEditUnten.add(lblDeadline);
+
+        txtDeadline.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDeadlineFocusLost(evt);
+            }
+        });
+
+        pnlAufgabenEditUnten.add(txtDeadline);
+
+        pnlAufgabenEdit.add(pnlAufgabenEditUnten, java.awt.BorderLayout.SOUTH);
+
+        pnlAufgaben.add(pnlAufgabenEdit, java.awt.BorderLayout.SOUTH);
+
+        pnlAufgabenActions.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0));
+
+        btnAufgabeNeu.setText("Neue Aufgabe");
+        btnAufgabeNeu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAufgabeNeuActionPerformed(evt);
+            }
+        });
+
+        pnlAufgabenActions.add(btnAufgabeNeu);
+
+        btnAufgabeLoeschen.setText("Aufgabe l\u00f6schen");
+        btnAufgabeLoeschen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAufgabeLoeschenActionPerformed(evt);
+            }
+        });
+
+        pnlAufgabenActions.add(btnAufgabeLoeschen);
+
+        pnlAufgaben.add(pnlAufgabenActions, java.awt.BorderLayout.NORTH);
 
         pnlZimmerProperties.add(pnlAufgaben);
 
         pnlAusstattung.setLayout(new java.awt.BorderLayout());
 
+        pnlAusstattung.setBorder(new javax.swing.border.TitledBorder("Ausstattung"));
         tblAusstattung.setBorder(new javax.swing.border.EtchedBorder());
         tblAusstattung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -729,11 +976,27 @@ public class frmZimmerplan extends javax.swing.JFrame
             }
         ));
         tblAusstattung.setGridColor(new java.awt.Color(255, 255, 255));
-        tblAusstattung.setMinimumSize(new java.awt.Dimension(60, 65));
+        tblAusstattung.setMinimumSize(new java.awt.Dimension(60, 100));
         pnlAusstattung.add(tblAusstattung, java.awt.BorderLayout.CENTER);
 
-        lblAusstattung.setText("Ausstattung");
-        pnlAusstattung.add(lblAusstattung, java.awt.BorderLayout.NORTH);
+        pnlAusstattungsActions.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0));
+
+        btnAusstattungNeu.setText("Neues Element");
+        pnlAusstattungsActions.add(btnAusstattungNeu);
+
+        btnAusstattungLoeschen.setText("Element l\u00f6schen");
+        pnlAusstattungsActions.add(btnAusstattungLoeschen);
+
+        pnlAusstattung.add(pnlAusstattungsActions, java.awt.BorderLayout.NORTH);
+
+        pnlAusstattungEdit.setLayout(new javax.swing.BoxLayout(pnlAusstattungEdit, javax.swing.BoxLayout.X_AXIS));
+
+        lblElement.setText("Ausstattungselement: ");
+        pnlAusstattungEdit.add(lblElement);
+
+        pnlAusstattungEdit.add(cmbElement);
+
+        pnlAusstattung.add(pnlAusstattungEdit, java.awt.BorderLayout.SOUTH);
 
         pnlZimmerProperties.add(pnlAusstattung);
 
@@ -756,6 +1019,30 @@ public class frmZimmerplan extends javax.swing.JFrame
 
         pack();
     }//GEN-END:initComponents
+
+    private void txtDeadlineFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDeadlineFocusLost
+        saveCurrentAufgabe();
+    }//GEN-LAST:event_txtDeadlineFocusLost
+
+    private void txtAbFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAbFocusLost
+        saveCurrentAufgabe();
+    }//GEN-LAST:event_txtAbFocusLost
+
+    private void chkErledigtStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkErledigtStateChanged
+        saveCurrentAufgabe();
+    }//GEN-LAST:event_chkErledigtStateChanged
+
+    private void txtBezeichnungFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBezeichnungFocusLost
+        saveCurrentAufgabe();
+    }//GEN-LAST:event_txtBezeichnungFocusLost
+
+    private void btnAufgabeLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAufgabeLoeschenActionPerformed
+        deleteCurrentAufgabe();
+    }//GEN-LAST:event_btnAufgabeLoeschenActionPerformed
+
+    private void btnAufgabeNeuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAufgabeNeuActionPerformed
+        neueAufgabe();
+    }//GEN-LAST:event_btnAufgabeNeuActionPerformed
 
     private void btnSuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuchenActionPerformed
         search();
@@ -791,15 +1078,23 @@ public class frmZimmerplan extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAufgabeLoeschen;
+    private javax.swing.JButton btnAufgabeNeu;
+    private javax.swing.JButton btnAusstattungLoeschen;
+    private javax.swing.JButton btnAusstattungNeu;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnSpeichern;
     private javax.swing.JButton btnSuchen;
     private javax.swing.JButton btnSuchenReset;
+    private javax.swing.JCheckBox chkErledigt;
+    private javax.swing.JComboBox cmbElement;
     private javax.swing.JButton cmdLoeschen;
+    private javax.swing.JLabel lblAb;
     private javax.swing.JLabel lblAnzahlBetten;
-    private javax.swing.JLabel lblAufgaben;
-    private javax.swing.JLabel lblAusstattung;
+    private javax.swing.JLabel lblBezeichnung;
     private javax.swing.JLabel lblCaption;
+    private javax.swing.JLabel lblDeadline;
+    private javax.swing.JLabel lblElement;
     private javax.swing.JLabel lblLand;
     private javax.swing.JLabel lblNachname;
     private javax.swing.JLabel lblNotiz;
@@ -816,7 +1111,13 @@ public class frmZimmerplan extends javax.swing.JFrame
     private javax.swing.JPanel pnlAnzeigeOben;
     private javax.swing.JPanel pnlAnzeigeZimmer;
     private javax.swing.JPanel pnlAufgaben;
+    private javax.swing.JPanel pnlAufgabenActions;
+    private javax.swing.JPanel pnlAufgabenEdit;
+    private javax.swing.JPanel pnlAufgabenEditOben;
+    private javax.swing.JPanel pnlAufgabenEditUnten;
     private javax.swing.JPanel pnlAusstattung;
+    private javax.swing.JPanel pnlAusstattungEdit;
+    private javax.swing.JPanel pnlAusstattungsActions;
     private javax.swing.JPanel pnlCaption;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlLogout;
@@ -828,7 +1129,10 @@ public class frmZimmerplan extends javax.swing.JFrame
     private javax.swing.JTable tblAufgaben;
     private javax.swing.JTable tblAusstattung;
     private javax.swing.JTable tblZimmer;
+    private javax.swing.JTextField txtAb;
     private javax.swing.JTextField txtAnzahlBetten;
+    private javax.swing.JTextField txtBezeichnung;
+    private javax.swing.JTextField txtDeadline;
     private javax.swing.JTextField txtLand;
     private javax.swing.JTextField txtNachname;
     private javax.swing.JTextField txtNotiz;

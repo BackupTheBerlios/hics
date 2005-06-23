@@ -116,6 +116,27 @@ public class QueryZimmer extends Query
     }
     
     /**
+     * Erstellt einen neuen Suchfilter für die ZimmerNr.
+     * Im Gegensatz zu normalen Filtern findet dieser Filter auch
+     * dann Zimmernummern, wenn nur ein Teilstring angegeben wurde.
+     * Bereits vorhandene Filter dieses Typs bleiben erhalten und werden
+     * mit einem OR kombiniert.
+     *
+     * @param zimmerNr  Die gewünschte Zimmernummer.
+     */
+    public void addSearchFilterZimmerNr( String zimmerNr )
+    {
+        String[] newFilter = new String[ filterZimmerNr.length + 1 ];
+        for( int i = 0; i < filterZimmerNr.length; i++ ) {
+            newFilter[i] = filterZimmerNr[i];
+        }
+        newFilter[ newFilter.length - 1 ] =
+            "CAST(ZimmerNr AS VARCHAR(10) ) LIKE "
+            + Database.getSqlString("%" + zimmerNr + "%");
+        filterZimmerNr = newFilter;
+    }
+    
+    /**
      * Löscht alle Filter, die nach Zimmernummern filtern.
      */
     public void unsetFilterZimmerNr()

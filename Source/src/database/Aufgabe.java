@@ -58,7 +58,8 @@ public class Aufgabe extends Entity
      * auf NULL zu setzen, muss null als Argument übergeben werden.
      */
     
-    public void setProperties( Integer zimmerNr, String bezeichnung, java.util.Date ab, java.util.Date deadline, Boolean erledigt )
+    public void setProperties( Integer zimmerNr, String bezeichnung,
+            java.util.Date ab, java.util.Date deadline, Boolean erledigt )
     {
         // Die Werte sind so nummeriert wie oben in der Initialisierung
         // angegeben. Die Nummerierung ist unabhängig von der Reihenfolge
