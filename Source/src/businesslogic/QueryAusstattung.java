@@ -34,7 +34,7 @@ public class QueryAusstattung extends Query
      * Ermittelt alle Ausstattung-Entities,
      * die mit der SQL-Abfrage gefunden wurden.
      */
-    public Ausstattung[] getAusstattungEntites()
+    public Ausstattung[] getAusstattungEntities()
     {
         Entity[] entities = this.getEntities( new Ausstattung() );
         Ausstattung[] ausstattungen = new Ausstattung[entities.length];

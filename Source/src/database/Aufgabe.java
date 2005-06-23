@@ -48,7 +48,7 @@ public class Aufgabe extends Entity
      * Ermittelt die Aufgabenummer dieser Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
      */
-    public Integer getAufgabeNR()
+    public Integer getAufgabenNr()
     {
         return (Integer) primaryKeys[0];
     }

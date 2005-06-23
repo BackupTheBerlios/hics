@@ -412,7 +412,15 @@ public abstract class Entity
         
         if( result == null )
             return false;
-        else
-            return true;
+        
+        // Prüfen, ob die Abfrage auch Werte enthält
+        try {
+            result.next();
+            result.getObject(1);
+        } catch( java.sql.SQLException e ) {
+            return false;
+        }
+        
+        return true;
     }
 }

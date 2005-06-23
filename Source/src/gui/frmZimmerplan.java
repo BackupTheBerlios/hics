@@ -20,16 +20,30 @@ public class frmZimmerplan extends javax.swing.JFrame
 {
     public static String TITLE="Zimmerplan";
     private String[] columns = {"Zimmer", "Anzahl Betten", "Preis/Nacht", "belegt von"};
-    private static final int COL_ZIMMER    = 0;
-    private static final int COL_BETTEN = 1;
+    private static final int COL_ZIMMER  = 0;
+    private static final int COL_BETTEN  = 1;
     private static final int COL_PREIS   = 2;
     private static final int COL_KUNDE   = 3;
     
+    private String[] aufgabenColumns = {"Aufgabe", "ab", "Deadline", "erledigt"};
+    private static final int AGCOL_AUFGABE  = 0;
+    private static final int AGCOL_AB       = 1;
+    private static final int AGCOL_DEADLINE = 2;
+    private static final int AGCOL_ERLEDIGT = 3;
+    
+    private String[] ausstattungColumns = {"Ausstattung"};
+    private static final int ASCOL_AUSSTATTUNG = 0;
+    
     private Integer[] zimmerNummern;
-    private Integer[] kundenNummern;
+    private Integer[] aufgabenNummern;
+    private Integer[] ausstattungsNummern;
     private ZimmerHelper helper;
     private int currentIndex;
+    private int currentAufgabenIndex;
+    private int currentAusstattungsIndex;
     private boolean newEntry = true;
+    private boolean newAufgabenEntry = true;
+    private boolean newAusstattungsEntry = true;
     
 
     /** Creates new form frmStart */
@@ -60,10 +74,9 @@ public class frmZimmerplan extends javax.swing.JFrame
                         (ListSelectionModel)e.getSource();
                     if (lsm.isSelectionEmpty()) {
                         clearZimmerWidgets();
-                        clearKundenTextFields();
                     } else {
                         int selectedRow = lsm.getMinSelectionIndex();
-                        fillTextFields( selectedRow );
+                        fillWidgets( selectedRow );
                     }
                 }
             }
@@ -84,7 +97,8 @@ public class frmZimmerplan extends javax.swing.JFrame
     }
 
     /**
-     * Füllt mit Hilfe eines Helper-Objekts die Zimmertabelle bestimmten Kunden.
+     * Füllt mit Hilfe eines Helper-Objekts die Zimmertabelle mit den
+     * als Parameter angegebenen Zimmern.
      */
     public void loadTableData( Zimmer[] zimmern )
     {
@@ -114,6 +128,74 @@ public class frmZimmerplan extends javax.swing.JFrame
     }
     
     /**
+     * Füllt mit Hilfe eines Helper-Objekts die Aufgabentabelle mit
+     * den Aufgaben des aktuell ausgewählten Zimmers.
+     */
+    public void loadAufgabenTableData( Zimmer zimmer )
+    {
+        Aufgabe[] aufgaben = helper.getZimmerAufgaben( zimmer );
+        if( aufgaben == null )
+            return;
+        
+        tblAufgaben.setModel( new javax.swing.table.DefaultTableModel(
+                                  new Object[0][aufgabenColumns.length],
+                                  aufgabenColumns )
+        );
+        
+        Object[][] contents = new Object[aufgaben.length][aufgabenColumns.length];
+        aufgabenNummern = new Integer[aufgaben.length];
+        
+        // Zunächst wird die Tabelle mit Dummy-Einträgen gefüllt
+        for( int i = 0; i < aufgaben.length; i++ ) {
+            for( int k = 0; k < aufgabenColumns.length; k++ ) {
+                contents[i][k] = "";
+            }
+        }
+        tblAufgaben.setModel(
+            new javax.swing.table.DefaultTableModel( contents, aufgabenColumns )
+        );
+        
+        // jetzt werden die eigentlichen Einträge eingefügt
+        for( int i = 0; i < aufgaben.length; i++ ) {
+            refreshAufgabe( i, aufgaben[i] );
+        }
+    }
+    
+    /**
+     * Füllt mit Hilfe eines Helper-Objekts die Ausstattungstabelle mit
+     * den Ausstattungen des aktuell ausgewählten Zimmers.
+     */
+    public void loadAusstattungsTableData( Zimmer zimmer )
+    {
+        Ausstattung[] ausstattungen = helper.getZimmerAusstattungen( zimmer );
+        if( ausstattungen == null )
+            return;
+        
+        tblAusstattung.setModel( new javax.swing.table.DefaultTableModel(
+                                  new Object[0][ausstattungColumns.length],
+                                  ausstattungColumns )
+        );
+        
+        Object[][] contents = new Object[ausstattungen.length][ausstattungColumns.length];
+        ausstattungsNummern = new Integer[ausstattungen.length];
+        
+        // Zunächst wird die Tabelle mit Dummy-Einträgen gefüllt
+        for( int i = 0; i < ausstattungen.length; i++ ) {
+            for( int k = 0; k < ausstattungColumns.length; k++ ) {
+                contents[i][k] = "";
+            }
+        }
+        tblAusstattung.setModel(
+            new javax.swing.table.DefaultTableModel( contents, ausstattungColumns )
+        );
+        
+        // jetzt werden die eigentlichen Einträge eingefügt
+        for( int i = 0; i < ausstattungen.length; i++ ) {
+            refreshAusstattung( i, ausstattungen[i] );
+        }
+    }
+    
+    /**
      * Aktualisiert einen Tabelleneintrag mit den Daten eines Zimmer-Objekts.
      */
     public void refreshZimmer( int tableIndex, Zimmer newValue, Kunde belegtVon )
@@ -138,6 +220,42 @@ public class frmZimmerplan extends javax.swing.JFrame
         }
     }
     
+    /**
+     * Aktualisiert einen Aufgaben-Tabelleneintrag mit den Daten
+     * eines Aufgaben-Objekts.
+     */
+    public void refreshAufgabe( int tableIndex, Aufgabe newValue )
+    {
+        aufgabenNummern[tableIndex] = newValue.getAufgabenNr();
+        tblAufgaben.setValueAt(
+            newValue.getBezeichnung(), tableIndex, AGCOL_AUFGABE );
+        tblAufgaben.setValueAt(
+            "ab " + newValue.getAb().toString(),
+            tableIndex, AGCOL_AB );
+        tblAufgaben.setValueAt(
+            "Deadline: " + newValue.getDeadline().toString(),
+            tableIndex, AGCOL_DEADLINE );
+        
+        if( newValue.getErledigt() == null
+            || newValue.getErledigt().booleanValue() == false )
+        {
+            tblAufgaben.setValueAt( "erledigt", tableIndex, AGCOL_ERLEDIGT );
+        }
+        else {
+            tblAufgaben.setValueAt( "nicht erledigt", tableIndex, AGCOL_ERLEDIGT );
+        }
+    }
+    
+    /**
+     * Aktualisiert einen Ausstattungs-Tabelleneintrag mit den Daten
+     * eines Ausstattungs-Objekts.
+     */
+    public void refreshAusstattung( int tableIndex, Ausstattung newValue )
+    {
+        ausstattungsNummern[tableIndex] = newValue.getAusstattungsNr();
+        tblAusstattung.setValueAt(
+            newValue.getBezeichnung(), tableIndex, ASCOL_AUSSTATTUNG );
+    }
     
     /**
      * Löscht den Text aller Zimmerdaten-Textfelder.
@@ -147,6 +265,24 @@ public class frmZimmerplan extends javax.swing.JFrame
         txtZimmerNr.setText("");
         txtAnzahlBetten.setText("");
         txtPreis.setText("");
+        
+        // Zimmeraufgaben nicht mehr anzeigen
+        tblAufgaben.setModel( new javax.swing.table.DefaultTableModel(
+                                  new Object[0][aufgabenColumns.length],
+                                  aufgabenColumns )
+        );
+        aufgabenNummern = null;
+        newAufgabenEntry = true;
+        
+        // Ausstattung nicht mehr anzeigen
+        tblAusstattung.setModel( new javax.swing.table.DefaultTableModel(
+                                     new Object[0][ausstattungColumns.length],
+                                     ausstattungColumns )
+        );
+        ausstattungsNummern = null;
+        newAusstattungsEntry = true;
+        
+        clearKundenTextFields();
     }
     
     /**
@@ -165,9 +301,9 @@ public class frmZimmerplan extends javax.swing.JFrame
     }
     
     /**
-     * Füllt die Zimmer- und Kundendaten-Textfelder mit Werten aus der Datenbank.
+     * Füllt die Zimmer- und Kundendaten-Steuerelemente mit Werten aus der Datenbank.
      */
-    private void fillTextFields( int tableIndex )
+    private void fillWidgets( int tableIndex )
     {
         currentIndex = tableIndex;
         newEntry = false;
@@ -183,17 +319,11 @@ public class frmZimmerplan extends javax.swing.JFrame
         txtAnzahlBetten.setText( zimmer.getAnzahlBetten().toString() );
         txtPreis.setText( zimmer.getPreisProNacht().toString() );
         
-        if( helper.getKundeInZimmer(zimmer) == null ) {
+        Kunde kunde = helper.getKundeInZimmer( zimmer );
+        if( kunde == null ) {
             clearKundenTextFields();
         }
         else {
-            Kunde kunde = new Kunde();
-            kunde.assignDatabase( DatabaseManager.db );
-            kunde.setPrimaryKeys( kundenNummern[currentIndex] );
-            if( kunde.fromDatabase() == false ) {
-                helpMeldungen.showErrorMessage(
-                    "Konnte die Kundendaten nicht auslesen!");
-            }
             txtVorname.setText( kunde.getVorname() );
             txtNachname.setText( kunde.getNachname() );
             txtPlz.setText( kunde.getPLZ().toString() );
@@ -203,27 +333,36 @@ public class frmZimmerplan extends javax.swing.JFrame
             txtTelNr.setText( kunde.getTelNr() );
             txtNotiz.setText( kunde.getNotiz() );
         }
+        
+        loadAufgabenTableData( zimmer );
+        loadAusstattungsTableData( zimmer );
     }
     
     /**
-     * Schreibt die Kundendaten-Textfelder wieder in die Datenbank zurück.
+     * Schreibt die Zimmerdaten-Textfelder wieder in die Datenbank zurück.
      */
     private void saveTextFields()
     {
-        if( txtNachname.getText().equals("") || txtVorname.getText().equals("") )
-        {
-            helpMeldungen.showErrorMessage("Zum Speichern in die Datenbank " +
-                "muessen sowohl Vor- als auch Nachname eingegeben werden!");
+        Integer zimmerNummer;
+        try {
+            zimmerNummer = Integer.valueOf( txtZimmerNr.getText() );
+        } catch( NumberFormatException e ) {
+            helpMeldungen.showErrorMessage(
+                "Bitte geben Sie eine Zimmernummer ein!");
             return;
         }
-        
+        if( zimmerNummer.intValue() != zimmerNummern[currentIndex].intValue() )
+        {
+            // Zimmernummer wurde geändert: als neues Zimmer speichern
+            newEntry = true;
+        }
         
         Integer anzahlBetten;
         try {
             anzahlBetten = Integer.valueOf( txtAnzahlBetten.getText() );
         } catch( NumberFormatException e ) {
             helpMeldungen.showErrorMessage("Bitte geben Sie eine Zahl " +
-                    "in das Textfeld 'Anzahl Betten' ein!");
+                "in das Textfeld 'Anzahl Betten' ein!");
             return;
         }
         
@@ -232,17 +371,14 @@ public class frmZimmerplan extends javax.swing.JFrame
             preisProNacht = Double.valueOf( txtPreis.getText() );
         } catch( NumberFormatException e ) {
             helpMeldungen.showErrorMessage("Bitte geben Sie eine Zahl " +
-                    "in das Textfeld 'Preis pro Nacht' ein!");
+                "in das Textfeld 'Preis pro Nacht' ein!");
             return;
         }
         
         Zimmer zimmer = new Zimmer();
         zimmer.assignDatabase( DatabaseManager.db );
         
-        if( newEntry == false )
-            zimmer.setPrimaryKeys( zimmerNummern[currentIndex] );
-        else
-            zimmer.setSerialKey();
+        zimmer.setPrimaryKeys( zimmerNummer );
         
         zimmer.setProperties( anzahlBetten, preisProNacht );
         
@@ -269,32 +405,30 @@ public class frmZimmerplan extends javax.swing.JFrame
     {
         if( newEntry == true )
         {
-            helpMeldungen.showErrorMessage("Da gerade kein Kunde ausgewaehlt " +
-                "ist, wird auch keiner gelöscht.");
+            helpMeldungen.showErrorMessage("Da gerade kein Zimmer ausgewaehlt " +
+                "ist, wird auch keines gelöscht.");
             return;
         }
         
-        Kunde kunde = new Kunde();
-        kunde.assignDatabase( DatabaseManager.db );
-        kunde.setPrimaryKeys( kundenNummern[currentIndex] );
+        Zimmer zimmer = new Zimmer();
+        zimmer.assignDatabase( DatabaseManager.db );
+        zimmer.setPrimaryKeys( zimmerNummern[currentIndex] );
         
-        if( kunde.deleteFromDatabase() == false ) {
-            helpMeldungen.showErrorMessage("Die Kundendaten konnten wegen " +
-                "eines Fehlers nicht geloescht werden.");
+        if( zimmer.deleteFromDatabase() == false ) {
+            helpMeldungen.showErrorMessage("Das Zimmer konnten wegen " +
+                "eines Fehlers nicht gelöscht werden.");
         }
         loadTableData();
     }
     
     /**
-     * Filtert die Kundenliste anhand des Texts im Such-Textfeld.
+     * Filtert die Zimmerliste anhand des Texts im Such-Textfeld.
      */
     public void search()
     {
-        if( txtSuchen.getText().length() < 3 ) {
-            helpMeldungen.showInformationMessage("Der Suchbegriff muss " +
-                "mindestens drei Zeichen lang sein.");
+        if( txtSuchen.getText().length() < 1 )
             return;
-        }
+        
         Zimmer[] zimmern = helper.searchByName( txtSuchen.getText() );
         if( zimmern == null ) {
             helpMeldungen.showInformationMessage(
@@ -520,7 +654,7 @@ public class frmZimmerplan extends javax.swing.JFrame
         pnlLöschen.setLayout(new java.awt.BorderLayout());
 
         cmdLoeschen.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/abbrechen.gif")));
-        cmdLoeschen.setText("Ausgew\u00e4hlten Kunden l\u00f6schen");
+        cmdLoeschen.setText("Ausgew\u00e4hltes Zimmer l\u00f6schen");
         cmdLoeschen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLoeschenActionPerformed(evt);
@@ -575,6 +709,7 @@ public class frmZimmerplan extends javax.swing.JFrame
             }
         ));
         tblAufgaben.setGridColor(new java.awt.Color(255, 255, 255));
+        tblAufgaben.setMinimumSize(new java.awt.Dimension(60, 65));
         pnlAufgaben.add(tblAufgaben, java.awt.BorderLayout.CENTER);
 
         pnlZimmerProperties.add(pnlAufgaben);
@@ -594,6 +729,7 @@ public class frmZimmerplan extends javax.swing.JFrame
             }
         ));
         tblAusstattung.setGridColor(new java.awt.Color(255, 255, 255));
+        tblAusstattung.setMinimumSize(new java.awt.Dimension(60, 65));
         pnlAusstattung.add(tblAusstattung, java.awt.BorderLayout.CENTER);
 
         lblAusstattung.setText("Ausstattung");

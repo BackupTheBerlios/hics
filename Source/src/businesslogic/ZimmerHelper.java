@@ -62,6 +62,36 @@ public class ZimmerHelper
     }
     
     /**
+     * Gibt die vollständige Liste von Aufgaben für das gewünschte Zimmer
+     * zurück.
+     */
+    public Aufgabe[] getZimmerAufgaben( Zimmer zimmer )
+    {
+        QueryAufgabe query = new QueryAufgabe( db );
+        query.addFilterZimmerNr( zimmer.getZimmerNr() );
+        
+        if( query.search() == false )
+            return null;
+        Aufgabe[] aufgaben = query.getAufgabenEntities();
+        return aufgaben;
+    }
+    
+    /**
+     * Gibt die vollständige Liste von Ausstattungselementen
+     * für das gewünschte Zimmer zurück.
+     */
+    public Ausstattung[] getZimmerAusstattungen( Zimmer zimmer )
+    {
+        QueryAusstattung query = new QueryAusstattung( db );
+        query.addFilterZimmerNr( zimmer.getZimmerNr() );
+        
+        if( query.search() == false )
+            return null;
+        Ausstattung[] ausstattungen = query.getAusstattungEntities();
+        return ausstattungen;
+    }
+    
+    /**
      * Gibt eine Liste aller Zimmer zurück, bei denen der gewünschte String
      * auftritt. Falls beim Suchen ein Fehler passiert, wird null zurückgegeben.
      */
@@ -121,16 +151,16 @@ public class ZimmerHelper
      * Ausstattungs - Objekte. Bei einer negativen Suche wird null 
      * zurückgegeben. 
      **/
-    public Ausstattung[] getAusstattung(){
+    /*public Ausstattung[] getAusstattung(){
         
             QueryAusstattung query = new QueryAusstattung( db );
         
         if( query.search() == false )
             return null;
-        Ausstattung[] ausstattung = query.getAusstattungEntites();
+        Ausstattung[] ausstattung = query.getAusstattungEntities();
         return ausstattung;
        
-    }
+    }*/
     
            
 //    /**
