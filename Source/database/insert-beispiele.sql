@@ -8,7 +8,8 @@
  */
 
 /* Einfügen einer Berechtigung. */
-INSERT INTO Berechtigung (Bezeichnung) VALUES ('Admin');
+
+INSERT INTO Berechtigung (Berechtigungsnr, Bezeichnung) VALUES (1,'Admin');
 
 /*
  * Einfügen eines neuen Mitarbeiters.
@@ -16,44 +17,51 @@ INSERT INTO Berechtigung (Bezeichnung) VALUES ('Admin');
  * muss über ein SELECT-Statement herausgefunden werden, welche möglichen
  * BerechtigungsNrn es überhaupt gibt.
  */
-INSERT INTO Mitarbeiter (BerechtigungsNr, Nachname, Vorname, Login, Passwort) VALUES (2, 'Petsovits', 'Jakob', 'jpetso', 'crackit');
+INSERT INTO Mitarbeiter (Mitarbeiternr, Berechtigungsnr, Nachname, Vorname, Login, Passwort) VALUES (1, 1, 'Admin', 'Admin', 'Admin','passwd');
 
 /* Einfügen eines neuen Kunden. */
+/*
 INSERT INTO Kunde (Nachname, Vorname, PLZ, Wohnort, Strasse, TelNr) VALUES ('Petsovits', 'Papa', '7312', 'Horitschon', 'Spamgasse 13', '+43(664)7649270');
-
+*/
 /*
  * Einfügen einer neuen Notiz. Die KundenNr muss auch hier eigentlich
  * über ein SELECT-Statement herausgefunden werden, während die NotizNr
  * automatisch generiert wird.
  */
+/*
 INSERT INTO Notiz (KundenNr, Bezeichnung) VALUES (1, 'Vater von Jakob. Bekommt auf alles eine 30% Ermäßigung.');
-
+*/
 /* Einfügen des Zimmers 666. ZimmerNr wird nicht automatisch generiert. */
+/*
 INSERT INTO Zimmer (ZimmerNr, AnzahlBetten, PreisProNacht) VALUES (666, 2, 30.70);
-
+*/
 /* Einfügen von neuen Zimmer-Aufgaben. */
+/*
 INSERT INTO Aufgabe (ZimmerNr, Bezeichnung, ab, Deadline, erledigt) VALUES (666, 'Brand löschen', 'now', '2005-05-27', FALSE);
 INSERT INTO Aufgabe (ZimmerNr, Bezeichnung, ab, Deadline, erledigt) VALUES (666, 'Saustall aufräumen', '2005-05-27', '2005-06-30', FALSE);
-
+*/
 /* Einfügen diverser Zimmer-Ausstattungsmöglichkeiten. */
+/*
 INSERT INTO Ausstattung (Bezeichnung) VALUES ('Fernseher');
 INSERT INTO Ausstattung (Bezeichnung) VALUES ('Wasserbett');
 INSERT INTO Ausstattung (Bezeichnung) VALUES ('WLAN');
-
+*/
 /*
  * Im höllischen Zimmer gibt es Fernseher und WLAN.
  * Dass man auch hier die Primary Keys über irgendwelche SELECT-Statements
  * ausfindig machen sollte, muss wohl eh nicht mehr erwähnt werden?
  */
+/*
 INSERT INTO verfuegt_ueber (ZimmerNr, AusstattungsNr) VALUES (666, 1);
 INSERT INTO verfuegt_ueber (ZimmerNr, AusstattungsNr) VALUES (666, 3);
-
+*/
 /*
  * Reservieren einer Buchung für Kunde 1, reserviert von Mitarbeiter 1.
  * Die per SELECT-Statement gefunden werden.
  */
+/*
 INSERT INTO Aufenthalt (KundenNr, MitarbeiterNr, von, bis, Status) VALUES (1, 1, '2005-07-01', '2005-07-08', 'reserviert');
-
+*/
 /*
  * Zimmer für den Aufenthalt belegen. Können auch mehrere Zimmer sein.
  * Achtung: Das ist das einzige, was gemacht werden muss (beim Anlegen eines
@@ -61,4 +69,6 @@ INSERT INTO Aufenthalt (KundenNr, MitarbeiterNr, von, bis, Status) VALUES (1, 1,
  *          Also extra aufpassen, dass es für jeden Aufenthalt mindestens ein
  *          belegtes Zimmer gibt.
  */
+ /*
 INSERT INTO belegt (AufenthaltsNr, ZimmerNr, von, bis) VALUES (1, 666, '2005-07-01', '2005-07-08');
+*/
