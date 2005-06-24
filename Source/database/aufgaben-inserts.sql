@@ -1,0 +1,10 @@
+insert into aufgabe values (16, 101, 'Glühbirne im Bad auswechseln', '2005-06-22', '2005-06-26','f');
+insert into aufgabe values (17, 102, 'zusätzliche Handtücher bereitstellen', '2005-06-22', '2005-06-25','f');
+insert into aufgabe values (18, 101, 'Glühbirne im Vorraum austauschen', '2005-06-22', '2005-06-25','f');
+insert into aufgabe values (19, 103, 'Geburtstag: Flasche Sekt ins Zimmer stellen', '2005-06-22', '2005-06-26','f');
+insert into aufgabe values (20, 201, 'Zusätzliches Kinderbett ins Zimmer stellen', '2005-06-22', '2005-06-25','f');
+insert into aufgabe values (21, 202, 'Gast möchte Bügeltisch', '2005-06-22', '2005-06-27','f');
+insert into aufgabe values (22, 203, 'zustätzliches Mineral in der Minibar einkühlen', '2005-06-22', '2005-06-28','f');
+insert into aufgabe values (23, 301, 'Fenster putzen', '2005-06-22', '2005-06-29','f');
+insert into aufgabe values (24, 302, 'Vorhang hat sich auf einer Seite gelöst', '2005-06-22', '2005-06-26','f');
+insert into aufgabe values (25, 401, 'Heitzung überprüfen', '2005-06-22', '2005-06-27','f');
