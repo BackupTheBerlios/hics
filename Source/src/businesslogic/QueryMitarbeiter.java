@@ -42,7 +42,7 @@ public class QueryMitarbeiter extends Query
      * Ermittelt alle Mitarbeiter-Entities,
      * die mit der SQL-Abfrage gefunden wurden.
      */
-    public Mitarbeiter[] getMitarbeiterEntites()
+    public Mitarbeiter[] getMitarbeiterEntities()
     {
         Entity[] entities = this.getEntities( new Mitarbeiter() );
         Mitarbeiter[] mitarbs = new Mitarbeiter[entities.length];

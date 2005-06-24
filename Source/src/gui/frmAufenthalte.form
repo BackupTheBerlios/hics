@@ -171,36 +171,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="pnlOk">
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JButton" name="btnNeuerAufenthalt">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="gifs/neu.gif"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Neuer Aufenthalt"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Betätigen Sie diesen Button um ein neues Objekt zu erstellen!"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNeuerAufenthaltActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnSpeichern">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="gifs/ok.gif"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Werte speichern"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Betätigen Sie diesen Button um zu bestätigen!"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSpeichernActionPerformed"/>
-                  </Events>
-                </Component>
-              </SubComponents>
-            </Container>
             <Container class="javax.swing.JPanel" name="pnlAnzeigeKunde">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -212,9 +182,21 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="2"/>
-                <Property name="rows" type="int" value="8"/>
+                <Property name="rows" type="int" value="9"/>
               </Layout>
               <SubComponents>
+                <Component class="javax.swing.JButton" name="btnKundeSelect">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Kunden auswählen"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKundeSelectActionPerformed"/>
+                  </Events>
+                </Component>
+                <Container class="javax.swing.JPanel" name="pnlKundenFill">
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                </Container>
                 <Component class="javax.swing.JLabel" name="lblNachname">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Nachname"/>
@@ -311,6 +293,36 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                   </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnlOk">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JButton" name="btnNeuerAufenthalt">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="gifs/neu.gif"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Neuer Aufenthalt"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Betätigen Sie diesen Button um ein neues Objekt zu erstellen!"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNeuerAufenthaltActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnSpeichern">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="gifs/ok.gif"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Werte speichern"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Betätigen Sie diesen Button um zu bestätigen!"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSpeichernActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -215,7 +215,9 @@ public class frmStart extends javax.swing.JFrame
         String login = txtUsername.getText();
         String passwort = new String(pwdKennwort.getPassword());
         MitarbeiterHelper helper = new MitarbeiterHelper(DatabaseManager.db);
-        int berechtigung = helper.getMitarbeiterBerechtigung(login, passwort);
+        Mitarbeiter mitarbeiter = helper.getMitarbeiter( login, passwort );
+        Session.mitarbeiter = mitarbeiter;
+        int berechtigung = helper.getMitarbeiterBerechtigung(mitarbeiter);
         
         if( berechtigung == MitarbeiterHelper.BERECHTIGUNG_REINIGUNG ) {
           this.dispose();

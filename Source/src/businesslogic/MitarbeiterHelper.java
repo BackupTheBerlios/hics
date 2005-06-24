@@ -43,7 +43,7 @@ public class MitarbeiterHelper
         QueryMitarbeiter query = new QueryMitarbeiter( db );
         query.addFilterLogin( username );
         query.search();
-        Mitarbeiter[] mitarb = query.getMitarbeiterEntites();
+        Mitarbeiter[] mitarb = query.getMitarbeiterEntities();
         if (mitarb.length == 0){
              return true;
         }
@@ -52,6 +52,24 @@ public class MitarbeiterHelper
         }
     }
     
+    /**
+     * Gibt den Mitarbeiter zurück, der über das angegebene Login und Passwort
+     * verfügt.
+     */
+    public Mitarbeiter getMitarbeiter( String login, String passwort )
+    {
+        QueryMitarbeiter query = new QueryMitarbeiter( db );
+        query.addFilterLogin( login );
+        query.addFilterPasswort( passwort );
+        
+        if( query.search() == false )
+            return null;
+        Mitarbeiter[] mitarbs = query.getMitarbeiterEntities();
+        if( mitarbs == null || mitarbs.length == 0 )
+            return null;
+        else
+            return mitarbs[0];
+    }
     
     /**
      * Sucht nach einem oder auch mehreren parametern eines Mitarbeiters.
@@ -93,7 +111,7 @@ public class MitarbeiterHelper
       
         if(nu != false){
             query.search();
-            Mitarbeiter[] mitarb = query.getMitarbeiterEntites();
+            Mitarbeiter[] mitarb = query.getMitarbeiterEntities();
             return mitarb;
         }
         else{
@@ -222,22 +240,15 @@ public class MitarbeiterHelper
      * Der Rückgabewert ist eine Konstante BERECHTIGUNG_*,
      * die in dieser Klasse definiert ist.
      */
-    public int getMitarbeiterBerechtigung( String login, String passwort )
-    {
-        QueryMitarbeiter query = new QueryMitarbeiter( db );
-        query.addFilterLogin( login );
-        query.addFilterPasswort( passwort );
-        query.search();
-        
-        Mitarbeiter[] mitarbs = query.getMitarbeiterEntites();
-        
-        if( mitarbs == null || mitarbs.length != 1 ) {
+    public int getMitarbeiterBerechtigung( Mitarbeiter mitarbeiter )
+    {   
+        if( mitarbeiter == null ) {
             return BERECHTIGUNG_KEINE;
         }
         else {
             // Berechtigung des Mitarbeiters ermitteln
             Berechtigung berechtigung = new Berechtigung();
-            berechtigung.setPrimaryKeys( mitarbs[0].getBerechtigungsNr() );
+            berechtigung.setPrimaryKeys( mitarbeiter.getBerechtigungsNr() );
             berechtigung.assignDatabase( db );
             if( berechtigung.fromDatabase() == false )
                 return BERECHTIGUNG_KEINE;

@@ -21,7 +21,7 @@ public class Aufenthalt extends Entity
     {
         entityName = "Aufenthalt";
         primaryKeyNames = new String[] {"AufenthaltsNr"};
-        propertyNames = new String[] {"KundenNr", "Von", "Bis","Status"};
+        propertyNames = new String[] {"KundenNr", "MitarbeiterNr", "Von", "Bis", "Status"};
         primaryKeys = new Object[primaryKeyNames.length];
         properties = new Object[propertyNames.length];
     }
@@ -58,24 +58,35 @@ public class Aufenthalt extends Entity
      * auf NULL zu setzen, muss null als Argument übergeben werden.
      */
 
-    public void setProperties(Integer kundenNr, java.util.Date von, java.util.Date bis, String status )
+    public void setProperties( Integer kundenNr, Integer mitarbeiterNr, 
+            java.util.Date von, java.util.Date bis, String status )
     {
         // Die Werte sind so nummeriert wie oben in der Initialisierung
         // angegeben. Die Nummerierung ist unabhängig von der Reihenfolge
         // in der Datenbank.
         properties[0] = kundenNr;
-        properties[1] = von;
-        properties[2] = bis;
-        properties[3] = status;
+        properties[1] = mitarbeiterNr;
+        properties[2] = von;
+        properties[3] = bis;
+        properties[4] = status;
     }
 
     /**
-	 * Ermittelt die Eigenschaft Von der Entity. Falls der entsprechende
+	 * Ermittelt die Eigenschaft KundenNr der Entity. Falls der entsprechende
 	 * Wert in der Datenbank NULL ist, wird null zurückgegeben.
 	 */
 	public Integer getKundenNr()
 	{
 	    return (Integer) properties[0];
+	}
+    
+    /**
+	 * Ermittelt die Eigenschaft MitarbeiterNr der Entity. Falls der entsprechende
+	 * Wert in der Datenbank NULL ist, wird null zurückgegeben.
+	 */
+	public Integer getMitarbeiterNr()
+	{
+	    return (Integer) properties[1];
 	}
 
     /**
@@ -84,7 +95,7 @@ public class Aufenthalt extends Entity
      */
     public java.util.Date getVon()
     {
-        return (java.util.Date) properties[1];
+        return (java.util.Date) properties[2];
     }
 
     /**
@@ -93,7 +104,7 @@ public class Aufenthalt extends Entity
      */
     public java.util.Date getBis()
     {
-        return (java.util.Date) properties[2];
+        return (java.util.Date) properties[3];
     }
 
     /**
@@ -102,6 +113,6 @@ public class Aufenthalt extends Entity
      */
     public String getStatus()
     {
-        return (String) properties[3];
+        return (String) properties[4];
     }
 }

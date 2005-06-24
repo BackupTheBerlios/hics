@@ -53,6 +53,16 @@ public class frmAufenthalte extends javax.swing.JFrame
         show();
     }
     
+    public void reactivate( Kunde kunde )
+    {
+        this.setVisible( true );
+        if( aufenthaltsNummern == null )
+            return;
+        
+        currentKundenNr = kunde.getKundenNr();
+        fillKundenWidgets( kunde );
+    }
+    
     private void setupListeners()
     {
         //Ask to be notified of selection changes.
@@ -198,9 +208,9 @@ public class frmAufenthalte extends javax.swing.JFrame
         tblAufenthalte.setValueAt(
             zimmerNummernString, tableIndex, COL_ZIMMER );
         tblAufenthalte.setValueAt(
-            newValue.getVon().toString(), tableIndex, COL_VON );
+            "von " + newValue.getVon().toString(), tableIndex, COL_VON );
         tblAufenthalte.setValueAt(
-            newValue.getBis().toString(), tableIndex, COL_BIS );
+            "bis " + newValue.getBis().toString(), tableIndex, COL_BIS );
         tblAufenthalte.setValueAt(
             newValue.getStatus(), tableIndex, COL_STATUS );
     }
@@ -275,24 +285,24 @@ public class frmAufenthalte extends javax.swing.JFrame
             helpMeldungen.showErrorMessage("Konnte die Daten nicht auslesen!");
         
         txtStatus.setText( aufenthalt.getStatus() );
-        txtVon.setText( "von " + aufenthalt.getVon().toString() );
-        txtBis.setText( "bis " + aufenthalt.getBis().toString() );
+        txtVon.setText( aufenthalt.getVon().toString() );
+        txtBis.setText( aufenthalt.getBis().toString() );
         
-        fillKundenWidgets( aufenthalt );
-        loadZimmerTableData( aufenthalt );
-    }
-    
-    /**
-     * Füllt die Kundendaten-Textfelder mit Werten aus der Datenbank.
-     */
-    private void fillKundenWidgets( Aufenthalt aufenthalt )
-    {
         Kunde kunde = helper.getKundeInAufenthalt( aufenthalt );
         if( kunde == null ) {
             currentKundenNr = null;
             kunde = new Kunde();
         }
         
+        fillKundenWidgets( kunde );
+        loadZimmerTableData( aufenthalt );
+    }
+    
+    /**
+     * Füllt die Kundendaten-Textfelder mit Werten aus der Datenbank.
+     */
+    private void fillKundenWidgets( Kunde kunde )
+    {        
         currentKundenNr = kunde.getKundenNr();
         
         txtVorname.setText( kunde.getVorname() );
@@ -359,7 +369,8 @@ public class frmAufenthalte extends javax.swing.JFrame
                 "Der Aufenthalt wurde zunächst nicht gespeichert.");
         }
             
-        aufenthalt.setProperties( currentKundenNr, von, bis, txtStatus.getText() );
+        aufenthalt.setProperties( currentKundenNr, Session.mitarbeiter.getMitarbeiterNr(),
+                von, bis, txtStatus.getText() );
         
         if( aufenthalt.toDatabase() == false ) {
             helpMeldungen.showErrorMessage("Die Aufenthaltsdaten konnten wegen " +
@@ -447,10 +458,9 @@ public class frmAufenthalte extends javax.swing.JFrame
         txtVon = new javax.swing.JTextField();
         lblBis = new javax.swing.JLabel();
         txtBis = new javax.swing.JTextField();
-        pnlOk = new javax.swing.JPanel();
-        btnNeuerAufenthalt = new javax.swing.JButton();
-        btnSpeichern = new javax.swing.JButton();
         pnlAnzeigeKunde = new javax.swing.JPanel();
+        btnKundeSelect = new javax.swing.JButton();
+        pnlKundenFill = new javax.swing.JPanel();
         lblNachname = new javax.swing.JLabel();
         txtNachname = new javax.swing.JTextField();
         lblVorname = new javax.swing.JLabel();
@@ -467,6 +477,9 @@ public class frmAufenthalte extends javax.swing.JFrame
         txtTelNr = new javax.swing.JTextField();
         lblNotiz = new javax.swing.JLabel();
         txtNotiz = new javax.swing.JTextField();
+        pnlOk = new javax.swing.JPanel();
+        btnNeuerAufenthalt = new javax.swing.JButton();
+        btnSpeichern = new javax.swing.JButton();
         pnlLöschen = new javax.swing.JPanel();
         cmdLoeschen = new javax.swing.JButton();
         pnlCenter = new javax.swing.JPanel();
@@ -556,33 +569,20 @@ public class frmAufenthalte extends javax.swing.JFrame
 
         pnlAnzeigeOben.add(pnlAnzeigeAufenthalt);
 
-        btnNeuerAufenthalt.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/neu.gif")));
-        btnNeuerAufenthalt.setText("Neuer Aufenthalt");
-        btnNeuerAufenthalt.setToolTipText("Bet\u00e4tigen Sie diesen Button um ein neues Objekt zu erstellen!");
-        btnNeuerAufenthalt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNeuerAufenthaltActionPerformed(evt);
-            }
-        });
-
-        pnlOk.add(btnNeuerAufenthalt);
-
-        btnSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/ok.gif")));
-        btnSpeichern.setText("Werte speichern");
-        btnSpeichern.setToolTipText("Bet\u00e4tigen Sie diesen Button um zu best\u00e4tigen!");
-        btnSpeichern.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSpeichernActionPerformed(evt);
-            }
-        });
-
-        pnlOk.add(btnSpeichern);
-
-        pnlAnzeigeOben.add(pnlOk);
-
-        pnlAnzeigeKunde.setLayout(new java.awt.GridLayout(8, 2));
+        pnlAnzeigeKunde.setLayout(new java.awt.GridLayout(9, 2));
 
         pnlAnzeigeKunde.setBorder(new javax.swing.border.TitledBorder("Kundendaten"));
+        btnKundeSelect.setText("Kunden ausw\u00e4hlen");
+        btnKundeSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKundeSelectActionPerformed(evt);
+            }
+        });
+
+        pnlAnzeigeKunde.add(btnKundeSelect);
+
+        pnlAnzeigeKunde.add(pnlKundenFill);
+
         lblNachname.setText("Nachname");
         lblNachname.setRequestFocusEnabled(false);
         pnlAnzeigeKunde.add(lblNachname);
@@ -647,6 +647,30 @@ public class frmAufenthalte extends javax.swing.JFrame
         pnlAnzeigeKunde.add(txtNotiz);
 
         pnlAnzeigeOben.add(pnlAnzeigeKunde);
+
+        btnNeuerAufenthalt.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/neu.gif")));
+        btnNeuerAufenthalt.setText("Neuer Aufenthalt");
+        btnNeuerAufenthalt.setToolTipText("Bet\u00e4tigen Sie diesen Button um ein neues Objekt zu erstellen!");
+        btnNeuerAufenthalt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNeuerAufenthaltActionPerformed(evt);
+            }
+        });
+
+        pnlOk.add(btnNeuerAufenthalt);
+
+        btnSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/ok.gif")));
+        btnSpeichern.setText("Werte speichern");
+        btnSpeichern.setToolTipText("Bet\u00e4tigen Sie diesen Button um zu best\u00e4tigen!");
+        btnSpeichern.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSpeichernActionPerformed(evt);
+            }
+        });
+
+        pnlOk.add(btnSpeichern);
+
+        pnlAnzeigeOben.add(pnlOk);
 
         pnlAnzeige.add(pnlAnzeigeOben, java.awt.BorderLayout.NORTH);
 
@@ -761,6 +785,11 @@ public class frmAufenthalte extends javax.swing.JFrame
         pack();
     }//GEN-END:initComponents
 
+    private void btnKundeSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKundeSelectActionPerformed
+        this.setVisible( false );
+        new frmKundenliste( this, frmKundenliste.MODE_AUSWAHL_AUFENTHALTE ).setVisible(true);
+    }//GEN-LAST:event_btnKundeSelectActionPerformed
+
     private void btnSwitchToKundenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSwitchToKundenActionPerformed
         this.dispose();
         new frmKundenliste().setVisible(true);
@@ -790,6 +819,9 @@ public class frmAufenthalte extends javax.swing.JFrame
 
     private void btnNeuerAufenthaltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNeuerAufenthaltActionPerformed
         clearWidgets();
+        txtStatus.setText("Reserviert");
+        txtVon.setText( new java.sql.Date(new java.util.Date().getTime()).toString() );
+        txtBis.setText( new java.sql.Date(new java.util.Date().getTime()).toString() );
         newEntry = true;
         currentIndex = -1; // eigentlich wurscht, aber sicherheitshalber
     }//GEN-LAST:event_btnNeuerAufenthaltActionPerformed
@@ -811,6 +843,7 @@ public class frmAufenthalte extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnKundeSelect;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnNeuerAufenthalt;
     private javax.swing.JButton btnSpeichern;
@@ -840,6 +873,7 @@ public class frmAufenthalte extends javax.swing.JFrame
     private javax.swing.JPanel pnlAnzeigeOben;
     private javax.swing.JPanel pnlCaption;
     private javax.swing.JPanel pnlCenter;
+    private javax.swing.JPanel pnlKundenFill;
     private javax.swing.JPanel pnlLogout;
     private javax.swing.JPanel pnlLöschen;
     private javax.swing.JPanel pnlOk;

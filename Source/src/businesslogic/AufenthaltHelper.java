@@ -83,10 +83,7 @@ public class AufenthaltHelper {
         if( query.search() == false )
             return null;
         Zimmer[] zimmern = query.getZimmerEntities();
-        if( zimmern.length == 0 )
-            return null;
-        else
-            return zimmern;
+        return zimmern;
     }
     
     

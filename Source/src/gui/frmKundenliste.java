@@ -18,6 +18,11 @@ import javax.swing.event.*;
  */
 public class frmKundenliste extends javax.swing.JFrame
 {
+    public static final int MODE_NORMAL  = 0;
+    public static final int MODE_AUSWAHL_AUFENTHALTE = 1;
+    private frmAufenthalte aufenthaltsFrame = null;
+    private int mode;
+    
     public static String TITLE="Kundenliste";
     private String[] columns = {"Name", "Adresse", "Telefonnr.", "Notiz"};
     private static final int COL_NAME    = 0;
@@ -30,15 +35,34 @@ public class frmKundenliste extends javax.swing.JFrame
     private int currentIndex;
     private boolean newEntry = true;
     
-
+    
     /** Creates new form frmStart */
     public frmKundenliste() {
+        this(MODE_NORMAL);
+    }
+    
+    /** Creates new form frmStart */
+    public frmKundenliste( frmAufenthalte frame, int mode ) {
+        this(mode);
+        aufenthaltsFrame = frame;
+    }
+
+    /** Creates new form frmStart */
+    public frmKundenliste( int mode )
+    {
         super(TITLE);
         initComponents();
         setupListeners();
         
         helper = new KundenHelper(DatabaseManager.db);
         loadTableData();
+        
+        this.mode = mode;
+        if( mode == MODE_AUSWAHL_AUFENTHALTE ) {
+            lblCaption.setText("Kunden auswählen");
+            btnSwitchToAufenthalte.setText("Ausgewählten Kunden übernehmen");
+            btnSwitchToZimmerplan.setVisible( false );
+        }
         
         setSize(getToolkit().getScreenSize());
         show();
@@ -144,7 +168,6 @@ public class frmKundenliste extends javax.swing.JFrame
         txtLand.setText("");
         txtTelNr.setText("");
         txtNotiz.setText("");
-        
     }
     
     /**
@@ -537,8 +560,26 @@ public class frmKundenliste extends javax.swing.JFrame
     }//GEN-END:initComponents
 
     private void btnSwitchToAufenthalteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSwitchToAufenthalteActionPerformed
-        this.dispose();
-        new frmAufenthalte().setVisible(true);
+        if( mode == MODE_AUSWAHL_AUFENTHALTE )
+        {
+            if( newEntry == true || kundenNummern == null ) {
+                helpMeldungen.showErrorMessage("Bitte wählen Sie einen Kunden aus.");
+                return;
+            }
+            Kunde kunde = new Kunde();
+            kunde.assignDatabase( DatabaseManager.db );
+            kunde.setPrimaryKeys( kundenNummern[currentIndex] );
+            if( kunde.fromDatabase() == false ) {
+                helpMeldungen.showErrorMessage("Fehler beim Auslesen aus der Datenbank.");
+                return;
+            }
+            this.dispose();
+            aufenthaltsFrame.reactivate( kunde );
+        }
+        else if( mode == MODE_NORMAL ) {
+            this.dispose();
+            new frmAufenthalte().setVisible(true);
+        }
     }//GEN-LAST:event_btnSwitchToAufenthalteActionPerformed
 
     private void btnSwitchToZimmerplanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSwitchToZimmerplanActionPerformed
