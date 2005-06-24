@@ -69,7 +69,7 @@ public class frmKundenliste extends javax.swing.JFrame
     }
     
     /**
-     * Füllt mit Hilfe eines Helper-Objekts die Zimmertabelle mit allen Kunden.
+     * Füllt mit Hilfe eines Helper-Objekts die Kundentabelle mit allen Kunden.
      */
     public void loadTableData()
     {
@@ -82,7 +82,8 @@ public class frmKundenliste extends javax.swing.JFrame
     }
 
     /**
-     * Füllt mit Hilfe eines Helper-Objekts die Zimmertabelle bestimmten Kunden.
+     * Füllt mit Hilfe eines Helper-Objekts die Kundentabelle mit den
+     * angegebenen Kunden.
      */
     public void loadTableData( Kunde[] kunden )
     {
@@ -314,6 +315,10 @@ public class frmKundenliste extends javax.swing.JFrame
         tblKunden = new javax.swing.JTable();
         pnlLogout = new javax.swing.JPanel();
         btnLogout = new javax.swing.JButton();
+        pnlSwitcher = new javax.swing.JPanel();
+        pnlSwitcherButtons = new javax.swing.JPanel();
+        btnSwitchToZimmerplan = new javax.swing.JButton();
+        btnSwitchToAufenthalte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -434,7 +439,7 @@ public class frmKundenliste extends javax.swing.JFrame
         pnlOk.add(btnNeuerKunde);
 
         btnSpeichern.setIcon(new javax.swing.ImageIcon(getClass().getResource("gifs/ok.gif")));
-        btnSpeichern.setText("Werte \u00fcbernehmen");
+        btnSpeichern.setText("Werte speichern");
         btnSpeichern.setToolTipText("Bet\u00e4tigen Sie diesen Button um zu best\u00e4tigen!");
         btnSpeichern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -501,8 +506,45 @@ public class frmKundenliste extends javax.swing.JFrame
 
         getContentPane().add(pnlLogout, java.awt.BorderLayout.SOUTH);
 
+        pnlSwitcher.setLayout(new java.awt.BorderLayout());
+
+        pnlSwitcher.setBorder(new javax.swing.border.TitledBorder("Wechseln zu"));
+        pnlSwitcherButtons.setLayout(new java.awt.GridLayout(2, 0));
+
+        btnSwitchToZimmerplan.setText("Zimmerplan");
+        btnSwitchToZimmerplan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSwitchToZimmerplanActionPerformed(evt);
+            }
+        });
+
+        pnlSwitcherButtons.add(btnSwitchToZimmerplan);
+
+        btnSwitchToAufenthalte.setText("Aufenthalte");
+        btnSwitchToAufenthalte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSwitchToAufenthalteActionPerformed(evt);
+            }
+        });
+
+        pnlSwitcherButtons.add(btnSwitchToAufenthalte);
+
+        pnlSwitcher.add(pnlSwitcherButtons, java.awt.BorderLayout.NORTH);
+
+        getContentPane().add(pnlSwitcher, java.awt.BorderLayout.EAST);
+
         pack();
     }//GEN-END:initComponents
+
+    private void btnSwitchToAufenthalteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSwitchToAufenthalteActionPerformed
+        this.dispose();
+        new frmAufenthalte().setVisible(true);
+    }//GEN-LAST:event_btnSwitchToAufenthalteActionPerformed
+
+    private void btnSwitchToZimmerplanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSwitchToZimmerplanActionPerformed
+        this.dispose();
+        new frmZimmerplan().setVisible(true);
+    }//GEN-LAST:event_btnSwitchToZimmerplanActionPerformed
 
     private void btnSuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuchenActionPerformed
         search();
@@ -550,6 +592,8 @@ public class frmKundenliste extends javax.swing.JFrame
     private javax.swing.JButton btnSpeichern;
     private javax.swing.JButton btnSuchen;
     private javax.swing.JButton btnSuchenReset;
+    private javax.swing.JButton btnSwitchToAufenthalte;
+    private javax.swing.JButton btnSwitchToZimmerplan;
     private javax.swing.JButton cmdLoeschen;
     private javax.swing.JLabel lblCaption;
     private javax.swing.JLabel lblLand;
@@ -571,6 +615,8 @@ public class frmKundenliste extends javax.swing.JFrame
     private javax.swing.JPanel pnlOk;
     private javax.swing.JPanel pnlSuchaktionen;
     private javax.swing.JPanel pnlSuchen;
+    private javax.swing.JPanel pnlSwitcher;
+    private javax.swing.JPanel pnlSwitcherButtons;
     private javax.swing.JTable tblKunden;
     private javax.swing.JTextField txtLand;
     private javax.swing.JTextField txtNachname;

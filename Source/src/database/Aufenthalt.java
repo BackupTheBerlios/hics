@@ -48,7 +48,7 @@ public class Aufenthalt extends Entity
      * Ermittelt die Aufenthaltsnummer dieser Entity. Falls der entsprechende
      * Wert in der Datenbank NULL ist, wird null zurückgegeben.
      */
-    public Integer getAufenthaltsNR()
+    public Integer getAufenthaltsNr()
     {
         return (Integer) primaryKeys[0];
     }

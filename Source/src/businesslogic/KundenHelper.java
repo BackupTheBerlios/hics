@@ -12,6 +12,7 @@ import java.sql.*;
 /**
  *
  * @author Zeynep
+ * @author Jakob Petsovits
  */
 public class KundenHelper {
   

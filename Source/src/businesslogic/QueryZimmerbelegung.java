@@ -36,24 +36,38 @@ public class QueryZimmerbelegung extends Query
     }
     
     /**
+     * Ermittelt alle Zimmerbelegung-Relationen,
+     * die mit der SQL-Abfrage gefunden wurden.
+     */
+    public Zimmerbelegung[] getZimmerbelegungEntities()
+    {
+        Entity[] entities = this.getEntities( new Zimmerbelegung() );
+        Zimmerbelegung[] belegungen = new Zimmerbelegung[entities.length];
+        for( int i = 0; i < entities.length; i++ ) {
+            belegungen[i] = (Zimmerbelegung) entities[i];
+        }
+        return belegungen;
+    }
+    
+    /**
      * Ermittelt alle Aufenthalts-Entities,
      * die mit der SQL-Abfrage gefunden wurden.
      */
-    public Aufenthalt[] getAufenthaltEntites()
+    public Aufenthalt[] getAufenthaltEntities()
     {
         Entity[] entities = this.getEntities( new Aufenthalt() );
-        Aufenthalt[] aufenthalts = new Aufenthalt[entities.length];
+        Aufenthalt[] aufenthalte = new Aufenthalt[entities.length];
         for( int i = 0; i < entities.length; i++ ) {
-            aufenthalts[i] = (Aufenthalt) entities[i];
+            aufenthalte[i] = (Aufenthalt) entities[i];
         }
-        return aufenthalts;
+        return aufenthalte;
     }
     
     /**
      * Ermittelt alle Zimmer-Entities,
      * die mit der SQL-Abfrage gefunden wurden.
      */
-    public Zimmer[] getZimmerEntites()
+    public Zimmer[] getZimmerEntities()
     {
         Entity[] entities = this.getEntities( new Zimmer() );
         Zimmer[] zimmern = new Zimmer[entities.length];

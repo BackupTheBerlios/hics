@@ -22,6 +22,93 @@ public class AufenthaltHelper {
     public AufenthaltHelper( Database database ) {
         db = database;
     }
+    
+    /**
+     * Gibt eine Liste aller Aufenthalte zurück, oder null, falls beim Suchen
+     * ein Fehler aufgetreten ist.
+     */
+    public Aufenthalt[] getAufenthalte()
+    {
+        QueryAufenthalt query = new QueryAufenthalt( db );
+        
+        if( query.search() == false )
+            return null;
+        Aufenthalt[] aufenthalte = query.getAufenthaltEntities();
+        return aufenthalte;
+    }
+    
+    /**
+     * Gibt eine den zu einem Aufenthalt zugehörigen Zimmerbelegungen zurück.
+     */
+    public Zimmerbelegung[] getZimmerbelegungenInAufenthalt( Aufenthalt aufenthalt )
+    {
+        QueryZimmerbelegung query = new QueryZimmerbelegung( db );
+        query.addFilterAufenthaltsNr( aufenthalt.getAufenthaltsNr() );
+        
+        if( query.search() == false )
+            return null;
+        Zimmerbelegung[] belegungen = query.getZimmerbelegungEntities();
+        if( belegungen.length == 0 )
+            return null;
+        else
+            return belegungen;
+    }
+    
+    /**
+     * Gibt eine den zu einem Aufenthalt zugehörigen Kunden zurück.
+     */
+    public Kunde getKundeInAufenthalt( Aufenthalt aufenthalt )
+    {
+        QueryKunde query = new QueryKunde( db );
+        query.addFilterKundenNr( aufenthalt.getKundenNr() );
+        
+        if( query.search() == false )
+            return null;
+        Kunde[] kunden = query.getKundenEntities();
+        if( kunden.length == 0 )
+            return null;
+        else
+            return kunden[0];
+    }
+    
+    /**
+     * Gibt die Liste der den zu einem Aufenthalt zugehörigen
+     * belegten Zimmer zurück.
+     */
+    public Zimmer[] getZimmernInAufenthalt( Aufenthalt aufenthalt )
+    {
+        QueryZimmerbelegung query = new QueryZimmerbelegung( db );
+        query.addFilterAufenthaltsNr( aufenthalt.getAufenthaltsNr() );
+        
+        if( query.search() == false )
+            return null;
+        Zimmer[] zimmern = query.getZimmerEntities();
+        if( zimmern.length == 0 )
+            return null;
+        else
+            return zimmern;
+    }
+    
+    
+    
+    /**
+     * Gibt eine Liste von Aufenthalten zurück, die dem Suchkriterium
+     * entsprechen.
+     */
+    public Aufenthalt[] search( String string )
+    {
+        /*QueryZimmerbelegung query = new QueryZimmerbelegung( db );
+        query.addFilterAufenthaltsNr( aufenthalt.getAufenthaltsNr() );
+        
+        if( query.search() == false )*/
+            return null;
+        /*Zimmer[] zimmern = query.getZimmerEntities();
+        if( zimmern.length == 0 )
+            return null;
+        else
+            return zimmern;*/
+    }
+    
     /**
      * Sucht nach einem oder auch mehreren parametern eines Aufenthalts.
      * Rückgabewert ist bei positiver Suche das oder die gefundenen Aufenthalts - 
@@ -59,7 +146,7 @@ public class AufenthaltHelper {
         }
         if(nu != false){
             query.search();
-            Aufenthalt[] aufent = query.getAufenthaltEntites();
+            Aufenthalt[] aufent = query.getAufenthaltEntities();
             return aufent;
         }
         else{

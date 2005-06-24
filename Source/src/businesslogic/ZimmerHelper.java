@@ -12,6 +12,7 @@ import java.sql.*;
 /**
  *
  * @author Sabrina Valek
+ * @author Jakob Petsovits
  */
 public class ZimmerHelper
 {
@@ -51,14 +52,22 @@ public class ZimmerHelper
      */
     public Kunde getKundeInZimmer( Zimmer zimmer )
     {
-        //QueryBla query = new QueryBla( db );
+        QueryZimmerbelegung query = new QueryZimmerbelegung( db );
+        query.addFilterZimmerNr( zimmer.getZimmerNr() );
         
-        //if( query.search() == false )
+        if( query.search() == false )
             return null;
-        //Kunde[] kunden = query.getKundeEntities();
-        //if( kunden.length > 0 ) {
-        //    return kunden[0];
-        //}
+        Aufenthalt[] aufenthalte = query.getAufenthaltEntities();
+        if( aufenthalte.length == 0 ) {
+            return null;
+        }
+        Kunde kunde = new Kunde();
+        kunde.assignDatabase( db );
+        kunde.setPrimaryKeys( aufenthalte[0].getKundenNr() );
+        if( kunde.fromDatabase() == false )
+            return null;
+        else
+            return kunde;
     }
     
     /**

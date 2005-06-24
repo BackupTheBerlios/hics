@@ -43,7 +43,7 @@ public class QueryAufenthalt extends Query
      * Ermittelt alle Aufenthalts-Entities,
      * die mit der SQL-Abfrage gefunden wurden.
      */
-    public Aufenthalt[] getAufenthaltEntites()
+    public Aufenthalt[] getAufenthaltEntities()
     {
         Entity[] entities = this.getEntities( new Aufenthalt() );
         Aufenthalt[] aufenthalts = new Aufenthalt[entities.length];
