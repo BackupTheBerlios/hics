@@ -102,8 +102,8 @@ public class frmAdmin extends javax.swing.JFrame {
         pnlMitarbeiter.setLayout(new java.awt.GridBagLayout());
 
         cmbBerechtigung.addItem("");
-        cmbBerechtigung.addItem("Admin");
         cmbBerechtigung.addItem("Rezeption");
+        cmbBerechtigung.addItem("Admin");
         cmbBerechtigung.addItem("Reinigung");
         cmbBerechtigung.setEditable(false);
         cmbBerechtigung.setMaximumSize(new java.awt.Dimension(110, 25));
