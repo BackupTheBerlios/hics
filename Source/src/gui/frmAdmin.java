@@ -34,20 +34,9 @@ public class frmAdmin extends javax.swing.JFrame {
         setSize(getToolkit().getScreenSize());
         show();
        
-        if( dbConnect() == false ) {
-            helpMeldungen.showErrorMessage(
-              "Die Verbindung zur Datenbank konnte nicht hergestellt werden.");
-            System.exit(1);
-        }
     }
         
-     private boolean dbConnect()
-    {
-        db = new Database( DatabaseAccess.url,
-                           DatabaseAccess.user, DatabaseAccess.passwort );
-        return db.connect();
-    }
-       
+    
      
      private boolean dbDisconnect()
     {
@@ -401,14 +390,17 @@ public class frmAdmin extends javax.swing.JFrame {
         ButtonModel selected = rbtnGroup.getSelection();
         String selection = (selected.getActionCommand());
         
+       
+        
         if (selection.equals("mitarbeiter")){
-            
+            MitarbeiterHelper helper = new MitarbeiterHelper(db);
             Integer berechtigung = new Integer(cmbBerechtigung.getSelectedIndex());
 
             String vname = txtMitarbeiterVN.getText();
             String nname = txtMitarbeiterNN.getText();
             String login = txtLogin.getText();
             String pwd = txtPwd.getText();
+            
             
             if( berechtigung.intValue() == 0)
             helpMeldungen.showInformationMessage("Bitte wählen Sie eine " +
@@ -423,35 +415,43 @@ public class frmAdmin extends javax.swing.JFrame {
             else if( login.equals("") )
                 helpMeldungen.showInformationMessage("Bitte geben Sie einen " +
                         "Loginnamen ein!");
+            else if (helper.userNameVorhanden(login)==false){
+                 helpMeldungen.showErrorMessage("Der Loginname  " +
+                     "ist bereits vorhanden!");
+                 txtLogin.setText("");
+                 login = "";
+            }
             else if( pwd.equals("") )
                helpMeldungen.showInformationMessage("Bitte geben Sie ein " +
                        "Passwort ein!");
             else {
+                
                 if(mitarbeiterNr == null) {
 
-                     MitarbeiterHelper helper = new MitarbeiterHelper(db);
                      mitarbeiterNr = new Integer(helper.newMitarbNr().intValue()+1);
                      if (mitarbeiterNr == null) {
                          helpMeldungen.showErrorMessage("Es ist keine neue " +
                                  "Mitarbeiternr verfügbar!");
                      }
-                     else {
-                         bestätigung = helper.setMitarbeiter(mitarbeiterNr, 
-                             berechtigung, nname, vname, login, pwd, db);
+                     else { 
+                        bestätigung = helper.setMitarbeiter(mitarbeiterNr, 
+                        berechtigung, nname, vname, login, pwd, db);
+
+                         
+                         
                      }
                  }
-                else {
-
-                    MitarbeiterHelper helper = new MitarbeiterHelper(db);
-                    bestätigung = helper.changeMitarbeiter(mitarbeiterNr, 
-                         berechtigung, nname, vname, login, pwd);
+                else {   
+                       bestätigung = helper.changeMitarbeiter(mitarbeiterNr, 
+                       berechtigung, nname, vname, login, pwd);
+                    
                 }
 
                 if (bestätigung == false) {
                     helpMeldungen.showErrorMessage("Der Mitarbeiter konnte nicht " +
                             "gespeichert werden!");
                 }
-                else {
+                else if (bestätigung == true) {
                     helpMeldungen.showInformationMessage("Der Mitarbeiter wurde " +
                             "gespeichert!");
                     cmdNeu.doClick();
@@ -466,21 +466,39 @@ public class frmAdmin extends javax.swing.JFrame {
             Integer betten = null;
             Float preis = null;   
             
-            if( txtZimNr.getText().equals(""))
-                helpMeldungen.showInformationMessage("Bitte geben Sie eine " +
-                    "Zimmernummer ein!");
-             else
-                zimmerNr = new Integer(txtZimNr.getText());
-             if(txtBettenANz.getText().equals(""))
-                helpMeldungen.showInformationMessage("Bitte geben Sie eine " +
-                        "Bettenanzahl ein!");
-             else
-                betten = new Integer(txtBettenANz.getText());
-             if(txtPreis.getText().equals(""))
-                helpMeldungen.showInformationMessage("Bitte geben Sie einen " +
-                        "Preis ein!");         
-             else
-                preis = new Float(txtPreis.getText());
+            
+
+            try {
+                betten = Integer.valueOf( txtBettenANz.getText() );
+            } catch( NumberFormatException e ) {
+                helpMeldungen.showErrorMessage("Bitte geben Sie eine Zahl " +
+                        "in das Textfeld 'Betten' ein!");
+                txtBettenANz.setText("");
+                return;
+            }
+
+            try {
+                zimmerNr = Integer.valueOf( txtZimNr.getText() );
+            } catch( NumberFormatException e ) {
+                helpMeldungen.showErrorMessage("Bitte geben Sie eine Zahl " +
+                        "in das Textfeld 'ZimmerNr' ein!");
+                txtZimNr.setText("");
+                return;
+            }
+             try {
+                preis =Float.valueOf( txtPreis.getText() );
+            } catch( NumberFormatException e ) {
+                helpMeldungen.showErrorMessage("Bitte geben Sie eine Zahl " +
+                        "in das Textfeld 'Preis' ein!");
+                        txtPreis.setText("");
+                return;
+            }
+
+             zimmerNr = new Integer(txtZimNr.getText());
+             betten = new Integer(txtBettenANz.getText());
+             preis = new Float(txtPreis.getText());
+
+                
             
              
              ZimmerHelper helper = new ZimmerHelper(db);

@@ -76,7 +76,7 @@ public class QueryAufgabe extends Query
         where = this.getWhereString(where, filterDeadline);
         where = this.getWhereString(where, filterErledigt);
         
-        query += where + ";";
+        query += where + "order by zimmernr asc;";
         return this.search( query );
     }
     

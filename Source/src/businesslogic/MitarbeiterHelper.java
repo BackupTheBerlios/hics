@@ -36,7 +36,22 @@ public class MitarbeiterHelper
         db = database;
     }
     
-   
+   //sucht nach usernamen und gibt true zurück, wenn er bereits besteht
+    public boolean userNameVorhanden(String username){
+         
+        
+        QueryMitarbeiter query = new QueryMitarbeiter( db );
+        query.addFilterLogin( username );
+        query.search();
+        Mitarbeiter[] mitarb = query.getMitarbeiterEntites();
+        if (mitarb.length == 0){
+             return true;
+        }
+        else {
+             return false;
+        }
+    }
+    
     
     /**
      * Sucht nach einem oder auch mehreren parametern eines Mitarbeiters.
